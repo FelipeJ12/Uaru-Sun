@@ -5,7 +5,7 @@
         <h1 style="color: white;" class="mb-4">Especies de Flora</h1>
 
         @if($especies->isEmpty())
-            <p style="color: white;">No hay publicaciones registradas en la categoría de flora.</p>
+            <p style="color: white;">No hay publicaciones registradas en la categoría de la flora.</p>
         @else
             <div class="row">
                 @foreach($especies as $especie)

@@ -29,40 +29,17 @@
         }
     </style>
 
-
 @if ($posts->count())
-
     <div class="card-container">
-        <div class="card">
-            <div class="card-body">
-            <ul>
         @foreach ($posts as $post)
-            <li>{{ $post->title }}</li>
-        @endforeach
-    </ul>
+            <div class="card">
+                <div class="card-body">
+                    <ul>
+                        <li>{{ $post->title }}</li>
+                    </ul>
+                </div>
             </div>
-                
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-            <ul>
-        @foreach ($posts as $post)
-            <li>{{ $post->title }}</li>
         @endforeach
-    </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-            <ul>
-        @foreach ($posts as $post)
-            <li>{{ $post->title }}</li>
-        @endforeach
-    </ul>
-            </div>
-        </div>
     </div>
 @else
     <p style="color: white;">No tienes publicaciones aún.</p>
