@@ -6,12 +6,21 @@
 <div class="container">
 
 
-<h1 style="color: white; text-align: center;">Mi Perfil</h1>
+    <h1 style="color: white; text-align: center;">Mi Perfil</h1>
 
+    <p style="color: white;"><strong>Nombre:</strong> {{ $user->name }}</p>
+    <p style="color: white;"><strong>Email:</strong> {{ $user->email }}</p>
 
-        <p style="color: white;"><strong>Nombre:</strong> {{ $user->name }}</p>
-        <p style="color: white;"><strong>Email:</strong> {{ $user->email }}</p>
-
+    <div style=" color: white;">
+        <p><strong>Preferencias:</strong> {{ $user->datos->preferencias ?? 'Dato no disponible' }}</p>
+        
+        <p><strong>Alias:</strong> {{ $user->datos->alias ?? 'Dato no disponible' }}</p>
+        <p><strong>Teléfono:</strong> {{ $user->datos->telefono ?? 'Dato no disponible' }}</p>
+        <p><strong>Idiomas:</strong> {{ $user->datos->idiomas ?? 'Dato no disponible' }}</p>
+        <p><strong>Deportes Favoritos:</strong> {{ $user->datos->deportes ?? 'Dato no disponible' }}</p>
+        <p><strong>Animal Favorito:</strong> {{ $user->datos->animal_favorito ?? 'Dato no disponible' }}</p>
+        <p><strong>Ocupación:</strong> {{ $user->datos->ocupacion ?? 'Dato no disponible' }}</p>
+    </div>
 
 <h2 style="color: white; text-align: center;">Mis Publicaciones</h2>
 
@@ -41,7 +50,7 @@
         @endforeach
     </ul>
             </div>
-                
+
         </div>
 
         <div class="card">
@@ -67,5 +76,6 @@
 @else
     <p style="color: white;">No tienes publicaciones aún.</p>
 @endif
-    
+
 @endsection
+

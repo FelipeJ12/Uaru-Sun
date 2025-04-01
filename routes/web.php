@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\FloraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EspeciesController;
 use App\Http\Controllers\AdminSpeciesController;
@@ -13,8 +12,11 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PeligroExtincionController;
 use App\Http\Controllers\FaunaController;
-use App\Http\Controllers\AnfibiosController;
-use App\Http\Controllers\ArbolesController;
+use App\Http\Controllers\PeligrosoController;
+use App\Http\Controllers\AlimentoController;
+use App\Http\Controllers\DatousuarioController;
+
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', function () {
@@ -26,8 +28,6 @@ Route::get('/especies/{id}', [EspeciesController::class, 'show'])->name('catalog
 Route::get('/UsuarioPost', [UsuarioPostController::class, 'index'])->name('UsuarioPost.index');
 Route::get('/UsuarioPost/create', [UsuarioPostController::class, 'create'])->name('UsuarioPost.create');
 Route::post('/UsuarioPost', [UsuarioPostController::class, 'store'])->name('UsuarioPost.store');
-Route::put('/admin/especies/{species}', [AdminSpeciesController::class, 'update'])->name('admin.especies.update');
-
 
 
 
@@ -42,23 +42,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/nueva-fauna', [FaunaController::class, 'create']);
     Route::get('/nuevaz', [PeligroExtincionController::class, 'create']);
     Route::get('/nuevaz', [PeligroExtincionController::class, 'index'])->name('peligro.index');
-    Route::get('/ver', [AnfibiosController::class, 'index'])->name('anfibio.index');
-    Route::get('/usar', [ArbolesController::class, 'index'])->name('arboles.index');
-
 
 
 
 });
-Route::resource('arboles', ArbolesController::class);
-Route::resource('anfibios', AnfibiosController::class);
 Route::resource('extintos', PeligroExtincionController::class);
 Route::resource('fauna', FaunaController::class);
-Route::resource('flora', FloraController::class);
 Route::resource('/comentarios', ComentarioController::class);
 Route::get('/comentarios/create/{id}', [ComentarioController::class, 'create'])->name('comentarios.create');
 
 Route::resource('/paisajes', controller: PaisajeController::class);
 Route::get('/index', [PaisajeController::class, 'index'])->name('paisajes.index_paisaje');
+
+Route::resource('/peligrosos', PeligrosoController::class);
+Route::get('/index', [PeligrosoController::class, 'index'])->name('peligrosos.index_peligroso');
+
+Route::resource('/comidas', AlimentoController::class);
+
+Route::resource('/informacion', DatousuarioController::class);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');

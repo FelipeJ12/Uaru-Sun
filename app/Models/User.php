@@ -15,6 +15,11 @@ class User extends Authenticatable
     public function favoritos(){
         return $this->hasMany(Favorito::class);
     }
+
+    public function datos()
+    {
+        return $this->hasOne(Datousuario::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

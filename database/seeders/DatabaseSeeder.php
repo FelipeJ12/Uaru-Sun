@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             AdminUserSeeder::class,
             PaisajeSeeder::class,
+            PeligrosoSeeder::class,
         ]);
 
         User::factory()->create([
@@ -29,3 +30,4 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+

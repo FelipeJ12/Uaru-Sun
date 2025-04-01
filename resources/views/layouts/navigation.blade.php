@@ -6,35 +6,15 @@
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="d-inline-block align-text-top" width="40" height="40">
             ÚARU SUN
         </a>
-    
+    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="d-inline-block align-text-top" width="40" height="40">
 
-    <style>
-        .boton-flotante {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #28a745;
-            color: white;
-            border: 2px solid #ED7456;
-            border-radius: 50%;
-            width: 70px; 
-            height: 70px; 
-            font-size: 30px; /* Ajustado tamaño de fuente */
-            cursor: pointer;
-            text-align: center;
-            line-height: 60px; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
-            text-decoration: none; 
-        }
-    </style>
+    </a>
 
 
         <!-- Menú Hamburguesa -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-
 
         <!-- Elementos del Menú -->
         <div class="collapse navbar-collapse" id="mainNavbar">
@@ -52,6 +32,22 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.especies.index') ? 'active' : '' }}" href="{{ route('admin.especies.index') }}">
                                 <i class="fas fa-cog me-1"></i>Administrar Publicaciones
+                            </a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->role === 'user')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('UsuarioPost.create') ? 'active' : '' }}" href="{{ route('UsuarioPost.create') }}">
+                                <i class="fas fa-plus-circle me-1"></i>Crear Publicación
+                            </a>
+                        </li>
+                    @endif
+
+                    @if(Auth::user()->role === 'user' || Auth::user()->role === 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('paisajes.index') ? 'active' : '' }}" href="{{ route('paisajes.index') }}">
+                                <i class="fas fa-plus-circle me-1"></i>Paisajes
                             </a>
                         </li>
                     @endif
@@ -95,16 +91,16 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="menuDropdown">
                 <a class="dropdown-item" href="{{ route('fauna.index') }}">
-                    <i class="fas fa-paw me-2"></i>Fauna 
+                    <i class="fas fa-paw me-2"></i>Fauna
                 </a>
-
-                <a class="dropdown-item" href="{{ route('flora.index') }}">
-                    <i class="fas fa-paw me-2"></i>Flora 
-                </a>
-
-
                 <a class="dropdown-item" href="{{ route('peligro.index') }}">
                     <i class="fas fa-paw me-2"></i>Peligro de Extincion
+                </a>
+                <a class="dropdown-item" href="{{ route('comidas.index') }}">
+                    <i class="fas fa-paw me-2"></i>Alimentación herbívoros
+                </a>
+                <a class="dropdown-item" href="{{ route('peligrosos.index') }}">
+                    <i class="fas fa-paw me-2"></i>Animales peligrosos
                 </a>
             </div>
         </li>
@@ -116,6 +112,11 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 <hr class="dropdown-divider">
+                <i class="fas fa-sign-out-alt me-2">
+                    <a class="dropdown-item" href="{{ route('informacion.create') }}">
+                        <i class="fas fa-paw me-2"></i>Datos del usuario
+                    </a>
+                </i>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="dropdown-item text-danger">
@@ -131,16 +132,8 @@
 
 
 
-<button class="boton-flotante" onclick="window.location.href='{{ route('UsuarioPost.create') }}'">+</button>
-
- 
-
             </ul>
         </div>
-
-        <a href="{{ route('UsuarioPost.create') }}" class="boton-flotante">+</a>
-
-        
     </div>
 </nav>
 
