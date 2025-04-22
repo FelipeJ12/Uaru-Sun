@@ -10,14 +10,14 @@
 
     <div class="text-center mb-4">
         <h1 class="mb-4 text-white" class="display-4 text-success">
-            <i class="fas fa-leaf"></i> Especies en Peligro de Extincion
+            <i style="color: white; text-align: center;"></i> Especies en Peligro de Extinción
         </h1>
     </div>
-    
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <a href="{{ route('fauna.index') }}" class="btn btn-success me-md-2">Regresar</a>
-</div>
 
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{{ route('fauna.index') }}" class="btn btn-success me-md-2">Regresar</a>
+    </div>
 
         @if($especies->isEmpty())
             <p class="text-white">No hay especies registradas en los animales en peligro de extincion.</p>

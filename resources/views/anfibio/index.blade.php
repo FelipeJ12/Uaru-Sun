@@ -59,7 +59,6 @@
             <a href="{{ route('fauna.index') }}" class="btn btn-success me-md-2">Regresar</a>
     </div>
 
-
     @if($especies->isEmpty())
         <p style="color: white; text-align: center; margin-top: 30px;">No hay especies registradas en este grupo.</p>
     @else

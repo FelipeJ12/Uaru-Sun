@@ -52,8 +52,6 @@ class DatousuarioController extends Controller
         $datos->fecha_nacimiento = $request->input('fecha_nacimiento');
         $datos->alias = $request->input('alias');
         $datos->telefono = $request->input('telefono');
-        $datos->idiomas = $request->input('idiomas');
-        $datos->deportes = $request->input('deportes');
         $datos->animal_favorito = $request->input('animal_favorito');
         $datos->ocupacion = $request->input('ocupacion');
         $datos->user_id = $request->input('user_id');
@@ -110,8 +108,6 @@ class DatousuarioController extends Controller
         $datos->fecha_nacimiento = $request->input('fecha_nacimiento');
         $datos->alias = $request->input('alias');
         $datos->telefono = $request->input('telefono');
-        $datos->idiomas = $request->input('idiomas');
-        $datos->deportes = $request->input('deportes');
         $datos->animal_favorito = $request->input('animal_favorito');
         $datos->ocupacion = $request->input('ocupacion');
 

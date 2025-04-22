@@ -15,6 +15,13 @@ class User extends Authenticatable
     return $this->hasMany(Post::class);
 }
 
+
+    public function species(){
+        return $this->hasMany(Species::class);
+    }
+
+
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 

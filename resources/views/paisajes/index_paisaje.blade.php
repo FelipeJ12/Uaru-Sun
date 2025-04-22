@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="text-white text-center">Bienvenido a Paisajes Naturales</h1>
+            <h1 style="color: white; text-align: center;">Bienvenido a Paisajes Naturales</h1>
         </div>
 
         @if(session('success'))
@@ -41,6 +41,10 @@
     </div>
 
     <style>
+
+        .text-center {
+            margin-top: 80px; /* Ajusta este valor según sea necesario */
+        }
         .custom-table {
             width: 100%;
             background: rgba(30,28,28,0.67);

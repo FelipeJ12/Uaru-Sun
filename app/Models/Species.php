@@ -26,4 +26,10 @@ class Species extends Model
     {
         return $this->hasMany(Comentario::class);
     }
+    
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    
+
 }

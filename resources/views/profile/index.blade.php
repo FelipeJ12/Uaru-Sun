@@ -83,23 +83,23 @@
 
     <h2 style="color: white; text-align: center; margin-top: 30px;">Mis Publicaciones</h2>
 
-
-    
-@if($especies->isEmpty())
- <p style="color: white; text-align: center; margin-top: 30px;">No hay especies registradas.</p>
-@else
-    <div class="gallery-grid">
-        @foreach($especies as $especie)
-             <div class="custom-card">
-                <img src="{{ route('catalogo.show', $especie->id) }}" alt="{{ $especie->nombre }}">
-                 <div class="custom-card-body">
-                    <h5>{{ $especie->nombre }}</h5>
-                    <p>{{ $especie->descripcion }}</p>
-                </div>
-            </div>
-        @endforeach
-    </div>
-@endif
+    @if($especies->isEmpty())
+        <p class="text-white">No hay especies registradas en este grupo.</p>
+    @else
+        <div class="gallery-grid">
+            @foreach($especies as $especie)
+                <a href="{{ route('catalogo.show', $especie->id) }}" class="custom-card text-dark">
+                    <img src="{{ asset('storage/' . $especie->image_path) }}" alt="{{ $especie->nombre }}">
+                    <div class="custom-card-body">
+                        <h5>{{ $especie->nombre }}</h5>
+                        <p><em>{{ $especie->nombre_cientifico }}</em></p>
+                        <p><strong>Hábitat:</strong> {{ $especie->habitat }}</p>
+                        <p><strong>Ubicación:</strong> {{ $especie->ubicacion }}</p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    @endif
 
 
 </div>

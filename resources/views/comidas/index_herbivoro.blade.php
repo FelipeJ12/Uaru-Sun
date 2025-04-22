@@ -12,9 +12,10 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="text-white text-center">Alimentación de animales herbívoros</h1>
         </div>
+
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <a href="{{ route('fauna.index') }}" class="btn btn-success me-md-2">Regresar</a>
-</div>
+            <a href="{{ route('fauna.index') }}" class="btn btn-success me-md-2">Regresar</a>
+        </div>
 
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>

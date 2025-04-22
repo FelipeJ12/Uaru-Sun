@@ -61,7 +61,7 @@
 
 
     @if($especies->isEmpty())
-        <p style="color: white; text-align: center; margin-top: 30px;">No hay especies registradas en este grupo.</p>
+        <p class="text-white">No hay especies registradas en este grupo.</p>
     @else
         <div class="gallery-grid">
             @foreach($especies as $especie)
