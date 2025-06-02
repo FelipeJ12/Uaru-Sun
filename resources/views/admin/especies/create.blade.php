@@ -62,24 +62,18 @@
         margin-top: 20px;
     }
 
+    #preview img {
+        max-width: 100%;
+        max-height: 300px;
+        margin-top: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 </style>
 
 <div class="container">
     <div class="form-container">
         <h1>Agregar Nueva Especie</h1>
-
-        {{-- Errores de backend --}}
-        {{--
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        --}}
 
         <form id="especieForm" action="{{ route('admin.especies.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
@@ -131,14 +125,14 @@
                 <label for="image" class="form-label">Imagen</label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="validarImagen()" required>
                 <div id="imagenError" class="text-danger" style="display: none;">Debe subir una imagen válida.</div>
+                <div id="preview"></div> <!-- Aquí se mostrará la previsualización -->
             </div>
 
             <div class="btn-group">
-            <button type="submit" class="btn btn-primary" id="guardarBtn">
-    <span id="guardarIcono" class="me-2"><i class="fas fa-save"></i></span>
-    Guardar
-</button>
-
+                <button type="submit" class="btn btn-primary" id="guardarBtn">
+                    <span id="guardarIcono" class="me-2"><i class="fas fa-save"></i></span>
+                    Guardar
+                </button>
                 <a href="{{ route('admin.especies.index') }}" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
@@ -212,13 +206,25 @@
             function validarImagen() {
                 const input = document.getElementById('image');
                 const error = document.getElementById('imagenError');
+                const preview = document.getElementById('preview');
+                const file = input.files[0];
 
-                const valido = input.files && input.files.length > 0;
-                error.style.display = valido ? 'none' : 'block';
-                input.classList.toggle('is-invalid', !valido);
+                if (file && file.type.startsWith('image/')) {
+                    error.style.display = 'none';
+                    input.classList.remove('is-invalid');
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="Vista previa de la imagen">`;
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    error.style.display = 'block';
+                    input.classList.add('is-invalid');
+                    preview.innerHTML = '';
+                }
             }
 
-            // Ejecutar validaciones si hay errores del backend
             window.addEventListener('load', () => {
                 if ({{ $errors->any() ? 'true' : 'false' }}) {
                     validarNombre();
@@ -232,33 +238,29 @@
             });
 
             document.getElementById('especieForm').addEventListener('submit', function (event) {
-    const btn = document.getElementById('guardarBtn');
-    const icono = document.getElementById('guardarIcono');
+                const btn = document.getElementById('guardarBtn');
+                const icono = document.getElementById('guardarIcono');
 
-    // Mostrar animación de carga inmediatamente al hacer clic
-    btn.disabled = true;
-    icono.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+                btn.disabled = true;
+                icono.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
 
-    // Ejecutar validaciones
-    validarNombre();
-    validarNombreCientifico();
-    validarDescripcion();
-    validarHabitat();
-    validarLocation();
-    validarCategoria();
-    validarImagen();
+                validarNombre();
+                validarNombreCientifico();
+                validarDescripcion();
+                validarHabitat();
+                validarLocation();
+                validarCategoria();
+                validarImagen();
 
-    const errores = document.querySelectorAll('.is-invalid');
-    if (errores.length > 0) {
-        event.preventDefault();
-        event.stopPropagation();
+                const errores = document.querySelectorAll('.is-invalid');
+                if (errores.length > 0) {
+                    event.preventDefault();
+                    event.stopPropagation();
 
-        // Revertir la animación porque hubo errores
-        btn.disabled = false;
-        icono.innerHTML = `<i class="fas fa-save"></i>`;
-    }
-});
-
+                    btn.disabled = false;
+                    icono.innerHTML = `<i class="fas fa-save"></i>`;
+                }
+            });
         </script>
     </div>
 </div>

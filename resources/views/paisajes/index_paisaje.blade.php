@@ -19,9 +19,9 @@
                     <div class="card h-100 shadow bg-dark text-white border-0">
                         <a href="{{ route('paisajes.show', $paisaje->id) }}">
                             @if($paisaje->id <= 5)
-                                <img src="{{ asset($paisaje->url) }}" class="card-img-top img-fluid" style="max-height: 250px; object-fit: cover;">
+                                <img src="{{ asset($paisaje->url) }}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; width: 100%;">
                             @else
-                                <img src="{{ asset('storage/' . $paisaje->url) }}" class="card-img-top img-fluid" style="max-height: 250px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $paisaje->url) }}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; width: 100%;">
                             @endif
                         </a>
                         <div class="card-body">
