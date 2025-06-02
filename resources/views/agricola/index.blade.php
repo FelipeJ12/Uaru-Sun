@@ -55,8 +55,18 @@
 <div class="container mt-4">
     <h1 style="color: white; text-align: center; margin-top: 30px;">Bienvenido a la Flora Agricola</h1>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="{{ route('flora.index') }}" class="btn btn-success me-md-2">Regresar</a>
+     <!-- Menú desplegable -->
+     <div class="d-flex justify-content-end mb-4">
+        <div class="dropdown">
+            <button class="btn btn-success me-md-2"  type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Seleccionar Categoría
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{{ route('agricola.index') }}">Flora Agricola</a></li>
+                <li><a class="dropdown-item" href="{{ route('jardin.index') }}">Flora de Jardin</a></li>
+                <li><a class="dropdown-item" href="{{ route('arboles.index') }}">Grupo de Árboles</a></li>
+            </ul>
+        </div>
     </div>
 
     @if($especies->isEmpty())

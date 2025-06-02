@@ -16,8 +16,21 @@
         </h1>
     </div>
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="{{ route('fauna.index') }}" class="btn btn-success me-md-2">Regresar</a>
+        <!-- Menú desplegable -->
+    <div class="d-flex justify-content-end mb-4">
+        <div class="dropdown">
+            <button class="btn btn-success me-md-2" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Seleccionar Categoría
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{{ route('peligro.index') }}">Peligro de Extinción</a></li>
+                <li><a class="dropdown-item" href="{{ route('anfibio.index') }}">Grupo de Anfibios</a></li>
+                <li><a class="dropdown-item" href="{{ route('ave.index') }}">Grupo de Aves</a></li>
+                <li><a class="dropdown-item" href="{{ route('mamiferos.index') }}">Grupo de Mamiferos</a></li>
+                <li><a class="dropdown-item" href="{{ route('comidas.index') }}">Alimentación herbívoros</a></li>
+                <li><a class="dropdown-item" href="{{ route('peligrosos.index') }}">Animales peligrosos</a></li>
+            </ul>
+        </div>
     </div>
 
         @if($especies->isEmpty())
