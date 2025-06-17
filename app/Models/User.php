@@ -10,6 +10,17 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
 
+// Usuarios que me siguen
+public function seguidores()
+{
+    return $this->belongsToMany(User::class, 'follows', 'seguido_id', 'seguidor_id');
+}
+
+// Usuarios a los que yo sigo
+public function siguiendo()
+{
+    return $this->belongsToMany(User::class, 'follows', 'seguidor_id', 'seguido_id');
+}
 
     public function posts()
 {

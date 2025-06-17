@@ -113,13 +113,14 @@
                 </li>
             @endif
 
+
             <?php if(Auth::user()->role === 'user'): ?>
-    <li>
-        <a class="dropdown-item <?php echo e(request()->routeIs('UsuarioPost.create') ? 'active' : ''); ?>" href="<?php echo e(route('UsuarioPost.create')); ?>">
-            <i class="fas fa-plus-circle me-1"></i> Crear Publicación
-        </a>
-    </li>
-<?php endif; ?>
+            <li>
+                <a class="dropdown-item <?php echo e(request()->routeIs('UsuarioPost.create') ? 'active' : ''); ?>" href="<?php echo e(route('UsuarioPost.create')); ?>">
+                    <i class="fas fa-plus-circle me-1"></i> Crear Publicación
+                </a>
+            </li>
+            <?php endif; ?>
 
 <?php if(in_array(Auth::user()->role, ['user', 'admin'])): ?>
     <li>
@@ -128,6 +129,15 @@
         </a>
     </li>
 <?php endif; ?>
+
+<?php if(in_array(Auth::user()->role, ['user', 'admin'])): ?>
+    <li>
+        <a class="dropdown-item <?php echo e(request()->routeIs('usuarios.explorar') ? 'active' : ''); ?>" href="<?php echo e(route('usuarios.explorar')); ?>">
+            <i class="fas fa-users me-1"></i> Explorar Usuarios
+        </a>
+    </li>
+<?php endif; ?>
+
 
 
             <li><hr class="dropdown-divider"></li>
