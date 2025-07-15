@@ -16,7 +16,7 @@
         <div class="row">
             @foreach($paisajes as $paisaje)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow bg-dark text-white border-0">
+                    <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                         <a href="{{ route('paisajes.show', $paisaje->id) }}">
                             @if($paisaje->id <= 5)
                                 <img src="{{ asset($paisaje->url) }}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; width: 100%;">
@@ -37,4 +37,16 @@
             {{ $paisajes->links() }}
         </div>
     </div>
+    @push('styles')
+<style>
+    body {
+        background-image: url('{{ asset('fonds.jpg') }}'); /* ← aquí va tu imagen */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+</style>
+@endpush
+
 @endsection

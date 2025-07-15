@@ -23,13 +23,13 @@
         <div class="row">
             @forelse($nuevos as $nuevo)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card shadow-sm h-100 border-0 rounded-4 bg-light">
+                    <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
-                                <h5 class="card-title text-dark mb-3">
-                                    ✨ {{ $nuevo->dato }}
+                                <h5 class="card-title text-white mb-3">
+                                     {{ $nuevo->dato }}
                                 </h5>
-                                <ul class="list-unstyled text-secondary small">
+                                <ul class="list-unstyled text-white small">
                                     <li><strong>👤 Usuario:</strong> {{ $nuevo->user->email ?? 'No disponible' }}</li>
                                     <li><strong>📌 Estado:</strong> {{ $nuevo->estado ?? 'No disponible' }}</li>
                                 </ul>
@@ -53,7 +53,7 @@
                             @endif
 
                             <div class="text-end mt-auto">
-                                <small class="text-muted">📅Enviado el {{ date('d-m-Y', strtotime($nuevo->fecha)) }}</small>
+                                <small class="text-">📅Enviado el {{ date('d-m-Y', strtotime($nuevo->fecha)) }}</small>
                             </div>
                         </div>
                     </div>

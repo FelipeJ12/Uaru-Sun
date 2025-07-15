@@ -3,6 +3,12 @@
 @section('content')
     <div class="container mt-5">
         <h2>Lista de Usuarios Suscritos</h2>
+
+        <!-- Botón de regresar -->
+        <a href="{{ url()->previous() }}" class="btn btn-outline-dark mb-3">
+            <i class="fas fa-arrow-left me-1"></i> Regresar
+        </a>
+
         <table class="table">
             <thead>
                 <tr>

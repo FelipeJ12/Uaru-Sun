@@ -20,7 +20,8 @@
         <div class="row">
             @forelse($eventos as $evento)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow bg-dark text-white border-light position-relative rounded-4">
+                   <div class="card h-100 shadow bg-success bg-opacity-50 text-white border-light position-relative rounded-4">
+
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
                                 @php

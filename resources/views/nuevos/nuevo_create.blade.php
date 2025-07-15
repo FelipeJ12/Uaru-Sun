@@ -4,6 +4,8 @@
 
 @section('content')
     <div class="container" style="margin-top: 50px">
+        
+            <div class="mb-3">
 
         <div class="alert alert-info">
             <strong>Queremos mejorar:</strong> Ayúdanos a mejorar el sistema de biodiversidad en Honduras sugiriendo nuevas secciones o funcionalidades que consideres importantes.

@@ -12,18 +12,7 @@
             margin-top: 80px;
         }
 
-        .perfil-container {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 50px;
-            border-radius: 12px;
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+        
 
         .avatar {
             width: 160px;
@@ -168,7 +157,7 @@
 
         <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
             <div class="col">
-                <div class="card shadow-sm border-0 h-100">
+                <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-user me-2"></i>Información Básica</h5>
                         <p><i class="fas fa-id-badge me-2 text-muted"></i><strong>Nombre:</strong> {{ $user->name }}</p>
@@ -180,7 +169,7 @@
             </div>
 
             <div class="col">
-                <div class="card shadow-sm border-0 h-100">
+                <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Detalles Adicionales</h5>
                         <p><i class="fas fa-phone me-2 text-muted"></i><strong>Teléfono:</strong> {{ $user->datos->telefono ?? 'Dato no disponible' }}</p>
@@ -203,7 +192,7 @@
             @foreach($especies as $especie)
                 <div class="col">
                     <a href="{{ route('catalogo.show', $especie->id) }}" class="text-decoration-none">
-                        <div class="card h-100 shadow-lg custom-dark-card">
+                        <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                             @if($especie->image_path)
                                 <img src="{{ asset('storage/' . $especie->image_path) }}"
                                      class="card-img-top"

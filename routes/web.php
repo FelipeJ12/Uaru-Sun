@@ -28,6 +28,7 @@ use App\Http\Controllers\MedicinaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\NuevoController;
+use App\Http\Controllers\BitaController;
 
 
 

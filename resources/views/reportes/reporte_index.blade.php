@@ -18,7 +18,7 @@
         <div class="row">
             @forelse($reportes as $reporte)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow bg-dark text-white border-0">
+                    <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                         @if($reporte->imagen)
                             <img src="{{ asset('storage/' . $reporte->imagen) }}" class="card-img-top img-fluid"
                                  style="height: 230px; object-fit: cover; width: 100%;">

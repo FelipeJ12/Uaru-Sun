@@ -54,6 +54,7 @@
 
             <!-- Menú Usuario -->
             <ul class="navbar-nav ms-auto">
+                 <div class="card h-100 shadow bg-success bg-opacity-50 text-white border-light position-relative rounded-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->routeIs('login', 'admin.especies.index', 'UsuarioPost.create', 'profile.index') ? 'active' : '' }}" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                         <i class="fas fa-user-circle me-1"></i>
