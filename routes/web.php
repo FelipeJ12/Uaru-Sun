@@ -29,6 +29,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EnfermedadPlantaController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\NuevoController;
 
 // Página principal
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -48,6 +50,8 @@ Route::get('/mamiferos', [MamiferosController::class, 'index'])->name('mamiferos
 Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
 Route::delete('/likes/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
 Route::get('/mis-likes', [LikeController::class, 'misLikes'])->name('likes.mislikes');
+Route::resource('eventos', EventoController::class);
+Route::resource('/nuevos', NuevoController::class);
 
 // Recursos
 Route::resources([
