@@ -3,54 +3,55 @@
 @section('title', 'Inicio - Flora y Fauna de Honduras')
 
 @section('content')
- 
 <div class="container mt-5">
     <div class="text-center mb-3">
         <h1 class="display-5 text-success">
             <i class="fas fa-leaf"></i> Biodiversidad Hondureña
         </h1>
         <p class="lead text-white">Descubre nuestra riqueza natural</p>
-        <!-- Usuarios conectados -->
-<div class="position-fixed bottom-0 end-0 m-3" style="width: 250px; z-index: 1050;">
-    <div class="bg-dark text-white rounded p-2 shadow-sm">
-        <h6 class="text-center mb-2" style="font-size: 0.9rem;">Usuarios conectados</h6>
-        <ul class="list-unstyled mb-0" style="font-size: 0.8rem;">
-            @forelse ($onlineUsers as $user)
-                <li class="text-center">{{ $user->name }}<br>
-                @if($user->last_seen)
-                    <small>(activo {{ $user->last_seen->diffForHumans() }})</small>
-                @else
-                    <small>Sin actividad reciente</small>
-                @endif
-</li>
-            @empty
-                <li class="text-center">No hay usuarios en línea</li>
-            @endforelse
-        </ul>
-    </div>
-</div>
 
+        <!-- Usuarios conectados (solo visible en pantallas medianas o más grandes) -->
+        <div class="position-fixed bottom-0 end-0 m-3 d-none d-md-block" style="width: 250px; z-index: 1050;">
+            <div class="bg-dark text-white rounded p-2 shadow-sm">
+                <h6 class="text-center mb-2" style="font-size: 0.9rem;">Usuarios conectados</h6>
+                <ul class="list-unstyled mb-0" style="font-size: 0.8rem;">
+                    @forelse ($onlineUsers as $user)
+                        <li class="text-center">
+                            {{ $user->name }}<br>
+                            @if($user->last_seen)
+                                <small>(activo {{ $user->last_seen->diffForHumans() }})</small>
+                            @else
+                                <small>Sin actividad reciente</small>
+                            @endif
+                        </li>
+                    @empty
+                        <li class="text-center">No hay usuarios en línea</li>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <div class="kb-gallery-container">
         @foreach($species as $specie)
-        <a href="{{ route('catalogo.show', $specie->id) }}" class="kb-gallery-item">
-            <figure>
-                <div class="img-wrapper">
-                    <img src="{{ asset('storage/' . $specie->image_path) }}" alt="{{ $specie->nombre }}">
-                </div>
-                <figcaption>
-                    <strong>{{ $specie->nombre }}</strong>
-                    <em>{{ $specie->nombre_cientifico }}</em>
-                    @if ($specie->category)
-                        <span class="badge bg-success">
-                            {{ $specie->category->nombre }} ({{ $specie->category->tipo }})
-                        </span>
-                    @else
-                        <span class="badge bg-warning">Sin categoría</span>
-                    @endif
-                </figcaption>
-            </figure>
-        </a>
+            <a href="{{ route('catalogo.show', $specie->id) }}" class="kb-gallery-item">
+                <figure>
+                    <div class="img-wrapper">
+                        <img src="{{ asset('storage/' . $specie->image_path) }}" alt="{{ $specie->nombre }}">
+                    </div>
+                    <figcaption>
+                        <strong>{{ $specie->nombre }}</strong>
+                        <em>{{ $specie->nombre_cientifico }}</em>
+                        @if ($specie->category)
+                            <span class="badge bg-success">
+                                {{ $specie->category->nombre }} ({{ $specie->category->tipo }})
+                            </span>
+                        @else
+                            <span class="badge bg-warning">Sin categoría</span>
+                        @endif
+                    </figcaption>
+                </figure>
+            </a>
         @endforeach
     </div>
 
@@ -152,6 +153,7 @@ figcaption span {
     background: #145c39;
 }
 
+/* Responsive */
 @media (max-width: 1024px) {
     .kb-gallery-item {
         width: calc(33.33% - 20px);
@@ -167,6 +169,11 @@ figcaption span {
 @media (max-width: 480px) {
     .kb-gallery-item {
         width: 100%;
+    }
+
+    /* Extra padding on mobile */
+    .kb-gallery-container {
+        padding-bottom: 60px;
     }
 }
 </style>
