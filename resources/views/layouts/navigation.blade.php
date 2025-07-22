@@ -52,6 +52,7 @@
                 </button>
             </form>
 
+
             <!-- Menú Usuario -->
             <ul class="navbar-nav ms-auto">
                  <div class="card h-100 shadow bg-success bg-opacity-50 text-white border-light position-relative rounded-4">
@@ -90,7 +91,7 @@
                                 <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar actividad ilegal</a></li>
                             @endif
                              <li><a class="dropdown-item" href="{{route('eventos.index')}}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
-                            <li><a class="dropdown-item" href="{{route('nuevos.index')}}"><i class="fas fa-lightbulb me-2 text-warning"></i> Ver recomendaciones de secciones</a></li>
+                            <li><a class="dropdown-item" href="{{route('nuevos.index')}}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones de secciones</a></li>
 
                             <li><a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-1"></i> Mi perfil</a></li>
                             <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>

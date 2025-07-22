@@ -30,38 +30,47 @@
                                     </h5>
                                 </div>
                                 <div class="text-end">
-                                    @if($evento->fecha_evento == $fecha)
-                                        <span class="badge bg-success text-white px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.85rem;">📅 Hoy</span>
-                                    @elseif($evento->fecha_evento < $fecha)
-                                        <span class="badge bg-danger text-white px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.85rem;">⏳ Pasado</span>
-                                    @else
-                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.85rem;">⏰ Próximo</span>
-                                    @endif
-                                </div>
+    @if($evento->fecha_evento == $fecha)
+        <span class="badge bg-success text-white px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.85rem;">
+            <i class="fas fa-calendar-day me-1"></i> Hoy
+        </span>
+    @elseif($evento->fecha_evento < $fecha)
+        <span class="badge bg-danger text-white px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.85rem;">
+            <i class="fas fa-hourglass-end me-1"></i> Pasado
+        </span>
+    @else
+        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.85rem;">
+            <i class="fas fa-clock me-1"></i> Próximo
+        </span>
+    @endif
+</div>
+
                                 <hr>
-                                <ul class="list-unstyled">
-                                    <li><strong>📆 Fecha:</strong> {{ \Carbon\Carbon::parse($evento->fecha_evento)->format('d/m/Y') }}</li>
-                                    <li><strong>⏰ Hora:</strong> {{ \Carbon\Carbon::parse($evento->hora_evento)->format('h:i A') }}</li>
-                                    <li><strong>📍 Dirección:</strong> {{ $evento->url }}</li>
-                                    <li><strong>👤 Registrado por:</strong> {{ $evento->user->email ?? 'correo no disponible' }}</li>
-                                </ul>
+                               <ul class="list-unstyled">
+    <li><strong><i class="fas fa-calendar me-2"></i>Fecha:</strong> {{ \Carbon\Carbon::parse($evento->fecha_evento)->format('d/m/Y') }}</li>
+    <li><strong><i class="fas fa-clock me-2"></i>Hora:</strong> {{ \Carbon\Carbon::parse($evento->hora_evento)->format('h:i A') }}</li>
+    <li><strong><i class="fas fa-map-marker-alt me-2"></i>Dirección:</strong> {{ $evento->url }}</li>
+    <li><strong><i class="fas fa-user me-2"></i>Registrado por:</strong> {{ $evento->user->email ?? 'correo no disponible' }}</li>
+</ul>
+
                             </div>
                             <hr>
 
                             {{-- Solo los administradores pueden editar o eliminar --}}
                             @if(auth()->check() && auth()->user()->role == 'admin')
                                 <div class="d-flex flex-column gap-2 mt-2">
-                                    <a href="{{ route('eventos.edit', $evento->id) }}" class="btn btn-outline-info w-100">
-                                        ✏️ Editar
-                                    </a>
-                                    <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este evento?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger w-100">
-                                            🗑️ Eliminar
-                                        </button>
-                                    </form>
-                                </div>
+    <a href="{{ route('eventos.edit', $evento->id) }}" class="btn btn-outline-info w-100">
+        <i class="fas fa-pen me-2"></i> Editar
+    </a>
+    <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este evento?')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-outline-danger w-100">
+            <i class="fas fa-trash me-2"></i> Eliminar
+        </button>
+    </form>
+</div>
+
                             @endif
 
                             <div class="mt-auto text-end">

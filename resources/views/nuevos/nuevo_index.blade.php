@@ -29,34 +29,41 @@
                                 <h5 class="card-title text-white mb-3">
                                      {{ $nuevo->dato }}
                                 </h5>
-                                <ul class="list-unstyled text-white small">
-                                    <li><strong>👤 Usuario:</strong> {{ $nuevo->user->email ?? 'No disponible' }}</li>
-                                    <li><strong>📌 Estado:</strong> {{ $nuevo->estado ?? 'No disponible' }}</li>
-                                </ul>
+                                <ul class="list-unstyled">
+    <li>
+        <strong><i class="fas fa-user me-1"></i> Usuario:</strong> {{ $nuevo->user->email ?? 'No disponible' }}
+    </li>
+    <li>
+        <strong><i class="fas fa-thumbtack me-1"></i> Estado:</strong> {{ $nuevo->estado ?? 'No disponible' }}
+    </li>
+</ul>
+
                             </div>
                             @if($nuevo->estado == 'Pendiente')
-                                <hr>
-                                <div class="d-flex flex-column gap-2 mt-2">
-                                    <a href="{{ route('nuevos.edit', $nuevo->id) }}" class="btn btn-outline-info w-100">
-                                        ✏️ Editar
-                                    </a>
+                               <hr>
+<div class="d-flex flex-column gap-2 mt-2">
+    <a href="{{ route('nuevos.edit', $nuevo->id) }}" class="btn btn-outline-info w-100">
+        <i class="fas fa-pen me-1"></i> Editar
+    </a>
 
-                                    <form action="{{ route('nuevos.destroy', $nuevo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta sugerencia?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger w-100">
-                                            🗑️ Eliminar
-                                        </button>
-                                    </form>
-                                </div>
-                                <hr>
+    <form action="{{ route('nuevos.destroy', $nuevo->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta sugerencia?')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-outline-danger w-100">
+            <i class="fas fa-trash me-1"></i> Eliminar
+        </button>
+    </form>
+</div>
+<hr>
+
                             @endif
 
                             <div class="text-end mt-auto">
-                                <small class="text-">📅Enviado el {{ date('d-m-Y', strtotime($nuevo->fecha)) }}</small>
-                            </div>
-                        </div>
-                    </div>
+    <small class="text-white">
+        <i class="fas fa-calendar-alt me-1"></i>Enviado el {{ date('d-m-Y', strtotime($nuevo->fecha)) }}
+    </small>
+</div>
+
                 </div>
             @empty
                 <div class="col-12">
