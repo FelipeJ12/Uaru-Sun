@@ -31,7 +31,6 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\NuevoController;
-use App\Http\Controllers\BitaController;
 use App\Http\Controllers\EnfermedadController;
 
 
