@@ -12,7 +12,7 @@
 
         <!-- Usuarios conectados (solo visible en pantallas medianas o más grandes) -->
         <div class="position-fixed bottom-0 end-0 m-3 d-none d-md-block" style="width: 250px; z-index: 1050;">
-            <div class="bg-dark text-white rounded p-2 shadow-sm">
+           <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                 <h6 class="text-center mb-2" style="font-size: 0.9rem;">Usuarios conectados</h6>
                 <ul class="list-unstyled mb-0" style="font-size: 0.8rem;">
                     @forelse ($onlineUsers as $user)
@@ -109,7 +109,7 @@
 }
 
 .img-wrapper img {
-    width: 97%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
@@ -117,7 +117,7 @@
 
 figcaption {
     height: 120px;
-    background-color: hsl(0, 2.70%, 7.30%);
+    background-color: rgba(25, 135, 84, 0.5); /* mismo color de tarjeta */
     color: white;
     padding: 10px;
     font-size: 0.9em;
@@ -128,6 +128,7 @@ figcaption {
     text-align: center;
     gap: 5px;
 }
+
 
 figcaption strong,
 figcaption em,
