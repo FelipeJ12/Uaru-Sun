@@ -28,6 +28,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EnfermedadPlantaController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\NuevoController;
 
 
 
@@ -100,6 +102,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/jardin', [FlorajardinController::class, 'index'])->name('jardin.index');
     Route::get('/arboles', [ArbolesController::class, 'index'])->name('arboles.index');
     Route::get('/bita', [BitaController::class, 'index'])->name('bitacora.bita'); // ya está arriba también
+    Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+    Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
+    Route::get('/nuevos', [NuevoController::class, 'index'])->name('nuevos.index');
+
 });
 
 // Recursos
@@ -109,6 +115,8 @@ Route::resource('Anfibio', AnfibiosController::class);
 Route::resource('extintos', PeligroExtincionController::class);
 Route::resource('fauna', FaunaController::class);
 Route::resource('flora', FloraController::class);
+Route::resource('eventos', EventoController::class);
+Route::resource('nuevos', NuevoController::class);
 Route::resource('/comentarios', ComentarioController::class);
 Route::get('/comentarios/create/{id}', [ComentarioController::class, 'create'])->name('comentarios.create');
 

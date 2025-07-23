@@ -117,7 +117,7 @@
 
 figcaption {
     height: 120px;
-    background-color: rgba(25, 135, 84, 0.5); /* mismo color de tarjeta */
+    background-color: rgba(25, 135, 84, 0.5); 
     color: white;
     padding: 10px;
     font-size: 0.9em;
