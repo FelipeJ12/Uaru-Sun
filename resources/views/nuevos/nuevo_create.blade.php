@@ -17,12 +17,13 @@
                 @method('PUT')
             @endif
 
-            <div class="mb-3">
-                <label for="dato" class="form-label">¿Qué sección crees que deberíamos agregar?</label>
-                <textarea class="form-control @error('dato') is-invalid @enderror" id="dato" name="dato" rows="3" maxlength="150"
-                          placeholder="Ejemplo: Añadir una sección para monitoreo de especies invasoras, catálogo de flora por región, etc.">{{ isset($nuevo) ? $nuevo->dato : old('dato') }}</textarea>
-                @error('dato')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div>
+            <div class="mb-3 text-white">
+    <label for="dato" class="form-label">¿Qué sección crees que deberíamos agregar?</label>
+    <textarea class="form-control @error('dato') is-invalid @enderror" id="dato" name="dato" rows="3" maxlength="150"
+              placeholder="Ejemplo: Añadir una sección para monitoreo de especies invasoras, catálogo de flora por región, etc.">{{ isset($nuevo) ? $nuevo->dato : old('dato') }}</textarea>
+    @error('dato')<div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
+
 
             @if(isset($usuario) && $usuario->role === 'admin')
                 <div class="mb-3">

@@ -17,7 +17,7 @@
                 @method('PUT')
             @endif
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="descripcion" class="form-label">Descripción del evento</label>
                 <textarea class="form-control @error('descripcion') is-invalid @enderror"
                           id="descripcion"
@@ -28,7 +28,7 @@
                 @error('descripcion')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="fecha_evento" class="form-label">Fecha del evento</label>
                 <input type="date"
                        class="form-control @error('fecha_evento') is-invalid @enderror"
@@ -39,7 +39,7 @@
                 @error('fecha_evento')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="hora_evento" class="form-label">Hora del evento</label>
                 <input type="time"
                        class="form-control @error('hora_evento') is-invalid @enderror"
@@ -49,7 +49,7 @@
                 @error('hora_evento')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="direccion" class="form-label">Dirección exacta del evento</label>
                 <textarea class="form-control @error('direccion') is-invalid @enderror"
                           id="direccion"
