@@ -18,8 +18,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Estilos compilados por Laravel Mix -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     @stack('styles')
 
@@ -110,8 +110,8 @@
  <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Scripts compilados por Laravel Mix -->
-<script src="{{ asset('js/app.js') }}"></script>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
 @stack('scripts')
 
