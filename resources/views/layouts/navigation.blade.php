@@ -71,48 +71,36 @@
                         @endguest
 
                         @auth
-                            @if(Auth::user()->role === 'admin')
-                                <li><a class="dropdown-item" href="{{ route('admin.especies.index') }}"><i class="fas fa-cog me-1"></i> Administrar Publicaciones</a></li>
-                                <li><a class="dropdown-item" href="{{ route('bitacora.bita') }}"><i class="fas fa-clipboard-list me-1"></i> Ver Bitácora</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/admin/users') }}"><i class="fas fa-users me-1"></i> usuarios suscriptos </a></li>
-                                <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Ver actividades ilegales</a></li>
-                                <li>
-    <a class="dropdown-item" href="{{ route('enfermedades.index') }}">
-        <i class="fas fa-virus me-1"></i> Enfermedades de Plantas
-    </a>
-</li>
-                                <li class="nav-item">
-</li>
+    @if(Auth::user()->role === 'admin')
+        <li><a class="dropdown-item" href="{{ route('admin.especies.index') }}"><i class="fas fa-cog me-1"></i> Administrar Publicaciones</a></li>
+        <li><a class="dropdown-item" href="{{ route('bitacora.bita') }}"><i class="fas fa-clipboard-list me-1"></i> Ver Bitácora</a></li>
+        <li><a class="dropdown-item" href="{{ url('/admin/users') }}"><i class="fas fa-users me-1"></i> Usuarios Suscritos</a></li>
+        <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Ver Actividades Ilegales</a></li>
+        <li><a class="dropdown-item" href="{{ route('enfermedades.index') }}"><i class="fas fa-virus me-1"></i> Enfermedades de Plantas</a></li>
+        <li><a class="dropdown-item" href="{{ route('nuevos.index') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones de secciones</a></li>
+    @endif
 
-                            @endif
+    @if(Auth::user()->role === 'user')
+        <li><a class="dropdown-item" href="{{ route('UsuarioPost.create') }}"><i class="fas fa-plus-circle me-1"></i> Crear Publicación</a></li>
+        <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar Actividad Ilegal</a></li>
+        <li><a class="dropdown-item" href="{{ route('nuevos.create') }}"><i class="fas fa-lightbulb me-2 text-warning"></i> Recomendaciones de Secciones Nuevas</a></li>
+    @endif
 
-                            @if(Auth::user()->role === 'user')
-                                <li><a class="dropdown-item" href="{{ route('UsuarioPost.create') }}"><i class="fas fa-plus-circle me-1"></i> Crear Publicación</a></li>
-                                <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar actividad ilegal</a></li>
-                            @endif
-                             <li><a class="dropdown-item" href="{{route('eventos.index')}}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
-                            <li><a class="dropdown-item" href="{{route('nuevos.index')}}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones de secciones</a></li>
+    <li><a class="dropdown-item" href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
+    <li><a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-1"></i> Mi perfil</a></li>
+    <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>
 
-                            <li><a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-1"></i> Mi perfil</a></li>
-                            <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>
-                           <li>
-  
-</li>
+    <li><hr class="dropdown-divider"></li>
     <li>
-    <a class="dropdown-item" href="{{ route('enfermedades.index') }}">
-        <i class="fas fa-leaf me-1"></i> Enfermedades de Plantas
-    </a>
-</li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item text-danger">
-                                        <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
-                                    </button>
-                                </form>
-                            </li>
-                        @endauth
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="dropdown-item text-danger">
+                <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
+            </button>
+        </form>
+    </li>
+@endauth
+
                     </ul>
                 </li>
                 
