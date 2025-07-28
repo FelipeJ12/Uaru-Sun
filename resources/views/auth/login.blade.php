@@ -13,7 +13,7 @@
         <!-- Formulario de Login con fondo transparente moderno -->
         <div class="backdrop-blur-md bg-white/10 p-8 rounded-xl shadow-2xl w-full max-w-sm text-white text-center">
             <h1 class="text-3xl font-bold text-yellow-300">Uaru-Sun</h1>
-            <p class="text-yellow-200 mb-6">Conéctate con la Biodiversidad</p>
+            <p class="text-yellow-200 mb-6">Conéctate con la Biodiversidad  Hondureña</p>
 
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -69,4 +69,4 @@
         </div>
     </div>
 </body>
-</html>
+</html> 
