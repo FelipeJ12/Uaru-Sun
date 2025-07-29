@@ -30,6 +30,8 @@ use App\Http\Controllers\EnfermedadPlantaController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\NuevoController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 
 
@@ -167,5 +169,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/store', [ProductController::class, 'index'])->name('store');
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'view'])->name('cart.view');
+});
+
 
 require __DIR__.'/auth.php';
