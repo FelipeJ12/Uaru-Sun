@@ -9,6 +9,32 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
 
+    
+    public function update(Request $request, $id)
+{
+    $quantity = $request->input('quantity');
+
+    $cart = session()->get('cart', []);
+    if (isset($cart[$id])) {
+        $cart[$id]['quantity'] = $quantity;
+        session()->put('cart', $cart);
+    }
+
+    return redirect()->back()->with('success', 'Cantidad actualizada.');
+}
+
+public function remove($id)
+{
+    $cart = session()->get('cart', []);
+    if (isset($cart[$id])) {
+        unset($cart[$id]);
+        session()->put('cart', $cart);
+    }
+
+    return redirect()->back()->with('success', 'Producto eliminado del carrito.');
+}
+
+
 public function add($id) {
     $product = Product::findOrFail($id);
     $cart = session()->get('cart', []);

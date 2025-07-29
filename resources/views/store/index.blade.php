@@ -2,8 +2,16 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-center text-green-700 mb-10">🌿 Tienda de Plantas de Honduras</h1>
+<style>
+        .text-center {
+            margin-top: 80px; /* Ajusta este valor según sea necesario */
+        }
+    </style>
 
+    <div class="text-center mb-4">
+        <h1 class="text-3xl font-bold text-center text-green-700 mb-10" style="color: white">🌿 Tienda de Plantas de Honduras</h1>
+    </div>
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         @foreach ($products as $product)
             <div class="bg-white rounded-2xl shadow-md overflow-hidden transition transform hover:scale-105">
@@ -34,4 +42,3 @@
         @endforeach
     </div>
 </div>
-@endsection
