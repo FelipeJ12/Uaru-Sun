@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
+\Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
 
 class CheckoutController extends Controller
 {
