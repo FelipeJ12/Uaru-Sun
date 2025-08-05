@@ -41,7 +41,7 @@
 
                 <h4 class="text-white">2. Bosques Tropicales</h4>
                 <div class="row">
-                    <div class="col-12 col-md-4"></div>
+                    <div class="col-12 col-md-4">
                         <img src="https://cdn0.ecologiaverde.com/es/posts/0/7/6/bosques_tropicales_caracteristicas_flora_y_fauna_1670_600.jpg" alt="Desiertos" class="img-fluid w-100 mb-3" style="max-height: 300px; object-fit: cover;">
                     </div>
                     <div class="col-12 col-md-8"> 
@@ -81,7 +81,7 @@
                 <h4 class="text-white">5. Praderas</h4>
                 <div class="row">
                     <div class="col-12 col-md-4">
-                        <img src="https://ecotrendies.com/wp-content/uploads/2018/12/animales-vegetacion-pradera.jpg" alt="Desiertos" class="img-fluid w-100 mb-3" style="max-height: 300px; object-fit: cover;">
+                        <img src="https://energiatoday.com/wp-content/uploads/2020/04/Alpes_praderas_1586629703.jpg" alt="Desiertos" class="img-fluid w-100 mb-3" style="max-height: 300px; object-fit: cover;">
                     </div>
                     <div class="col-12 col-md-8" style="text-align: justify">
                         <p class="text-white text-justify">
