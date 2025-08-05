@@ -34,6 +34,8 @@ use App\Http\Controllers\MedicinaController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PerfilUsuarioController;
+
 
 
 
@@ -189,6 +191,7 @@ Route::post('/checkout/stripe', [CheckoutController::class, 'payWithStripe'])->n
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
+Route::get('/perfil/{id}', [PerfilUsuarioController::class, 'ver'])->name('usuario.perfil');
 
 
 

@@ -37,20 +37,30 @@
                 @endauth
             </ul>
 
-            <!-- Buscador -->
-            <form class="d-flex align-items-center gap-1 me-3 flex-wrap" method="GET" action="{{ route('admin.especies.index') }}">
-                <div class="filtro-container position-relative">
-                    <input type="hidden" name="filtro" id="filtroSeleccionado" value="{{ request('filtro', 'nombre_comun') }}">
-                    <input type="text" class="form-control form-control-sm" name="query" id="campoBusqueda" value="{{ request('query') }}" placeholder="Buscar especie..." style="max-width: 180px;">
-                    <div class="filtro-dropdown" id="filtroDropdown">
-                        <label><input type="radio" name="filtro_opcion" value="nombre_comun" checked> Nombre Común</label>
-                        <label><input type="radio" name="filtro_opcion" value="habitat"> Hábitat</label>
-                    </div>
-                </div>
-                <button class="btn btn-outline-light btn-sm" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
+            <!-- Buscador simplificado -->
+<form class="d-flex align-items-center mb-0" method="GET" action="{{ route('admin.especies.index') }}">
+    <div class="input-group input-group-sm">
+        <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}" aria-label="Buscar especie" aria-describedby="button-addon2">
+        <button class="btn btn-outline-light" type="submit" id="button-addon2">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
+
+<!-- Iconos de tienda y carrito -->
+<ul class="navbar-nav ms-auto d-flex align-items-center gap-3">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('store') }}">
+                        <i class="fas fa-store fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('cart.view') }}">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
+                </li>
+            </ul>
+
 
 
             <!-- Menú Usuario -->
@@ -78,14 +88,13 @@
         <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Ver Actividades Ilegales</a></li>
         <li><a class="dropdown-item" href="{{ route('enfermedades.index') }}"><i class="fas fa-virus me-1"></i> Enfermedades de Plantas</a></li>
         <li><a class="dropdown-item" href="{{ route('nuevos.index') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones de secciones</a></li>
-        <li><a class="dropdown-item" href="{{ route('store') }}"><i class="fas fa-store me-2 text-dark"></i>Tienda</a></li>
-        <li><a class="dropdown-item" href="{{ route('cart.view') }}"><i class="fas fa-shopping-cart me-2 text-dark"></i>Carrito</a></li>
+        
     @endif
 
     @if(Auth::user()->role === 'user')
         <li><a class="dropdown-item" href="{{ route('UsuarioPost.create') }}"><i class="fas fa-plus-circle me-1"></i> Crear Publicación</a></li>
         <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar Actividad Ilegal</a></li>
-        <li><a class="dropdown-item" href="{{ route('nuevos.create') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Recomendaciones de Secciones Nuevas</a></li>
+        <li><a class="dropdown-item" href="{{ route('nuevos.create') }}"><i class="fas fa-lightbulb me-2 text-warning"></i> Recomendaciones de Secciones Nuevas</a></li>
     @endif
 
     <li><a class="dropdown-item" href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
@@ -112,6 +121,14 @@
 </nav>
 
 <style>
+
+.navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-nav .fa-lg {
+        font-size: 1.5rem;
+    }
     .filtro-dropdown {
         position: absolute;
         background-color: white;
