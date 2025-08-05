@@ -35,12 +35,12 @@
         text-overflow: ellipsis;
     }
 
+    .col-imagen { width: 150px; text-align: center; }
     .col-planta { width: 140px; }
     .col-enfermedad { width: 160px; }
     .col-sintomas { width: 220px; }
     .col-causas { width: 220px; }
     .col-solucion { width: 220px; }
-    .col-imagen { width: 150px; text-align: center; }
 
     .custom-table img {
         width: 250px;
@@ -76,22 +76,17 @@
             <table class="custom-table">
                 <thead>
                     <tr>
+                        <th class="col-imagen">Imagen</th>
                         <th class="col-planta">Planta</th>
                         <th class="col-enfermedad">Enfermedad</th>
                         <th class="col-sintomas">Síntomas</th>
                         <th class="col-causas">Causas</th>
                         <th class="col-solucion">Solución</th>
-                        <th class="col-imagen">Imagen</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($enfermedades as $enfermedad)
                         <tr>
-                            <td>{{ $enfermedad->nombre_planta }}</td>
-                            <td>{{ $enfermedad->nombre_enfermedad }}</td>
-                            <td title="{{ $enfermedad->sintomas }}">{{ Str::limit($enfermedad->sintomas, 100) }}</td>
-                            <td title="{{ $enfermedad->causas }}">{{ $enfermedad->causas ? Str::limit($enfermedad->causas, 100) : 'No especificadas' }}</td>
-                            <td title="{{ $enfermedad->solucion }}">{{ Str::limit($enfermedad->solucion, 100) }}</td>
                             <td class="text-center">
                                 @if ($enfermedad->imagen)
                                     <img src="{{ asset('storage/' . $enfermedad->imagen) }}" alt="imagen">
@@ -99,6 +94,11 @@
                                     <span class="text-muted">Sin imagen</span>
                                 @endif
                             </td>
+                            <td>{{ $enfermedad->nombre_planta }}</td>
+                            <td>{{ $enfermedad->nombre_enfermedad }}</td>
+                            <td title="{{ $enfermedad->sintomas }}">{{ Str::limit($enfermedad->sintomas, 100) }}</td>
+                            <td title="{{ $enfermedad->causas }}">{{ $enfermedad->causas ? Str::limit($enfermedad->causas, 100) : 'No especificadas' }}</td>
+                            <td title="{{ $enfermedad->solucion }}">{{ Str::limit($enfermedad->solucion, 100) }}</td>
                         </tr>
                     @empty
                         <tr>

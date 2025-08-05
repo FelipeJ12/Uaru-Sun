@@ -7,6 +7,8 @@
 
     <title>@yield('title') | Flora y Fauna de Honduras</title>
 
+    
+
     {{-- IMPORTAR FONT AWESOME PARA ÍCONOS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -45,6 +47,7 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
+        
 
         /* Contenido encima del fondo */
         .content {
@@ -76,6 +79,7 @@
             max-width: 100%;
             height: auto;
         }
+        
 
         /* Ajustes adicionales para pantallas pequeñas */
         @media (max-width: 767px) {
@@ -93,12 +97,15 @@
         width: 100%;
     }
     </style>
+    
 
 <!-- En el <head> -->
 @livewireStyles
     
 </head>
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
+
+
     <!-- Navbar de Bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     @include('layouts.navigation')  <!-- Menú de Breeze modificado -->
@@ -111,6 +118,7 @@
                 @include('layouts.navigation')
             </div>
         </div>
+        
     </nav>
 
     <!-- Mensaje flash -->
@@ -149,6 +157,7 @@
 </footer>
 
 <!-- Antes de cerrar </body> -->
+
 @livewireScripts
 </body>
 
