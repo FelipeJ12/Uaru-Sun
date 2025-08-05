@@ -4,6 +4,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') | Flora y Fauna de Honduras</title>
+    
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -112,6 +113,7 @@
 
 <!-- Scripts compilados por Laravel Mix -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 @stack('scripts')
 

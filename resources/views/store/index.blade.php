@@ -1,107 +1,44 @@
 @extends('layouts.app')
 
-@section('title', 'Tienda')
-
 @section('content')
-<div class="container">
-    <ul>
-    <style>
+<div class="container mx-auto px-4 py-8">
+<style>
         .text-center {
             margin-top: 80px; /* Ajusta este valor según sea necesario */
         }
     </style>
 
     <div class="text-center mb-4">
-        <h1 class="mb-4 text-white" class="display-4 text-success">
-            <i class="fas fa-leaf"></i> Bienvenido a la Lista de Tiendas
-        </h1>
+        <h1 class="text-3xl font-bold text-center text-green-700 mb-10" style="color: white">🌿 Tienda de Plantas de Honduras</h1>
     </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        @foreach ($products as $product)
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden transition transform hover:scale-105">
+                @if($product->image)
+                    <img src="{{ asset('storage/' . $product->image) }}"
+                         alt="{{ $product->name }}"
+                         class="w-full h-48 object-cover">
+                @else
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+                        Sin imagen
+                    </div>
+                @endif
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold text-gray-800">{{ $product->name }}</h2>
+                    <p class="text-sm text-gray-600 mt-1">{{ $product->description }}</p>
+                    <p class="text-green-600 text-lg font-bold mt-2">L {{ number_format($product->price, 2) }}</p>
 
-    <style>
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .card {
-            width: 18rem;
-            margin: 10px;
-            border: 2px solid #4CE4A0; /* Cambia el color y el grosor según tus necesidades */
-            border-radius: 7px; /* Opcional: para esquinas redondeadas */
-        }
-    </style>
-
-    <ul>
-
-    <div class="card-container">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">kokoro's PetShop HN </h5>
-                <a href="https://kokoroshn.com/" class="card-link">Abrir Link</a>
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-4"
+                          onsubmit="return confirm('¿Estás seguro de que deseas agregar este producto al carrito?')">
+                        @csrf
+                        <button type="submit"
+                            class="w-full bg-green-600 hover:bg-green-700 text-black font-semibold py-2 px-4 rounded-lg transition">
+                            Agregar al carrito
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">El Canario Pet Shop</h5>
-                <a href="https://elcanariohn.com/" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Super Mascota Honduras</h5>
-                <a href="https://www.supermascota.hn/?from=AppAgg.com" class="card-link">Abrir Link</a>
-            </div>
-        </div>
+        @endforeach
     </div>
-    <div class="card-container">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">daFlores</h5>
-                <a href="https://flowers.daflores.com/honduras/" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">LatinFlores</h5>
-                <a href="https://latinflores.com/collections/flores-a-honduras" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">JardinFloral</h5>
-                <a href="https://www.jardinfloral.com/honduras/" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-container">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Jetstereo</h5>
-                <a href="https://www.jetstereo.com/category/camaras" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">La Tienda del Fotógrafo</h5>
-                <a href="https://latiendadelfotografohn.com/categoria-producto/camaras/" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">RadioShack</h5>
-                <a href="https://www.radioshackla.com/honduras/c/fotografia/camaras" class="card-link">Abrir Link</a>
-            </div>
-        </div>
-    </div>
-       
-    </ul>
-    </ul>
 </div>
-@endsection

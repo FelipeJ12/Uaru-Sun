@@ -31,6 +31,10 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\NuevoController;
 use App\Http\Controllers\MedicinaController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+
 
 
 
@@ -168,5 +172,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/store', [ProductController::class, 'index'])->name('store');
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'view'])->name('cart.view');
+});
+
+Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::get('/checkout/cancel', [App\Http\Controllers\CheckoutController::class, 'cancel'])->name('checkout.cancel');
+Route::post('/checkout/stripe', [App\Http\Controllers\CheckoutController::class, 'payWithStripe'])->name('checkout.stripe');
+Route::post('/checkout/stripe', [CheckoutController::class, 'payWithStripe'])->name('checkout.stripe');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+
+
+
+
 
 require __DIR__.'/auth.php';
