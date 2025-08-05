@@ -46,25 +46,48 @@
     }
 
     .table-custom {
-    background-color: rgba(255, 255, 255, 0.3) !important; /* ← este cambio */
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4px); /* ← mejora visual */
-}
+        background-color: rgba(255, 255, 255, 0.3) !important;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4px);
+    }
 
-.table td {
-        background-color: rgba(122, 164, 124, 0.8); /* verde claro semitransparente */
+    .table td {
+        background-color: rgba(122, 164, 124, 0.8);
+        color: #fff;
+    }
 
-    color: #fff; /* texto blanco para destacar */
-}
+    .table th {
+        background-color: rgba(44, 183, 51, 0.8);
+        color: #003300;
+    }
 
-.table th {
-    background-color: rgba(44, 183, 51, 0.8); /* verde claro semitransparente */
-    color: #003300;
-}
-
-
+    /* Ajustes responsivos */
+    @media (max-width: 576px) {
+        .overlay-container {
+            padding: 15px;
+        }
+        .header-box h2 {
+            font-size: 22px;
+        }
+        .btn-back {
+            padding: 8px 15px;
+            font-size: 14px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .table th, .table td {
+            font-size: 14px;
+            padding: 8px 10px;
+            white-space: nowrap;
+        }
+    }
 </style>
 
 <div class="container mt-5">

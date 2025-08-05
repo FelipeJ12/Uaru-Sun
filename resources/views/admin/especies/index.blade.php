@@ -5,9 +5,45 @@
 @section('content')
 <style>
     body {
-        background: url('{{ asset('images/fonds.jpg') }}') no-repeat center center fixed;
+        background: url('{{ asset('images/fonds.jpg') }}') no-repeat center center;
         background-size: cover;
+        background-attachment: fixed;
     }
+
+    @media (max-width: 767px) {
+        body {
+            background-attachment: scroll;
+        }
+
+        .custom-table th, .custom-table td {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .custom-table td img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .action-buttons a, .action-buttons button {
+            width: 35px;
+            height: 35px;
+        }
+
+        .action-buttons img {
+            width: 18px !important;
+            height: 18px !important;
+        }
+
+        .habitat-col {
+            max-width: 150px;
+        }
+
+        .content-box h1 {
+            font-size: 24px;
+        }
+    }
+
     .content-box {
         background-color: rgba(30,28,28,0.67);
         padding: 20px;
@@ -15,6 +51,7 @@
         box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         color: white;
     }
+
     .custom-table {
         width: 100%;
         background: rgba(30,28,28,0.67);
@@ -22,29 +59,35 @@
         font-size: 18px;
         border-collapse: collapse;
     }
+
     .custom-table thead {
         background-color: rgba(30,28,28,0.87);
         font-weight: bold;
     }
+
     .custom-table th, .custom-table td {
         padding: 15px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
     .custom-table td img {
         max-width: 100%;
         height: auto;
     }
+
     .table-responsive {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     .action-buttons {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .action-buttons a, .action-buttons button {
         margin: 5px 0;
         font-size: 18px;
@@ -56,16 +99,18 @@
         padding: 0;
         border-radius: 8px;
     }
+
     .action-buttons a:hover, .action-buttons button:hover {
         opacity: 0.8;
         transform: scale(1.05);
         transition: all 0.2s ease;
     }
+
     .action-cell {
         text-align: center;
         vertical-align: top;
     }
-    /* NUEVA CLASE PARA HABITAT */
+
     .habitat-col {
         max-width: 250px;
         overflow: hidden;
@@ -76,10 +121,10 @@
 
 <div class="container mt-4">
     <div class="content-box">
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
             <h1>Administrar Especies</h1>
             @if(auth()->user()?->role === 'admin')
-                <a href="{{ route('admin.especies.create') }}" class="btn btn-success">
+                <a href="{{ route('admin.especies.create') }}" class="btn btn-success mt-2 mt-md-0">
                     <i class="fas fa-plus"></i> Nueva Especie
                 </a>
             @endif
@@ -88,17 +133,17 @@
         @if(auth()->user()?->role === 'admin')
         <form method="GET" action="{{ route('admin.especies.index') }}">
             <div class="row mb-3">
-                <div class="col-2">
+                <div class="col-md-2 col-12 mb-2">
                     <select class="form-select" name="filtro">
                         <option value="nombre_comun" {{ request('filtro') == 'nombre_comun' ? 'selected' : '' }}>Nombre Común</option>
                         <option value="habitat" {{ request('filtro') == 'habitat' ? 'selected' : '' }}>Hábitat</option>
                     </select>
                 </div>
-                <div class="col-9">
+                <div class="col-md-9 col-12 mb-2">
                     <input type="text" class="form-control" name="query" value="{{ request('query') }}" placeholder="Buscar especie">
                 </div>
-                <div class="col-1">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                <div class="col-md-1 col-12 mb-2">
+                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
                 </div>
             </div>
         </form>

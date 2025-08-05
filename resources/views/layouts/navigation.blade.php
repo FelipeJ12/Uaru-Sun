@@ -36,6 +36,7 @@
                     @endif
                 @endauth
             </ul>
+            
 
             <!-- Buscador simplificado -->
 <form class="d-flex align-items-center mb-0" method="GET" action="{{ route('admin.especies.index') }}">
