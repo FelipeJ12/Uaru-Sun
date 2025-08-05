@@ -17,14 +17,14 @@
                 @method('PUT')
             @endif
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="direccion" class="form-label">Dirección / Ubicación Exacta</label>
                 <textarea class="form-control @error('direccion') is-invalid @enderror" id="direccion" name="direccion" rows="2" maxlength="400"
                           placeholder="Ejemplo: Sendero El Cangrejal, Parque Nacional La Tigra, Francisco Morazán, cerca del mirador...">{{ old('direccion', $reporte->direccion ?? '') }}</textarea>
                 @error('direccion')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="actividad" class="form-label">Tipo de Actividad Ilegal</label>
                 <select class="form-select @error('actividad') is-invalid @enderror" id="actividad" name="actividad">
                     <option value="">-- Selecciona una actividad --</option>
@@ -34,7 +34,7 @@
                 @error('actividad')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="imagen" class="form-label">Evidencia fotográfica (opcional)</label>
                 <input type="file" class="form-control @error('imagen') is-invalid @enderror" id="imagen" name="imagen">
                 @error('imagen')<div class="invalid-feedback">{{ $message }}</div>@enderror

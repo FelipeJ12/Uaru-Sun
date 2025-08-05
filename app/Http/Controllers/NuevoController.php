@@ -5,19 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Nuevo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller; // << Asegúrate de que esto esté presente
 
-class NuevoController extends Controller
+class NuevoController extends Controller // << También importante
 {
+    public function __construct()
+    {
+        $this->middleware('auth'); // ← Esta línea solo funciona si extends Controller
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $usuario = Auth::user();
-        if($usuario->role == 'admin'){
+
+        if ($usuario->role === 'admin') {
             $nuevos = Nuevo::orderBy('id', 'desc')->paginate(10);
-        }
-        else{
+        } else {
             $nuevos = Nuevo::where('user_id', $usuario->id)->orderBy('id', 'desc')->paginate(10);
         }
 
@@ -50,18 +55,9 @@ class NuevoController extends Controller
         $nuevo->fecha = date('Y-m-d');
         $nuevo->user_id = $usuario->id;
         $nuevo->estado = 'Pendiente';
-
         $nuevo->save();
 
         return redirect()->route('nuevos.index')->with('success', 'Recomendación registrada correctamente.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -70,7 +66,8 @@ class NuevoController extends Controller
     public function edit(string $id)
     {
         $usuario = Auth::user();
-        $nuevo = Nuevo::findOrfail($id);
+        $nuevo = Nuevo::findOrFail($id);
+
         return view('nuevos.nuevo_create', compact('nuevo', 'usuario'));
     }
 
@@ -79,7 +76,9 @@ class NuevoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if ($request->input('tipo') == 'editar'){
+        $nuevo = Nuevo::findOrFail($id);
+
+        if ($request->input('tipo') === 'editar') {
             $request->validate([
                 'dato' => 'required|string|max:300',
                 'estado' => 'required',
@@ -87,8 +86,7 @@ class NuevoController extends Controller
                 'dato.required' => 'La recomendación es obligatoria.',
                 'estado.required' => 'El estado es requerido',
             ]);
-        }
-        else{
+        } else {
             $request->validate([
                 'dato' => 'required|string|max:300',
             ], [
@@ -96,12 +94,9 @@ class NuevoController extends Controller
             ]);
         }
 
-        $nuevo = Nuevo::findOrfail($id);
         $nuevo->dato = $request->input('dato');
         $nuevo->fecha = date('Y-m-d');
-        $nuevo->user_id = $nuevo->user_id;
         $nuevo->estado = $request->input('estado') ?? 'Pendiente';
-
         $nuevo->save();
 
         return redirect()->route('nuevos.index')->with('success', 'Recomendación editada correctamente.');
@@ -112,8 +107,9 @@ class NuevoController extends Controller
      */
     public function destroy(string $id)
     {
-        $nuevo = Nuevo::findOrfail($id);
-        if($nuevo->delete()){
+        $nuevo = Nuevo::findOrFail($id);
+
+        if ($nuevo->delete()) {
             return redirect()->route('nuevos.index')->with('danger', 'Sugerencia eliminada correctamente.');
         }
     }
