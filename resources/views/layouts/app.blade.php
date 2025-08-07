@@ -1,47 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') | Flora y Fauna de Honduras</title>
 
-    
-
     {{-- IMPORTAR FONT AWESOME PARA ÍCONOS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Agregar favicon -->
+    <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
-    <!-- Bootstrap 5 desde CDN -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papPjXvSxQy2tc+tdBO9e8z6mZ3KD+uHr1vwMDxQqnlG4EOGvD9B8FJ+ElZ6KkX5IewvOd3FY2NwlHbfe2E3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!-- Fuentes de Breeze (opcional) -->
+
+    <!-- Font Awesome (íconos) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Fuentes de Bunny -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- Estilos compilados por Laravel Mix -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     @stack('styles')
 
+    <!-- Estilos personalizados del fondo y ajustes visuales -->
     <style>
-        @media (max-width: 992px) {
-        .navbar .form-select,
-        .navbar .form-control {
-        width: 100%;
-        margin-top: 5px;
-        }
-    }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Fondo de la página */
         body {
-            background-image: url('images/fonds.jpg');
+            background-image: url('{{ asset('images/fonds.jpg') }}');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -49,59 +37,48 @@
         }
         
 
-        /* Contenido encima del fondo */
-        .content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.3);
-        }
-
-        /* Asegura que los dropdowns sean visibles */
         .dropdown-menu {
             z-index: 1050 !important;
         }
 
-        /* Asegurar que los contenedores sean responsivos */
         .container {
-            width: 100%;
             max-width: 1200px;
             padding: 0 15px;
         }
 
-        /* Hacer las imágenes responsivas */
         img {
             max-width: 100%;
             height: auto;
         }
         
 
-        /* Ajustes adicionales para pantallas pequeñas */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .navbar .form-select,
+            .navbar .form-control {
+                width: 100%;
+                margin-top: 5px;
+            }
+        }
+
         @media (max-width: 767px) {
             .content {
                 height: auto;
                 padding: 20px;
             }
         }
-        footer {
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        text-align: center;
-        padding: 15px 0;
-        font-size: 14px;
-        width: 100%;
-    }
     </style>
     
 
-<!-- En el <head> -->
-@livewireStyles
-    
+    @livewireStyles
 </head>
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
 
@@ -140,7 +117,7 @@
         </div>
     </main>
    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     @stack('scripts')
     
     <!-- Script para inicializar dropdowns -->
@@ -157,7 +134,6 @@
 </footer>
 
 <!-- Antes de cerrar </body> -->
-
 @livewireScripts
 </body>
 

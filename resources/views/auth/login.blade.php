@@ -5,15 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        .text-yellow-custom {
+            color: #facc15; /* amarillo fijo */
+        }
+
+        .text-yellow-custom:hover {
+            color: #facc15; /* mantiene el amarillo al pasar el mouse */
+        }
+
+        .no-underline {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body class="antialiased">
+
+    <!-- Botón de regresar arriba a la izquierda -->
+    <div class="absolute top-4 left-4 z-50">
+        <a href="{{ route('home') }}" class="text-yellow-custom text-lg flex items-center space-x-1 no-underline">
+            <span class="text-xl">←</span><span>Regresar</span>
+        </a>
+    </div>
+
     <div class="min-h-screen w-full flex items-center justify-center bg-no-repeat bg-cover bg-center"
          style="background-image: url('{{ asset('images/fonds.jpg') }}'); height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
-
+        
         <!-- Formulario de Login con fondo transparente moderno -->
         <div class="backdrop-blur-md bg-white/10 p-8 rounded-xl shadow-2xl w-full max-w-sm text-white text-center">
             <h1 class="text-3xl font-bold text-yellow-300">Uaru-Sun</h1>
-            <p class="text-yellow-200 mb-6">Conéctate con la Biodiversidad  Hondureña</p>
+            <p class="text-yellow-200 mb-6">Conéctate con la Biodiversidad Hondureña</p>
 
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -50,7 +72,7 @@
 
                 <div class="flex items-center justify-between mt-4">
                     @if (Route::has('password.request'))
-                        <a class="underline text-sm text-yellow-300 hover:text-yellow-500" href="{{ route('password.request') }}">
+                        <a class="text-sm text-yellow-custom no-underline" href="{{ route('password.request') }}">
                             {{ __('Olvidaste tu Contraseña?') }}
                         </a>
                     @endif
@@ -61,7 +83,7 @@
                         {{ __('Iniciar sesión') }}
                     </x-primary-button>
 
-                    <a href="{{ route('register') }}" class="text-sm text-yellow-300 hover:text-yellow-500 underline">
+                    <a href="{{ route('register') }}" class="text-sm text-yellow-custom no-underline">
                         {{ __('Registrarse') }}
                     </a>
                 </div>
@@ -69,4 +91,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
