@@ -192,7 +192,7 @@ Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('c
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 Route::get('/perfil/{id}', [PerfilUsuarioController::class, 'ver'])->name('usuario.perfil');
-
+Route::post('/checkout/procesar-pago', [CheckoutController::class, 'procesarPago'])->name('checkout.procesarPago');
 
 
 

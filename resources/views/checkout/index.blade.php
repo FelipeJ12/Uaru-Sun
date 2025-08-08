@@ -78,6 +78,12 @@
             font-size: 1.2rem;
         }
 
+        .error-message {
+            color: #dc2626; /* rojo para error */
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
         @media (max-width: 768px) {
             .contenedor {
                 flex-direction: column;
@@ -110,41 +116,64 @@
 
         <div class="resumen-pago">
             @if (count($cart) > 0)
-                <form method="POST" class="mb-6">
+                <form method="POST" action="{{ route('checkout.procesarPago') }}" class="mb-6">
                     @csrf
                     <h3 class="text-xl font-semibold mb-4">Dirección de Envío</h3>
+
                     <div class="mb-4">
                         <label for="address" class="block font-medium mb-1">Calle y Número</label>
                         <input type="text" name="address" id="address" required
                             class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" 
-                            placeholder="Ejemplo: Avenida Siempre Viva 123">
+                            placeholder="Ejemplo: Avenida Siempre Viva 123"
+                            value="{{ old('address') }}">
+                        @error('address')
+                            <p class="error-message">{{ $message }}</p>
+                        @enderror
                     </div>
+
                     <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="city" class="block font-medium mb-1">Ciudad</label>
                             <input type="text" name="city" id="city" required
                                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Ciudad">
+                                placeholder="Ciudad"
+                                value="{{ old('city') }}">
+                            @error('city')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="state" class="block font-medium mb-1">Estado / Departamento</label>
                             <input type="text" name="state" id="state" required
                                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Estado o Departamento">
+                                placeholder="Estado o Departamento"
+                                value="{{ old('state') }}">
+                            @error('state')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
+
                     <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="postal_code" class="block font-medium mb-1">Código Postal</label>
                             <input type="text" name="postal_code" id="postal_code" required
                                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Código Postal">
+                                placeholder="Código Postal"
+                                value="{{ old('postal_code') }}">
+                            @error('postal_code')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="country" class="block font-medium mb-1">País</label>
                             <input type="text" name="country" id="country" required
                                 class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="País">
+                                placeholder="País"
+                                value="{{ old('country') }}">
+                            @error('country')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -156,17 +185,17 @@
                             </li>
                         @endforeach
                     </ul>
+
                     <div class="text-right text-2xl font-bold text-gray-800 mb-8">
                         Total: <span class="text-green-700">L {{ number_format($total, 2) }}</span>
                     </div>
 
                     <div class="flex flex-col md:flex-row gap-4">
-                        <a href="{{ route('store') }}" class="w-full">
-                            <button type="button" class="pago-btn w-full">
-                                <i class="fas fa-credit-card btn-icon"></i> Confirmar y Pagar con Tarjeta
-                            </button>
-                        </a>
-                        <a href="{{ route('store') }}" class="w-full">
+                        <button type="submit" class="pago-btn w-full md:w-auto">
+                            <i class="fas fa-credit-card btn-icon"></i> Confirmar y Pagar con Tarjeta
+                        </button>
+
+                        <a href="{{ route('store') }}" class="w-full md:w-auto">
                             <button type="button" class="volver-btn w-full">
                                 <i class="fas fa-arrow-left btn-icon"></i> Volver a Tienda
                             </button>
