@@ -49,11 +49,11 @@
                 </li>
             </ul>
 
-            <!-- Buscador simplificado -->
-            <form class="d-flex align-items-center mb-2 mb-lg-0 flex-grow-1 ms-lg-3" method="GET" action="{{ route('admin.especies.index') }}">
-                <div class="input-group input-group-sm w-100">
-                    <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}">
-                    <button class="btn btn-outline-light" type="submit">
+            <!-- Buscador simplificado con ancho fijo de ~4cm -->
+            <form class="d-flex align-items-center mb-2 mb-lg-0 flex-grow-0 ms-lg-3" method="GET" action="{{ route('admin.especies.index') }}">
+                <div class="input-group input-group-sm" style="width: 160px;">
+                    <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}" style="width: 120px;">
+                    <button class="btn btn-outline-light" type="submit" style="width: 40px;">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -162,9 +162,10 @@
 
         /* Que el form ocupe todo el ancho */
         form.d-flex {
-            width: 100%;
+            width: 100% !important;
             flex-direction: column !important;
             margin-top: 10px;
+            flex-grow: 1 !important;
         }
 
         /* Botón y input para que se vean apilados y ocupen todo el ancho */
