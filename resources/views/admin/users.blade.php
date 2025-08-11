@@ -63,6 +63,14 @@
         color: #003300;
     }
 
+    tr:hover {
+        background-color: rgba(44, 183, 51, 0.5) !important;
+    }
+
+    tr {
+        cursor: pointer;
+    }
+
     /* Ajustes responsivos */
     @media (max-width: 576px) {
         .overlay-container {
@@ -113,7 +121,7 @@
                 </thead>
                 <tbody>
                     @foreach($users as $user)
-                        <tr>
+                        <tr onclick="window.location.href='{{ route('usuario.perfil', $user->id) }}'">
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>

@@ -43,9 +43,37 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
         }
+
+        .btn-regresar {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(76, 228, 160, 0.15);
+            color: #4CE4A0;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-bottom: 30px;
+            border: 2px solid #4CE4A0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 0 10px rgba(76, 228, 160, 0.4);
+            font-size: 16px;
+        }
+
+        .btn-regresar:hover {
+            background-color: #4CE4A0;
+            color: #000;
+            box-shadow: 0 0 15px rgba(76, 228, 160, 0.7);
+            text-decoration: none;
+        }
+        .btn-regresar i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
     </style>
 
     <div class="text-center">
+
         <div class="avatar">
             @if($usuario->datos && $usuario->datos->foto_perfil)
                 <img src="{{ asset('storage/' . $usuario->datos->foto_perfil) . '?t=' . time() }}" alt="Foto de perfil" />
@@ -55,6 +83,10 @@
         </div>
         <h2 class="text-2xl font-bold mt-4">{{ $usuario->name }}</h2>
     </div>
+
+    <a href="{{ url()->previous() }}" class="btn-regresar">
+            <i class="fas fa-arrow-left"></i> Regresar
+        </a>
 
     {{-- Información básica pública (sin datos sensibles) --}}
     <div class="custom-dark-card p-4">
