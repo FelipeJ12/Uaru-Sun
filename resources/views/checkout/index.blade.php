@@ -98,6 +98,16 @@
         }
     </style>
 
+@php
+    $items = [
+        ['label' => 'Tienda', 'url' => \Illuminate\Support\Facades\Route::has('store.index') ? route('store.index') : url('/store')],
+        ['label' => 'Carrito', 'url' => \Illuminate\Support\Facades\Route::has('cart.index') ? route('cart.index') : url('/cart')],
+        ['label' => 'Estado de pago']
+    ];
+@endphp
+
+<x-breadcrumbs :items="$items" title="Estado de pago" />
+
     <h1 class="text-4xl font-extrabold text-green-700 text-center mb-10" style="color: white;">Resumen del Pago</h1>
 
     <div class="contenedor">

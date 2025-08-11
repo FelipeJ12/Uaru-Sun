@@ -141,6 +141,15 @@
         }
     </style>
 
+@php
+    $items = [
+        ['label' => 'Tienda', 'url' => \Illuminate\Support\Facades\Route::has('store.index') ? route('store.index') : url('/store')],
+        ['label' => 'Carrito']
+    ];
+@endphp
+
+<x-breadcrumbs :items="$items" title="Carrito" />
+
     <h1 class="text-3xl font-bold text-center text-green-700 mb-10" style="color: white; margin-top: 30px;">Mi Carrito</h1>
 
     <div class="contenedor">
