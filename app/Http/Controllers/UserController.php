@@ -37,12 +37,36 @@ class UserController extends Controller
 
     return view('usuarios.explorar', compact('usuarios', 'destacados'));
 }
-public function index()
-{
-    $users = \App\Models\User::all(); // o paginate si prefieres paginar
 
-    return view('admin.users', compact('users'));
-}
+
+public function index(Request $request)
+    {
+
+        $users = \App\Models\User::all(); // o paginate si prefieres paginar
+
+        $buscar = $request->input('buscar');
+
+        $query = User::query();
+
+        if ($buscar) {
+            $query->where('name', 'like', "%$buscar%")
+                  ->orWhere('email', 'like', "%$buscar%");
+        }
+
+        $users = $query->paginate(15);
+
+        return view('admin.users', compact('users')); // Ajusta la vista a la que usas
+    }
+
+    public function eliminar(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (count($ids)) {
+            User::whereIn('id', $ids)->delete();
+        }
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuarios eliminados correctamente.');
+    }
 
 
 }

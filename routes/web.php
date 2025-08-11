@@ -193,6 +193,9 @@ Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('che
 
 Route::get('/perfil/{id}', [PerfilUsuarioController::class, 'ver'])->name('usuario.perfil');
 Route::post('/checkout/procesar-pago', [CheckoutController::class, 'procesarPago'])->name('checkout.procesarPago');
+Route::delete('/usuarios/eliminar', [UserController::class, 'eliminar'])->name('usuarios.eliminar');
+
+Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
 
 
 
