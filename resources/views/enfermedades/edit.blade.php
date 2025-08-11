@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Editar Enfermedad')
+
 @section('content')
 <style>
     body {
@@ -121,7 +123,7 @@
         max-width: 250px;
         border-radius: 15px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        display: none;
+        display: block;
         object-fit: cover;
     }
 
@@ -134,13 +136,15 @@
 </style>
 
 <div class="form-container">
-    <h2>Registrar Enfermedad en Planta</h2>
+    <h2>Editar Enfermedad en Planta</h2>
 
-    <form action="{{ route('enfermedades.store') }}" method="POST" enctype="multipart/form-data" novalidate>
+    <form action="{{ route('enfermedades.update', $enfermedad->id) }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
+        @method('PUT')
+
         <div class="mb-4">
             <label for="nombre_planta">Nombre de la planta</label>
-            <input type="text" id="nombre_planta" name="nombre_planta" class="form-control" required value="{{ old('nombre_planta') }}">
+            <input type="text" id="nombre_planta" name="nombre_planta" class="form-control" required value="{{ old('nombre_planta', $enfermedad->nombre_planta) }}">
             @error('nombre_planta')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -148,7 +152,7 @@
 
         <div class="mb-4">
             <label for="nombre_enfermedad">Nombre de la enfermedad</label>
-            <input type="text" id="nombre_enfermedad" name="nombre_enfermedad" class="form-control" required value="{{ old('nombre_enfermedad') }}">
+            <input type="text" id="nombre_enfermedad" name="nombre_enfermedad" class="form-control" required value="{{ old('nombre_enfermedad', $enfermedad->nombre_enfermedad) }}">
             @error('nombre_enfermedad')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -156,7 +160,7 @@
 
         <div class="mb-4">
             <label for="sintomas">Síntomas</label>
-            <textarea id="sintomas" name="sintomas" class="form-control" required>{{ old('sintomas') }}</textarea>
+            <textarea id="sintomas" name="sintomas" class="form-control" required>{{ old('sintomas', $enfermedad->sintomas) }}</textarea>
             @error('sintomas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -164,7 +168,7 @@
 
         <div class="mb-4">
             <label for="causas">Causas (opcional)</label>
-            <textarea id="causas" name="causas" class="form-control">{{ old('causas') }}</textarea>
+            <textarea id="causas" name="causas" class="form-control">{{ old('causas', $enfermedad->causas) }}</textarea>
             @error('causas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -172,7 +176,7 @@
 
         <div class="mb-4">
             <label for="solucion">Solución</label>
-            <textarea id="solucion" name="solucion" class="form-control" required>{{ old('solucion') }}</textarea>
+            <textarea id="solucion" name="solucion" class="form-control" required>{{ old('solucion', $enfermedad->solucion) }}</textarea>
             @error('solucion')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -181,7 +185,7 @@
         <div class="mb-4">
             <label for="imagen">Imagen (opcional)</label>
             <input type="file" id="imagen" name="imagen" class="form-control" accept="image/*">
-            <img id="preview" alt="Previsualización de imagen">
+            <img id="preview" src="{{ $enfermedad->imagen ? asset('storage/' . $enfermedad->imagen) : '#' }}" alt="Previsualización de imagen">
             @error('imagen')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -192,7 +196,7 @@
                 <i class="fas fa-arrow-left"></i> Regresar
             </a>
             <button type="submit" class="btn-custom">
-                <i class="fas fa-save"></i> Guardar
+                <i class="fas fa-save"></i> Actualizar
             </button>
         </div>
     </form>

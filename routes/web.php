@@ -197,6 +197,8 @@ Route::delete('/usuarios/eliminar', [UserController::class, 'eliminar'])->name('
 
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
 
+Route::delete('/enfermedades/{id}', [EnfermedadPlantaController::class, 'destroy'])->name('enfermedades.destroy');
+
 
 
 require __DIR__.'/auth.php';
