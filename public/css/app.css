@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import 'bootstrap.min.css';
+@import 'fontawesome.min.css';
+
+.dropdown-menu {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.dropdown-menu.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.bg-custom {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 10px;
+}

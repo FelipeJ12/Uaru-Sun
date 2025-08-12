@@ -4,7 +4,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') | Flora y Fauna de Honduras</title>
-    
+
+    {{-- IMPORTAR FONT AWESOME PARA ÍCONOS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -33,6 +35,7 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
+        
 
         .dropdown-menu {
             z-index: 1050 !important;
@@ -47,6 +50,7 @@
             max-width: 100%;
             height: auto;
         }
+        
 
         footer {
             background: rgba(0, 0, 0, 0.8);
@@ -72,10 +76,18 @@
             }
         }
     </style>
+    
 
     @livewireStyles
 </head>
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
+
+<!-- Ícono desde CDN (NO FUNCIONA SIN INTERNET) -->
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/.../all.min.css"> --}}
+
+<!-- Ícono local (FUNCIONA SIN INTERNET) -->
+<link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+
     <!-- Navbar de Bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     @include('layouts.navigation')  <!-- Menú de Breeze modificado -->
@@ -88,6 +100,7 @@
                 @include('layouts.navigation')
             </div>
         </div>
+        
     </nav>
 
     <!-- Mensaje flash -->
@@ -108,15 +121,24 @@
             @yield('content')
         </div>
     </main>
- <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap JS -->
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    @stack('scripts')
+    
+    <!-- Script para inicializar dropdowns -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            dropdownElementList.map(function (dropdownToggleEl) {
+                new bootstrap.Dropdown(dropdownToggleEl);
+            });
+        });
+    </script>
+    <footer>
+     {{ ('') }} Biodiversidad Hondureña.
+</footer>
 
-<!-- Scripts compilados por Laravel Mix -->
-<script src="{{ asset('js/app.js') }}"></script>
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-@stack('scripts')
-
+<!-- Antes de cerrar </body> -->
 @livewireScripts
 </body>
 

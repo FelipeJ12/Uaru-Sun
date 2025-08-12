@@ -8,15 +8,15 @@
         </a>
 
         <!-- Botón Hamburguesa -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- Contenido del Navbar -->
-        <div class="collapse navbar-collapse" id="mainNavbar">
-
+        <div class="collapse navbar-collapse justify-content-between align-items-center" id="mainNavbar">
+            
             <!-- Menú izquierdo -->
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto d-flex align-items-center gap-2">
                 @auth
                     @if(Auth::user()->role === 'user' || Auth::user()->role === 'admin')
                         <li class="nav-item">
@@ -36,10 +36,22 @@
                         </li>
                     @endif
                 @endauth
+
+                <!-- Íconos integrados -->
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('store') }}">
+                        <i class="fas fa-store fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('cart.view') }}">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
+                </li>
             </ul>
 
             <!-- Buscador -->
-            <form class="d-flex flex-wrap align-items-center gap-1 my-2 my-lg-0" method="GET" action="{{ route('admin.especies.index') }}">
+            <form class="d-flex align-items-center gap-1 me-3 flex-wrap" method="GET" action="{{ route('admin.especies.index') }}">
                 <div class="filtro-container position-relative">
                     <input type="hidden" name="filtro" id="filtroSeleccionado" value="{{ request('filtro', 'nombre_comun') }}">
                     <input type="text" class="form-control form-control-sm" name="query" id="campoBusqueda" value="{{ request('query') }}" placeholder="Buscar especie..." style="max-width: 180px;">
@@ -48,19 +60,17 @@
                         <label><input type="radio" name="filtro_opcion" value="habitat"> Hábitat</label>
                     </div>
                 </div>
-                <button class="btn btn-outline-light btn-sm" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
             </form>
 
             <!-- Menú Usuario -->
-            <ul class="navbar-nav ms-lg-3 mt-2 mt-lg-0">
+            <ul class="navbar-nav ms-auto">
+                 <div class="card h-100 shadow bg-success bg-opacity-50 text-white border-light position-relative rounded-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->routeIs('login', 'admin.especies.index', 'UsuarioPost.create', 'profile.index') ? 'active' : '' }}" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                         <i class="fas fa-user-circle me-1"></i>
                         @auth {{ Auth::user()->name }} @else Menú @endauth
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                         @guest
                             <li>
                                 <a class="dropdown-item" href="{{ route('login') }}">
@@ -70,44 +80,55 @@
                         @endguest
 
                         @auth
-                            @if(Auth::user()->role === 'admin')
-                                <li><a class="dropdown-item" href="{{ route('admin.especies.index') }}"><i class="fas fa-cog me-1"></i> Administrar Publicaciones</a></li>
-                                <li><a class="dropdown-item" href="{{ route('bitacora.bita') }}"><i class="fas fa-clipboard-list me-1"></i> Ver Bitácora</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/admin/users') }}"><i class="fas fa-users me-1"></i> Usuarios Suscritos</a></li>
-                                <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Ver Actividades Ilegales</a></li>
-                                <li><a class="dropdown-item" href="{{ route('enfermedades.index') }}"><i class="fas fa-virus me-1"></i> Enfermedades de Plantas</a></li>
-                                <li><a class="dropdown-item" href="{{ route('nuevos.index') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones</a></li>
-                                <li><a class="dropdown-item" href="{{ route('store') }}"><i class="fas fa-store me-2 text-dark"></i> Tienda</a></li>
-                                <li><a class="dropdown-item" href="{{ route('cart.view') }}"><i class="fas fa-shopping-cart me-2 text-dark"></i> Carrito</a></li>
-                            @endif
+    @if(Auth::user()->role === 'admin')
+        <li><a class="dropdown-item" href="{{ route('admin.especies.index') }}"><i class="fas fa-cog me-1"></i> Administrar Publicaciones</a></li>
+        <li><a class="dropdown-item" href="{{ route('bitacora.bita') }}"><i class="fas fa-clipboard-list me-1"></i> Ver Bitácora</a></li>
+        <li><a class="dropdown-item" href="{{ url('/admin/users') }}"><i class="fas fa-users me-1"></i> Usuarios Suscritos</a></li>
+        <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Ver Actividades Ilegales</a></li>
+        <li><a class="dropdown-item" href="{{ route('enfermedades.index') }}"><i class="fas fa-virus me-1"></i> Enfermedades de Plantas</a></li>
+        <li><a class="dropdown-item" href="{{ route('nuevos.index') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones de secciones</a></li>
+        <li><a class="dropdown-item" href="{{ route('store') }}"><i class="fas fa-store me-2 text-dark"></i>Tienda</a></li>
+        <li><a class="dropdown-item" href="{{ route('cart.view') }}"><i class="fas fa-shopping-cart me-2 text-dark"></i>Carrito</a></li>
+    @endif
 
-                            @if(Auth::user()->role === 'user')
-                                <li><a class="dropdown-item" href="{{ route('UsuarioPost.create') }}"><i class="fas fa-plus-circle me-1"></i> Crear Publicación</a></li>
-                                <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar Actividad</a></li>
-                                <li><a class="dropdown-item" href="{{ route('nuevos.create') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Recomendaciones Nuevas</a></li>
-                            @endif
+    @if(Auth::user()->role === 'user')
+        <li><a class="dropdown-item" href="{{ route('UsuarioPost.create') }}"><i class="fas fa-plus-circle me-1"></i> Crear Publicación</a></li>
+        <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar Actividad Ilegal</a></li>
+        <li><a class="dropdown-item" href="{{ route('nuevos.create') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Recomendaciones de Secciones Nuevas</a></li>
+    @endif
 
-                            <li><a class="dropdown-item" href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
-                            <li><a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-1"></i> Mi perfil</a></li>
-                            <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item text-danger">
-                                        <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
-                                    </button>
-                                </form>
-                            </li>
-                        @endauth
+    <li><a class="dropdown-item" href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
+    <li><a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-1"></i> Mi perfil</a></li>
+    <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>
+
+    <li><hr class="dropdown-divider"></li>
+    <li>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="dropdown-item text-danger">
+                <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
+            </button>
+        </form>
+    </li>
+@endauth
+
                     </ul>
                 </li>
+                
             </ul>
         </div>
     </div>
 </nav>
 
 <style>
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-nav .fa-lg {
+        font-size: 1.5rem;
+    }
+
     .filtro-dropdown {
         position: absolute;
         background-color: white;
@@ -120,14 +141,5 @@
     .filtro-container {
         position: relative;
         display: inline-block;
-    }
-    /* Ajuste para que el buscador no se rompa en móvil */
-    @media (max-width: 992px) {
-        .navbar-nav {
-            margin-top: 10px;
-        }
-        .filtro-container input {
-            max-width: 100% !important;
-        }
     }
 </style>

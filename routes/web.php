@@ -34,8 +34,11 @@ use App\Http\Controllers\MedicinaController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PerfilUsuarioController;
 
 
+
+Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
 
 // Perfil, tienda y cursos
@@ -44,6 +47,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/store', [StoreController::class, 'index'])->name('store.index');
     Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 });
+
+
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard'); // asegúrate de tener esta vista creada
+})->name('admin.dashboard');
 
 
 // Rutas de enfermedades en plantas
@@ -189,7 +198,13 @@ Route::post('/checkout/stripe', [CheckoutController::class, 'payWithStripe'])->n
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
+Route::get('/perfil/{id}', [PerfilUsuarioController::class, 'ver'])->name('usuario.perfil');
+Route::post('/checkout/procesar-pago', [CheckoutController::class, 'procesarPago'])->name('checkout.procesarPago');
+Route::delete('/usuarios/eliminar', [UserController::class, 'eliminar'])->name('usuarios.eliminar');
 
+Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+
+Route::delete('/enfermedades/{id}', [EnfermedadPlantaController::class, 'destroy'])->name('enfermedades.destroy');
 
 
 
