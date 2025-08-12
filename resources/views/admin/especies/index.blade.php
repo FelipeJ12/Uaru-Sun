@@ -12,7 +12,7 @@
         background-color: rgba(30,28,28,0.67);
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 15px rgba(7, 180, 30, 0.2);
         color: white;
     }
     .custom-table {
@@ -87,20 +87,25 @@
 
         @if(auth()->user()?->role === 'admin')
         <form method="GET" action="{{ route('admin.especies.index') }}">
-            <div class="row mb-3">
                 <div class="col-2">
                     <select class="form-select" name="filtro">
                         <option value="nombre_comun" {{ request('filtro') == 'nombre_comun' ? 'selected' : '' }}>Nombre Común</option>
                         <option value="habitat" {{ request('filtro') == 'habitat' ? 'selected' : '' }}>Hábitat</option>
                     </select>
                 </div>
-                <div class="col-9">
-                    <input type="text" class="form-control" name="query" value="{{ request('query') }}" placeholder="Buscar especie">
-                </div>
-                <div class="col-1">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                </div>
-            </div>
+                <div class="input-group" style="max-width: 900px;">
+    <span class="input-group-text bg-primary text-white border-0 rounded-start-pill">
+        <i class="fas fa-search"></i>
+    </span>
+    <input 
+        type="text" 
+        class="form-control border-0 rounded-end-pill shadow-sm" 
+        name="query" 
+        value="{{ request('query') }}" 
+        placeholder="Buscar especie"
+        style="font-size: 0.9rem;">
+</div>
+
         </form>
         @endif
 
