@@ -1,90 +1,248 @@
 @extends('layouts.app')
 
 @section('title', 'Comentarios')
-<style>
-    h1{
 
+@section('content')
+<style>
+    body {
+        background-image: url('{{ asset('images/fonds.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #333;
+    }
+
+    .comentarios-wrapper {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 25px 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+        font-weight: 700;
+        color: #28a745;
+        margin-bottom: 25px;
+    }
+
+    /* Imagen de especie cuadrada */
+    .imagen-especie {
+        width: 10cm;
+        height: 10cm;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+
+    .alert-success {
+        text-align: center;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: 600;
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        margin-bottom: 20px;
+    }
+
+    .comentario-burbuja {
+        background-color: #f9f9f9;
+        padding: 15px 20px;
+        border-radius: 25px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        position: relative;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+    }
+
+    .comentario-burbuja p:first-child {
+        font-weight: 700;
+        color: #1877f2;
+        margin-bottom: 8px;
+    }
+
+    .comentario-burbuja p:nth-child(2) {
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+        color: #222;
+    }
+
+    .comentario-fecha {
+        font-size: 0.75rem;
+        color: #6c757d;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+    }
+
+    .btn-eliminar {
+        background-color: transparent;
+        border: none;
+        color: #ff4d4d;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.85rem;
+        padding: 0;
+        margin-left: auto;
+        transition: color 0.3s ease;
+    }
+
+    .btn-eliminar:hover {
+        color: #cc0000;
+        text-decoration: underline;
+    }
+
+    .comentario-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .comentarios-form textarea {
+        width: 100%;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        padding: 12px 20px;
+        font-size: 1rem;
+        resize: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .comentarios-form textarea:focus {
+        border-color: #28a745;
+        outline: none;
+        box-shadow: 0 0 6px rgba(40,167,69,0.5);
+    }
+
+    .comentarios-form button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 12px 0;
+        border-radius: 25px;
+        border: none;
+        background-color: #1877f2;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .comentarios-form button:hover {
+        background-color: #145dbf;
+    }
+
+    .comentario-vacio {
+        text-align: center;
+        color: #888;
+        font-style: italic;
+        padding: 25px 0;
+    }
+
+    .btn-secondary {
+        display: block;
+        width: 100%;
+        margin-top: 30px;
+        padding: 12px 0;
+        border-radius: 25px;
+        background-color: #6c757d;
+        border: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #565e64;
+        text-decoration: none;
+        color: white;
     }
 </style>
 
-@section('content')
-<div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-    <div class="comentarios-wrapper" style="width: 100%; max-width: 600px; border: 1px solid #ccc; border-radius: 10px; padding: 15px; background-color: #fff;">
-        <h1 style="text-align: center; font-size: 2rem; color: #000; font-weight: bold;">Comentarios de la especie {{$specie->nombre}}</h1>
-        <hr>
+<div class="comentarios-wrapper">
+    <h1 class="text-black">Comentarios de la especie {{ $specie->nombre }}</h1>
 
-        @if(session('success'))
-            <div class="alert alert-success" style="text-align: center;">{{ session('success') }}</div>
-        @endif
+    <!-- Imagen de la especie -->
+    @if($specie->image_path)
+        <img src="{{ asset('storage/' . $specie->image_path) }}" alt="{{ $specie->nombre }}" class="imagen-especie">
+    @endif
 
-        <div class="comentarios-container" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-            @forelse ($specie->comentarios->sortBy('id')  as $comentario)
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if($specie->comentarios->isEmpty())
+        <div class="comentario-vacio">No se han agregado comentarios</div>
+    @else
+        @foreach ($specie->comentarios->sortBy('id') as $comentario)
             @if($comentario->comentario)
-                    @php
-                        $texto = $comentario->comentario;
-                        $longitud_maxima = 58;
-                        $texto_limitado = wordwrap($texto, $longitud_maxima, "\n", true);
-                    @endphp
-            @endif
-                <div class="comentario-burbuja" style="background-color: #f0f2f5; padding: 10px 15px; border-radius: 20px; width: 100%; box-sizing: border-box; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid #ccc;">
-                    <p style="margin: 0; color: #1877f2; font-weight: bold;">{{$comentario->user->email}}</p>
-                    <p style="margin: 0; color: #050505;">{{ $texto_limitado }}</p>
-                    <div style="margin-top: 20px">
-                        <p style="margin: 20px 0 0 0; font-size: 0.75rem; color: #65676b; position: absolute; bottom: 5px; right: 10px;">{{ date('d-m-Y', strtotime($comentario->fecha)) }}</p>
+                @php
+                    $texto = wordwrap($comentario->comentario, 58, "\n", true);
+                @endphp
+                <div class="comentario-item">
+                    <div class="comentario-burbuja">
+                        <p>{{ $comentario->user->email }}</p>
+                        <p>{{ $texto }}</p>
+                        <div class="comentario-fecha">{{ date('d-m-Y', strtotime($comentario->fecha)) }}</div>
                     </div>
-                </div>
-                <div style="display: flex; justify-content: flex-end;  width: 100%; box-sizing: border-box;">
-                    <button type="submit" style="background-color: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 10px; font-size: 0.75rem; cursor: pointer;" class="btn btn-outline-danger bm-3" data-bs-toggle="modal" data-bs-target="#modal{{$comentario->id}}">
+
+                    <!-- Botón eliminar modal trigger -->
+                    <button class="btn-eliminar" data-bs-toggle="modal" data-bs-target="#modal{{$comentario->id}}">
                         Eliminar
                     </button>
-                    <div class="modal fade" id="modal{{$comentario->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <!-- Modal eliminar -->
+                    <div class="modal fade" id="modal{{$comentario->id}}" tabindex="-1" aria-labelledby="modalLabel{{$comentario->id}}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar comentario</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h5 class="modal-title" id="modalLabel{{$comentario->id}}">Eliminar comentario</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                 </div>
                                 <div class="modal-body">
-                                    ¿Desea realmente eliminar el comentario "{{$texto_limitado}}"?
+                                    ¿Desea realmente eliminar el comentario "{{ $texto }}"?
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{{ route('comentarios.destroy', $comentario->id) }}" method="post" style="display: inline-block;">
+                                    <form action="{{ route('comentarios.destroy', $comentario->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="hidden" name="specie_id" id="specie_id" value="{{$specie->id}}">
-                                        <input type="submit" value="Eliminar" class="btn btn-primary">
+                                        <input type="hidden" name="specie_id" value="{{ $specie->id }}">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="comentario-burbuja vacio" style="text-align: center; background-color: #f0f2f5; border: 1px solid #ccc;">
-                    <p>No se han agregado comentarios</p>
-                </div>
-            @endforelse
-        </div>
+            @endif
+        @endforeach
+    @endif
 
-        <div class="comentarios-form" style="background-color: #fff; padding: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 10px; margin-top: 20px; border: 1px solid #ccc;">
-            <form action="{{ route('comentarios.store') }}" method="POST">
-                @csrf
-                <div class="input-group" style="width: 100%;">
-                    <textarea name="comentario" id="comentario" maxlength="200" class="form-control @error('comentario') is-invalid @enderror" placeholder="Escribe un comentario..." style="resize: none; height: 60px; border-radius: 20px; border: 1px solid #ccc; padding: 10px;"></textarea>
-                    @error('comentario')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <input type="hidden" name="specie_id" id="specie_id" value="{{$specie->id}}">
-                <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
-                <button type="submit" style="width: 100%; border-radius: 20px; padding: 10px; background-color: #1877f2; color: white; border: none; font-size: 16px; margin-top: 10px;">Comentar</button>
-            </form>
-        </div>
-        <hr>
-        <div style="margin-top: 30px">
-            <a href="{{ route('admin.especies.index') }}" class="btn btn-secondary">Salir </a>
-        </div>
+    <div class="comentarios-form">
+        <form action="{{ route('comentarios.store') }}" method="POST">
+            @csrf
+            <textarea name="comentario" id="comentario" maxlength="200" placeholder="Escribe un comentario..." class="@error('comentario') is-invalid @enderror"></textarea>
+            @error('comentario')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+
+            <input type="hidden" name="specie_id" value="{{ $specie->id }}">
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
+
+            <button type="submit">Comentar</button>
+        </form>
     </div>
+
+    <a href="{{ route('admin.especies.index') }}" class="btn btn-secondary">Salir</a>
 </div>
 @endsection

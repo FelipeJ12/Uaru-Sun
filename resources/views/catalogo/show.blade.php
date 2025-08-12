@@ -3,16 +3,19 @@
 @section('title', $specie->nombre)
 
 @section('content')
-<div class="container" style="min-height: 80vh; display: flex; justify-content: center; align-items: center; margin-top: 40px">
-    <div class="row" style="width: 100%; max-width: 1200px; background: #fff; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+<div class="container" style="min-height: 80vh; margin-top: 40px;">
+    <div class="row shadow-lg bg-white rounded-4 p-4" style="max-width: 1200px; margin: auto;">
 
-        <div class="col-md-6" style="border-right: 1px solid #ccc; padding-right: 20px;">
-            <div class="species-detail">
-                <img src="{{ asset('storage/' . $specie->image_path) }}" alt="{{ $specie->nombre }}" class="detail-image">
+        <!-- Columna izquierda: Detalles de la especie -->
+        <div class="col-md-6 border-end">
+            <div class="species-detail text-center">
+                <img src="{{ asset('storage/' . $specie->image_path) }}" 
+                     alt="{{ $specie->nombre }}" 
+                     class="detail-image mb-3 shadow-sm">
 
-                <div class="species-info">
-                    <h1>{{ $specie->nombre }}</h1>
-                    <h2><em>{{ $specie->nombre_cientifico }}</em></h2>
+                <div class="species-info text-start">
+                    <h1 class="fw-bold">{{ $specie->nombre }}</h1>
+                    <h2 class="fst-italic text-secondary">{{ $specie->nombre_cientifico }}</h2>
 
                     <!-- Botón de Favoritos -->
                     <div class="favorite-section">
@@ -20,24 +23,28 @@
                             <form action="{{ route('favoritos.destroy', $specie->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Quitar de Favoritos</button>
+                                <button type="submit" class="btn btn-danger w-100">
+                                    <i class="fas fa-star"></i> Quitar de Favoritos
+                                </button>
                             </form>
                         @else
                             <form action="{{ route('favoritos.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="species_id" value="{{ $specie->id }}">
-                                <button type="submit" class="btn btn-warning">Añadir a Favoritos</button>
+                                <button type="submit" class="btn btn-warning w-100">
+                                    <i class="far fa-star"></i> Añadir a Favoritos
+                                </button>
                             </form>
                         @endif
                     </div>
 
                     <!-- Botón de Me Gusta -->
-                    <div class="like-section mb-3 text-start">
+                    <div class="like-section mb-3">
                         @if(auth()->check() && auth()->user()->likes->where('species_id', $specie->id)->count())
                             <form action="{{ route('likes.destroy', $specie->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-link p-0" style="color: red; font-size: 24px;">
+                                <button type="submit" class="btn btn-link p-0" style="color: red; font-size: 28px;">
                                     <i class="fas fa-heart"></i>
                                 </button>
                             </form>
@@ -45,7 +52,7 @@
                             <form action="{{ route('likes.store') }}" method="POST" style="display: inline;">
                                 @csrf
                                 <input type="hidden" name="species_id" value="{{ $specie->id }}">
-                                <button type="submit" class="btn btn-link p-0" style="color: gray; font-size: 24px;">
+                                <button type="submit" class="btn btn-link p-0" style="color: gray; font-size: 28px;">
                                     <i class="far fa-heart"></i>
                                 </button>
                             </form>
@@ -70,27 +77,29 @@
             </div>
         </div>
 
-        <div class="col-md-6" style="padding-left: 20px; display: flex; flex-direction: column;">
-            <h2 style="text-align: center; font-weight: bold;">Comentarios</h2>
+        <!-- Columna derecha: Comentarios -->
+        <div class="col-md-6 d-flex flex-column">
+            <h2 class="text-center fw-bold mb-3">Comentarios</h2>
+
             @if(session('success'))
                 <div class="alert alert-success text-center">{{ session('success') }}</div>
             @endif
 
-            <div class="comentarios-scroll" style="flex: 1; overflow-y: auto; max-height: 250px; margin-bottom: 20px; padding-right: 10px;">
+            <div class="comentarios-scroll flex-grow-1 overflow-auto mb-3 pe-2" style="max-height: 250px;">
                 @forelse ($specie->comentarios->sortBy('id') as $comentario)
                     @php
                         $texto = $comentario->comentario;
                         $longitud_maxima = 58;
                         $texto_limitado = wordwrap($texto, $longitud_maxima, "\n", true);
                     @endphp
-                    <div class="comentario-burbuja" style="background-color: #f0f2f5; padding: 10px 15px; border-radius: 20px; margin-bottom: 10px; position: relative; border: 1px solid #ccc;">
-                        <p style="margin: 0; color: #1877f2; font-weight: bold;">{{ $comentario->user->email }}</p>
-                        <p style="margin: 0; color: #050505; white-space: pre-line;">{{ $texto_limitado }}</p>
-                        <p style="font-size: 0.75rem; color: #65676b; bottom: 5px; right: 10px;">{{ date('d-m-Y', strtotime($comentario->fecha)) }}</p>
+                    <div class="comentario-burbuja p-3 rounded-4 mb-2" style="background-color: #f8f9fa; border: 1px solid #ddd;">
+                        <p class="mb-1 text-primary fw-bold">{{ $comentario->user->email }}</p>
+                        <p class="mb-1 text-dark" style="white-space: pre-line;">{{ $texto_limitado }}</p>
+                        <p class="mb-0 text-muted small">{{ date('d-m-Y', strtotime($comentario->fecha)) }}</p>
 
                         @auth
                             @if(auth()->user()->role === 'admin')
-                                <div style="margin-top: 15px; text-align: right;">
+                                <div class="text-end mt-2">
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal{{$comentario->id}}">
                                         Eliminar
                                     </button>
@@ -101,7 +110,7 @@
 
                     @auth
                         @if(auth()->user()->role === 'admin')
-                            <div class="modal fade" id="modal{{$comentario->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal{{$comentario->id}}" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -126,14 +135,17 @@
                         @endif
                     @endauth
                 @empty
-                    <p class="text-center">No se han agregado comentarios</p>
+                    <p class="text-center text-muted">No se han agregado comentarios</p>
                 @endforelse
             </div>
 
+            <!-- Formulario de nuevo comentario -->
             <form action="{{ route('comentarios.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <textarea name="comentario" id="comentario" maxlength="200" class="form-control @error('comentario') is-invalid @enderror" placeholder="Escribe un comentario..." style="resize: none; height: 80px;"></textarea>
+                    <textarea name="comentario" id="comentario" maxlength="200" 
+                              class="form-control @error('comentario') is-invalid @enderror" 
+                              placeholder="Escribe un comentario..." style="resize: none; height: 80px;"></textarea>
                     @error('comentario')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -144,8 +156,11 @@
                 <button type="submit" class="btn btn-primary w-100">Comentar</button>
             </form>
 
+            <!-- Botón regresar -->
             <div class="text-end mt-4">
-                <a href="{{ route('home') }}" class="btn btn-secondary">Salir</a>
+            <a href="{{ session('previous_url', route('home')) }}" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> Regresar
+</a>
             </div>
         </div>
     </div>
@@ -153,42 +168,11 @@
 @endsection
 
 <style>
-    .species-detail {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 30px;
-        padding: 20px;
-    }
-
     .detail-image {
         width: 100%;
-        max-height: 500px;
+        max-height: 400px;
         object-fit: cover;
-        border-radius: 10px;
-    }
-
-    .species-info h1 {
-        color: #2c3e50;
-        margin-bottom: 5px;
-    }
-
-    .species-info h2 {
-        color: #7f8c8d;
-        margin-bottom: 25px;
-    }
-
-    .favorite-section, .like-section {
-        margin-bottom: 20px;
-    }
-
-    .favorite-section .btn,
-    .like-section .btn {
-        font-size: 16px;
-        padding: 10px 15px;
-    }
-
-    .info-section {
-        margin-bottom: 25px;
+        border-radius: 12px;
     }
 
     .info-section h3 {
@@ -197,4 +181,4 @@
         padding-bottom: 5px;
         margin-bottom: 10px;
     }
-</style>
+</style> 
