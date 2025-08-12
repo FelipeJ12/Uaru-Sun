@@ -201,7 +201,7 @@
                     </thead>
                     <tbody>
                         @forelse($users as $user)
-                        <tr onclick="window.location='{{ route('usuarios.index', $user->id) }}'">
+                        <tr onclick="window.location='{{ route('usuario.perfil', $user->id) }}'">
                             <td class="checkbox-cell" onclick="event.stopPropagation()">
                                 <input type="checkbox" name="ids[]" value="{{ $user->id }}">
                             </td>
