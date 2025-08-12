@@ -51,17 +51,14 @@
             </ul>
 
             <!-- Buscador -->
-            <form class="d-flex align-items-center gap-1 me-3 flex-wrap" method="GET" action="{{ route('admin.especies.index') }}">
-                <div class="filtro-container position-relative">
-                    <input type="hidden" name="filtro" id="filtroSeleccionado" value="{{ request('filtro', 'nombre_comun') }}">
-                    <input type="text" class="form-control form-control-sm" name="query" id="campoBusqueda" value="{{ request('query') }}" placeholder="Buscar especie..." style="max-width: 180px;">
-                    <div class="filtro-dropdown" id="filtroDropdown">
-                        <label><input type="radio" name="filtro_opcion" value="nombre_comun" checked> Nombre Común</label>
-                        <label><input type="radio" name="filtro_opcion" value="habitat"> Hábitat</label>
-                    </div>
-                </div>
-            </form>
-
+            <form class="d-flex align-items-center mb-0" method="GET" action="{{ route('admin.especies.index') }}">
+    <div class="input-group input-group-sm">
+        <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}" aria-label="Buscar especie" aria-describedby="button-addon2">
+        <button class="btn btn-outline-light" type="submit" id="button-addon2">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
             <!-- Menú Usuario -->
             <ul class="navbar-nav ms-auto">
                  <div class="card h-100 shadow bg-success bg-opacity-50 text-white border-light position-relative rounded-4">
