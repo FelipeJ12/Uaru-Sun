@@ -82,14 +82,15 @@
         -webkit-overflow-scrolling: touch;
     }
 
+    /* Botones en fila */
     .action-buttons {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        gap: 5px;
     }
 
     .action-buttons a, .action-buttons button {
-        margin: 5px 0;
         font-size: 18px;
         width: 40px;
         height: 40px;
@@ -98,6 +99,7 @@
         align-items: center;
         padding: 0;
         border-radius: 8px;
+        margin: 0;
     }
 
     .action-buttons a:hover, .action-buttons button:hover {
