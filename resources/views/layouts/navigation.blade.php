@@ -143,46 +143,13 @@
         position: relative;
         display: inline-block;
     }
-
-    @media (max-width: 768px) {
-        .navbar-nav .nav-item {
-            text-align: center;
-            width: 100%;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 10px;
-            width: 100%;
-        }
-
-        .navbar .input-group {
-            width: 100% !important;
-            margin-top: 10px;
-        }
-
-        /* Que el form ocupe todo el ancho */
-        form.d-flex {
-            width: 100% !important;
-            flex-direction: column !important;
-            margin-top: 10px;
-            flex-grow: 1 !important;
-        }
-
-        /* Botón y input para que se vean apilados y ocupen todo el ancho */
-        .form-control {
-            border-radius: 0.375rem 0.375rem 0 0 !important;
-        }
-
-        .btn-outline-light {
-            width: 100% !important;
-            border-radius: 0 0 0.375rem 0.375rem !important;
-        }
-
-        /* Para que el menú usuario no desborde */
-        .card.h-100.shadow.bg-success {
-            background-color: transparent !important;
-            box-shadow: none !important;
-            width: 100%;
-        }
+    .navbar-nav .nav-link.dropdown-toggle {
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
 </style>

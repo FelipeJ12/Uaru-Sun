@@ -28,7 +28,9 @@
                     <x-input-label for="email" :value="__('Correo electrónico')" class="text-yellow-300" />
                     <x-text-input id="email"
                         class="block mt-1 w-full border-yellow-500 focus:border-yellow-700 focus:ring focus:ring-yellow-300 text-gray-900"
-                        type="email" name="email" :value="old('email')" required autocomplete="username" />
+                        type="email" name="email" :value="old('email')" required autocomplete="username"
+                        maxlength="100"
+                        title="El correo no debe exceder los 100 caracteres." />
                     <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-400" />
                 </div>
 
@@ -37,8 +39,8 @@
                     <x-input-label for="password" :value="__('Contraseña (mínimo 8 caracteres)')" class="text-yellow-300" />
                     <x-text-input id="password"
                         class="block mt-1 w-full border-yellow-500 focus:border-yellow-700 focus:ring focus:ring-yellow-300 text-gray-900"
-                        type="password" name="password" required autocomplete="new-password" minlength="8"
-                        title="La contraseña debe tener al menos 8 caracteres." />
+                        type="password" name="password" required autocomplete="new-password" minlength="8" maxlength="20"
+                        title="La contraseña debe tener entre 8 y 20 caracteres." />
                     <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-400" />
                 </div>
 
@@ -47,17 +49,16 @@
                     <x-input-label for="password_confirmation" :value="__('Confirmar contraseña')" class="text-yellow-300" />
                     <x-text-input id="password_confirmation"
                         class="block mt-1 w-full border-yellow-500 focus:border-yellow-700 focus:ring focus:ring-yellow-300 text-gray-900"
-                        type="password" name="password_confirmation" required autocomplete="new-password" minlength="8"
+                        type="password" name="password_confirmation" required autocomplete="new-password" minlength="8" maxlength="20"
                         title="Debe coincidir con la contraseña." />
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-400" />
                 </div>
 
-               <div class="flex items-center justify-between mt-4">
-    <a class="no-underline text-sm text-yellow-300 hover:text-yellow-500" href="{{ route('login') }}">
-        {{ __('¿Ya tienes una cuenta? Inicia sesión') }}
-    </a>
-</div>
-
+                <div class="flex items-center justify-between mt-4">
+                    <a class="no-underline text-sm text-yellow-300 hover:text-yellow-500" href="{{ route('login') }}">
+                        {{ __('¿Ya tienes una cuenta? Inicia sesión') }}
+                    </a>
+                </div>
 
                 <div class="flex flex-col items-center justify-center mt-6 space-y-4">
                     <x-primary-button
