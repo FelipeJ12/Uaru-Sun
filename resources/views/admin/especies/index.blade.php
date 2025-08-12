@@ -13,12 +13,20 @@
     }
 
     .content-box {
+
+        background-color: rgba(30,28,28,0.67);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(7, 180, 30, 0.2);
+        color: white;
+
         background-color: rgba(255, 255, 255, 0.07);
         padding: 25px;
         border-radius: 15px;
         backdrop-filter: blur(8px);
         color: #fff;
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+
     }
 
     .content-box h1 {
@@ -127,13 +135,31 @@
 
         @if(auth()->user()?->role === 'admin')
         <form method="GET" action="{{ route('admin.especies.index') }}">
+
+                <div class="col-2">
             <div class="row mb-3">
                 <div class="col-md-2 col-12 mb-2">
+
                     <select class="form-select" name="filtro">
                         <option value="nombre_comun" {{ request('filtro') == 'nombre_comun' ? 'selected' : '' }}>Nombre Común</option>
                         <option value="habitat" {{ request('filtro') == 'habitat' ? 'selected' : '' }}>Hábitat</option>
                     </select>
                 </div>
+
+                <div class="input-group" style="max-width: 900px;">
+    <span class="input-group-text bg-primary text-white border-0 rounded-start-pill">
+        <i class="fas fa-search"></i>
+    </span>
+    <input 
+        type="text" 
+        class="form-control border-0 rounded-end-pill shadow-sm" 
+        name="query" 
+        value="{{ request('query') }}" 
+        placeholder="Buscar especie"
+        style="font-size: 0.9rem;">
+</div>
+
+
                 <div class="col-md-9 col-12 mb-2">
                     <input type="text" class="form-control" name="query" value="{{ request('query') }}" placeholder="Buscar especie">
                 </div>
@@ -141,6 +167,7 @@
                     <button type="submit" class="btn btn-primary w-100"><i class="fas fa-search"></i></button>
                 </div>
             </div>
+
         </form>
         @endif
 
