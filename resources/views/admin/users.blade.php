@@ -28,10 +28,9 @@
         margin: 0;
     }
 
-    /* Botón Regresar fijo en esquina superior izquierda, fuera del contenedor */
     .btn-back {
         position: fixed;
-        top: 90px; /* bajado */
+        top: 90px;
         left: 10px;
         background-color: #388e3c;
         color: white;
@@ -66,7 +65,6 @@
         color: #003300;
     }
 
-    /* Ajustes responsivos */
     @media (max-width: 576px) {
         .overlay-container {
             padding: 15px;
@@ -92,7 +90,6 @@
         }
     }
 
-    /* Buscador */
     .search-form {
         display: flex;
         justify-content: center;
@@ -120,10 +117,9 @@
     <div class="overlay-container">
 
         <div class="header-box">
-            <h2><i class="fas fa-leaf icon-leaf"></i>Lista de Usuarios Suscritos</h2>
+            <h2><i class="fas fa-leaf icon-leaf"></i> Lista de Usuarios Suscritos</h2>
         </div>
 
-        <!-- Botón de regresar -->
         <a href="{{ url()->previous() }}" class="btn-back mb-3 d-inline-block">
             <i class="fas fa-arrow-left me-1"></i> Regresar
         </a>
@@ -136,10 +132,11 @@
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Fecha de suscripción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
+                    @forelse($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -150,21 +147,18 @@
                                       onsubmit="return confirm('¿Seguro que deseas eliminar al usuario {{ $user->name }}?');">
                                     @csrf
                                     @method('DELETE')
-                                   
+                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
-                        @empty
+                    @empty
                         <tr>
                             <td colspan="5" class="text-center text-white">No hay usuarios registrados.</td>
                         </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <button type="submit" class="btn-custom mt-3">Eliminar usuarios seleccionados</button>
-        </form>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </div>
