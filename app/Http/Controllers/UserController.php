@@ -39,11 +39,21 @@ class UserController extends Controller
 }
 public function index()
 {
+    
     $users = \App\Models\User::all(); // o paginate si prefieres paginar
 
     return view('admin.users', compact('users'));
 }
 
+
+
+public function destroy(User $user)
+{
+    // Opcional: verificar permisos o rol antes de eliminar
+    $user->delete();
+
+    return redirect()->back()->with('success', 'Usuario eliminado correctamente.');
+}
 
 }
 

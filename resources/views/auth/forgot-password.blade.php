@@ -1,27 +1,61 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('¿Olvidaste tu contraseña? No hay problema. Simplemente indícanos tu correo electrónico y te
-             enviaremos un enlace para restablecer tu contraseña y podrás elegir una nueva..') }}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Restablecer contraseña</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            background-image: url('{{ asset('images/fonds.jpg') }}');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón en la esquina superior izquierda -->
+    <div class="fixed top-4 left-4">
+        <a href="{{ route('login') }}"
+           class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 shadow-md">
+            ← Ir atrás
+        </a>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="flex items-center justify-center min-h-screen px-4 py-12">
+        <div class="bg-white bg-opacity-80 rounded-lg shadow-lg max-w-md w-full p-6">
+            <p class="mb-6 text-green-900 text-center text-sm">
+                ¿Olvidaste tu contraseña? No hay problema. Indícanos tu correo electrónico y te enviaremos un enlace para restablecerla.
+            </p>
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+                <label for="email" class="block mb-2 font-semibold text-green-800">Correo electrónico</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    required
+                    autofocus
+                    placeholder="ejemplo@correo.com"
+                    class="w-full mb-4 px-4 py-2 border border-green-400 rounded focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-600"
+                >
+                @error('email')
+                    <p class="mb-4 text-red-600 text-sm">{{ $message }}</p>
+                @enderror
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400">
+                    Enviar enlace para restablecer contraseña
+                </button>
+            </form>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('correo para restablecer contraseña
-                    ') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</body>
+</html>

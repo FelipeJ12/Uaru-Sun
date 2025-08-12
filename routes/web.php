@@ -38,6 +38,7 @@ use App\Http\Controllers\PerfilUsuarioController;
 
 
 
+Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
 
 // Perfil, tienda y cursos
@@ -46,6 +47,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/store', [StoreController::class, 'index'])->name('store.index');
     Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
 });
+
+
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard'); // asegúrate de tener esta vista creada
+})->name('admin.dashboard');
 
 
 // Rutas de enfermedades en plantas

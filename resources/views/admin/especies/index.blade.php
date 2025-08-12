@@ -3,20 +3,102 @@
 @section('title', 'Administrar Especies')
 
 @section('content')
+{{-- Cargar Font Awesome --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
     body {
-        background: url('{{ asset('images/fonds.jpg') }}') no-repeat center center;
+        background: url('{{ asset('images/fonds.jpg') }}') no-repeat center center fixed;
         background-size: cover;
-        background-attachment: fixed;
     }
 
-    @media (max-width: 767px) {
-        body {
-            background-attachment: scroll;
-        }
+    .content-box {
+        background-color: rgba(255, 255, 255, 0.07);
+        padding: 25px;
+        border-radius: 15px;
+        backdrop-filter: blur(8px);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
 
+    .content-box h1 {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #ffffff;
+    }
+
+    .btn-success, .btn-primary, .btn-danger, .btn-secondary {
+        border-radius: 8px;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btn i {
+        font-size: 16px;
+    }
+
+    .btn-success {
+        background-color: #198754;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border: none;
+    }
+
+    .custom-table {
+        width: 100%;
+        color: #fff;
+        font-size: 16px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .custom-table thead {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .custom-table th, .custom-table td {
+        padding: 12px 15px;
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+
+    .custom-table td img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .habitat-col {
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
         .custom-table th, .custom-table td {
-            font-size: 14px;
+            font-size: 13px;
             padding: 10px;
         }
 
@@ -25,97 +107,10 @@
             height: 80px;
         }
 
-        .action-buttons a, .action-buttons button {
+        .action-buttons .btn {
             width: 35px;
             height: 35px;
         }
-
-        .action-buttons img {
-            width: 18px !important;
-            height: 18px !important;
-        }
-
-        .habitat-col {
-            max-width: 150px;
-        }
-
-        .content-box h1 {
-            font-size: 24px;
-        }
-    }
-
-    .content-box {
-        background-color: rgba(30,28,28,0.67);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        color: white;
-    }
-
-    .custom-table {
-        width: 100%;
-        background: rgba(30,28,28,0.67);
-        color: white;
-        font-size: 18px;
-        border-collapse: collapse;
-    }
-
-    .custom-table thead {
-        background-color: rgba(30,28,28,0.87);
-        font-weight: bold;
-    }
-
-    .custom-table th, .custom-table td {
-        padding: 15px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .custom-table td img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .action-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .action-buttons a, .action-buttons button {
-        margin: 5px 0;
-        font-size: 18px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        border-radius: 8px;
-    }
-
-    .action-buttons a:hover, .action-buttons button:hover {
-        opacity: 0.8;
-        transform: scale(1.05);
-        transition: all 0.2s ease;
-    }
-
-    .action-cell {
-        text-align: center;
-        vertical-align: top;
-    }
-
-    .habitat-col {
-        max-width: 250px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 </style>
 
@@ -143,7 +138,7 @@
                     <input type="text" class="form-control" name="query" value="{{ request('query') }}" placeholder="Buscar especie">
                 </div>
                 <div class="col-md-1 col-12 mb-2">
-                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </form>
@@ -167,22 +162,23 @@
                     @forelse($species as $specie)
                     <tr>
                         <td>
-                            <img src="{{ asset('storage/' . $specie->image_path) }}" class="rounded" style="width: 120px; height: 120px; object-fit: cover;">
+                            <img src="{{ asset('storage/' . $specie->image_path) }}" alt="Imagen">
                         </td>
                         <td>{{ $specie->nombre }}</td>
                         <td class="habitat-col" title="{{ $specie->habitat }}">{{ $specie->habitat }}</td>
-                        <td class="action-cell">
+                        <td>
                             <div class="action-buttons">
                                 @if(auth()->user()?->role === 'admin')
                                     <a href="{{ route('admin.especies.edit', $specie->id) }}" class="btn btn-success" title="Editar">
-                                        <img src="{{ asset('images/edit.png') }}" alt="Editar" style="width: 20px; height: 20px;">
+                                        <i class="fas fa-edit"></i>
                                     </a>
-                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $specie->id }}" title="Eliminar">
-                                        <img src="{{ asset('images/elim.png') }}" alt="Eliminar" style="width: 20px; height: 20px;">
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                        data-id="{{ $specie->id }}" data-nombre="{{ $specie->nombre }}" title="Eliminar">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 @endif
                                 <a href="{{ route('comentarios.create', $specie->id) }}" class="btn btn-primary" title="Comentarios">
-                                    <img src="{{ asset('images/comen.png') }}" alt="Comentarios" style="width: 20px; height: 20px;">
+                                    <i class="fas fa-comments"></i>
                                 </a>
                             </div>
                         </td>
@@ -209,7 +205,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro de que deseas eliminar esta especie?
+                ¿Estás seguro de que deseas eliminar la publicacion <strong><span id="specieName"></span></strong>?
             </div>
             <div class="modal-footer">
                 <form id="deleteForm" method="POST">
@@ -229,8 +225,12 @@
         deleteModal.addEventListener("show.bs.modal", function(event) {
             var button = event.relatedTarget;
             var id = button.getAttribute("data-id");
+            var nombre = button.getAttribute("data-nombre");
             var form = document.getElementById("deleteForm");
             form.action = "/admin/especies/" + id;
+
+            var specieNameSpan = deleteModal.querySelector("#specieName");
+            specieNameSpan.textContent = nombre;
         });
     });
 </script>

@@ -82,6 +82,11 @@
 </head>
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
 
+<!-- Ícono desde CDN (NO FUNCIONA SIN INTERNET) -->
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/.../all.min.css"> --}}
+
+<!-- Ícono local (FUNCIONA SIN INTERNET) -->
+<link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 
     <!-- Navbar de Bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">

@@ -150,4 +150,13 @@
         position: relative;
         display: inline-block;
     }
+    .navbar-nav .nav-link.dropdown-toggle {
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 </style>
