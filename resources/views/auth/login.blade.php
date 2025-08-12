@@ -66,7 +66,7 @@
                     <label for="remember_me" class="inline-flex items-center">
                         <input id="remember_me" type="checkbox" class="rounded border-yellow-500 text-yellow-600 
                             shadow-sm focus:ring-yellow-500" name="remember">
-                        <span class="ms-2 text-sm text-yellow-300">{{ __('guardar') }}</span>
+                        <span class="ms-2 text-sm text-yellow-300">{{ __('Guardar') }}</span>
                     </label>
                 </div>
 
