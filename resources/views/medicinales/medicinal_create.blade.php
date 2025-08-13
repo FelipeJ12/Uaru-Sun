@@ -62,7 +62,8 @@
                 <input type="file" class="form-control @error('imagen') is-invalid @enderror" id="imagen" name="imagen">
                 @error('imagen')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
-
+            
+            <div class="mb-3 text-white">
             <div id="contenedor_imagen" style="display: none; margin-top: 20px;">
                 <div style="font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                     <span style="font-size: 1.5rem;">🌿</span>

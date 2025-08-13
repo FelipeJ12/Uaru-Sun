@@ -16,7 +16,7 @@
         <div class="row">
             @forelse($medicinas as $medicina)
                 <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow bg-dark text-white border-0">
+                    <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
                         <a href="{{ route('medicinas.show', $medicina->id) }}">
                             <img src="{{ asset('storage/' . $medicina->imagen) }}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; width: 100%;">
                         </a>

@@ -26,7 +26,7 @@
 
 
             @if(isset($usuario) && $usuario->role === 'admin')
-                <div class="mb-3">
+                <div class="mb-3 text-white">
                     <label for="estado" class="form-label">Estado de la sugerencia</label>
                     <select class="form-select @error('estado') is-invalid @enderror" name="estado" id="estado">
                         <option value="">Seleccione una opción</option>

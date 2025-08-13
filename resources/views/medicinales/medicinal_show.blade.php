@@ -6,7 +6,7 @@
     <div class="container my-5">
         <div class=" mb-4">
             <h1 class="display-5 text-success fw-bold">{{ $medicina->nombre_comun }}</h1>
-            <p class="text-muted fst-italic">{{ $medicina->nombre_cientifico }}</p>
+            <p class="text-white fst-italic">{{ $medicina->nombre_cientifico }}</p>
         </div>
         <hr>
 

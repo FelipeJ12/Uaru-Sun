@@ -45,7 +45,7 @@
 
                 <!-- Email Address -->
                 <div class="text-left">
-                    <x-input-label for="email" :value="__('Email')" class="text-yellow-300" />
+                    <x-input-label for="email" :value="__('Correo')" class="text-yellow-300" />
                     <x-text-input id="email" class="block mt-1 w-full border-yellow-500 focus:border-yellow-700 
                         focus:ring focus:ring-yellow-300 text-gray-900" type="email" name="email" 
                         :value="old('email')" autofocus autocomplete="username" />
@@ -54,7 +54,7 @@
 
                 <!-- Password -->
                 <div class="mt-4 text-left">
-                    <x-input-label for="password" :value="__('Password')" class="text-yellow-300" />
+                    <x-input-label for="password" :value="__('Contraseña')" class="text-yellow-300" />
                     <x-text-input id="password" class="block mt-1 w-full border-yellow-500 focus:border-yellow-700 
                         focus:ring focus:ring-yellow-300 text-gray-900" type="password" name="password" 
                         autocomplete="current-password" />
@@ -66,14 +66,14 @@
                     <label for="remember_me" class="inline-flex items-center">
                         <input id="remember_me" type="checkbox" class="rounded border-yellow-500 text-yellow-600 
                             shadow-sm focus:ring-yellow-500" name="remember">
-                        <span class="ms-2 text-sm text-yellow-300">{{ __('guardar') }}</span>
+                        <span class="ms-2 text-sm text-yellow-300">{{ __('Guardar') }}</span>
                     </label>
                 </div>
 
                 <div class="flex items-center justify-between mt-4">
                     @if (Route::has('password.request'))
                         <a class="text-sm text-yellow-custom no-underline" href="{{ route('password.request') }}">
-                            {{ __('Olvidaste tu Contraseña?') }}
+                            {{ __('¿Olvidaste tu Contraseña?') }}
                         </a>
                     @endif
                 </div>
