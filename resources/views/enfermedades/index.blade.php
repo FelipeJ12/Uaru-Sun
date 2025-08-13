@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Enfermedades de Plantas'] // Última miga
+    ];
+    
     $title = 'Enfermedades en Plantas'; 
 @endphp
 
