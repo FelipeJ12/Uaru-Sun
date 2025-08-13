@@ -68,27 +68,26 @@
         </div>
     @endif
 
+
+
     <nav aria-label="breadcrumb" class="bg-white rounded shadow-sm p-3">
         <ol class="breadcrumb-arrow">
             @foreach($items as $index => $item)
-                @php 
-                    $isLast = $index === array_key_last($items);
-                    if (is_array($item)) {
-                        $label = $item['label'];
-                        $url = $item['url'] ?? null;
-                    } else {
-                        $label = $item;
-                        $url = null;
-                    }
-                @endphp
+                @php $isLast = $index === array_key_last($items); @endphp
 
-                <li class="{{ $isLast ? 'active' : '' }}" {{ $isLast ? 'aria-current=page' : '' }}>
-                    @if(!$isLast && $url)
-                        <a href="{{ $url }}">{{ $label }}</a>
-                    @else
-                        {{ $label }}
-                    @endif
-                </li>
+                @if(is_array($item))
+                    @php $label = $item['label']; $url = $item['url'] ?? null; @endphp
+                @else
+                    @php $label = $item; $url = null; @endphp
+                @endif
+
+                @if(!$isLast && $url)
+                    <li class="breadcrumb-item">
+                        <a href="{{ $url }}" class="text-decoration-none">{{ $label }}</a>
+                    </li>
+                @else
+                    <li class="breadcrumb-item active" aria-current="page">{{ $label }}</li>
+                @endif
             @endforeach
         </ol>
     </nav>

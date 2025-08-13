@@ -1,3 +1,7 @@
+@php
+    $title = 'Agregar Nueva Especie'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

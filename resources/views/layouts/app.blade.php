@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -5,17 +7,14 @@
 
     <title>@yield('title') | Flora y Fauna de Honduras</title>
 
-    {{-- IMPORTAR FONT AWESOME PARA ÍCONOS --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome (íconos) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <!-- Fuentes de Bunny -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,7 +25,6 @@
 
     @stack('styles')
 
-    <!-- Estilos personalizados del fondo y ajustes visuales -->
     <style>
         body {
             background-image: url('{{ asset('images/fonds.jpg') }}');
@@ -35,7 +33,6 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
-        
 
         .dropdown-menu {
             z-index: 1050 !important;
@@ -50,7 +47,6 @@
             max-width: 100%;
             height: auto;
         }
-        
 
         footer {
             background: rgba(0, 0, 0, 0.8);
@@ -76,70 +72,71 @@
             }
         }
     </style>
-    
 
     @livewireStyles
 </head>
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
 
-<!-- Ícono desde CDN (NO FUNCIONA SIN INTERNET) -->
-{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/.../all.min.css"> --}}
-
-<!-- Ícono local (FUNCIONA SIN INTERNET) -->
+<!-- Ícono local (funciona sin internet) -->
 <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 
-    <!-- Navbar de Bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    @include('layouts.navigation')  <!-- Menú de Breeze modificado -->
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                @include('layouts.navigation')
-            </div>
-        </div>
-        
-    </nav>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Mensaje flash -->
-    @if (session('success'))
-        <div id="success-message" class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-        <script>
-            setTimeout(function() {
-                document.getElementById('success-message').style.display = 'none';
-            }, 5000);  // El mensaje desaparecerá después de 5 segundos
-        </script>
-    @endif
+    <div class="collapse navbar-collapse" id="navbarNav">
+        @include('layouts.navigation')
+    </div>
+</nav>
 
-    <!-- Contenido Principal -->
-    <main class="py-4 flex-grow-1">
-        <div class="container">
-            @yield('content')
-        </div>
-    </main>
-   <!-- Bootstrap JS -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    @stack('scripts')
-    
-    <!-- Script para inicializar dropdowns -->
+<!-- Mensaje flash -->
+@if (session('success'))
+    <div id="success-message" class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
-            dropdownElementList.map(function (dropdownToggleEl) {
-                new bootstrap.Dropdown(dropdownToggleEl);
-            });
-        });
+        setTimeout(function() {
+            document.getElementById('success-message').style.display = 'none';
+        }, 5000);
     </script>
-    <footer>
-     {{ ('') }} Biodiversidad Hondureña.
+@endif
+
+<!-- Contenido Principal -->
+<main class="py-4 flex-grow-1">
+    <div class="container">
+
+        {{-- Breadcrumbs globales --}}
+        @if (View::hasSection('breadcrumbs'))
+            @yield('breadcrumbs')
+        @elseif (isset($items))
+            <x-breadcrumbs :items="$items" :title="$title ?? null" />
+        @elseif (!empty($autoBreadcrumbs))
+            <x-breadcrumbs :items="$autoBreadcrumbs" :title="isset($title) ? $title : ''" />
+        @endif
+
+        @yield('content')
+    </div>
+</main>
+
+<!-- Bootstrap JS -->
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+@stack('scripts')
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+        dropdownElementList.map(function (dropdownToggleEl) {
+            new bootstrap.Dropdown(dropdownToggleEl);
+        });
+    });
+</script>
+
+<footer>
+    Biodiversidad Hondureña.
 </footer>
 
-<!-- Antes de cerrar </body> -->
 @livewireScripts
 </body>
-
 </html>

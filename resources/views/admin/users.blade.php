@@ -1,3 +1,7 @@
+@php
+    $title = 'Lista de Usuarios Suscritos'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

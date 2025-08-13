@@ -1,3 +1,7 @@
+@php
+    $title = 'Administrar Especies'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Administrar Especies')

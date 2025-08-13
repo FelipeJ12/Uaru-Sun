@@ -153,14 +153,6 @@
             }
         }
     </style>
-@php
-    $items = [
-        // no incluimos 'Inicio' porque el componente lo añade automáticamente
-        ['label' => 'Tienda']
-    ];
-@endphp
-
-<x-breadcrumbs :items="$items" title="Tienda" />
 
     <div class="text-center mb-12">
         <h1 class="text-5xl font-extrabold text-white drop-shadow-lg select-none">
