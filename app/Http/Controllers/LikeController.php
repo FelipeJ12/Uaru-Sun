@@ -36,4 +36,10 @@ public function destroy($id)
     return back()->with('success', 'Has quitado el me gusta.');
 }
 
+public function __construct()
+{
+    $this->middleware('auth');
+}
+
+
 }
