@@ -1,3 +1,7 @@
+@php
+    $title = 'Editar Perfil '; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Actualizar Información')

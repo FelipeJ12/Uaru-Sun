@@ -1,3 +1,8 @@
+@php
+    $title = 'Peligro de Extincion'; 
+@endphp
+
+
 @extends('layouts.app')
 
 @section('title', 'Especies en peligro de Extinción')

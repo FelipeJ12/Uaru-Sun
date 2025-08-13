@@ -1,3 +1,7 @@
+@php
+    $title = 'Eventos Programados'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Eventos Programados')

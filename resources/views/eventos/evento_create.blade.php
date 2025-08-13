@@ -1,3 +1,8 @@
+@php
+    $title = 'Crear Eventos'; 
+@endphp
+
+
 @extends('layouts.app')
 
 @section('title', isset($evento) ? 'Editar Evento' : 'Crear Evento')

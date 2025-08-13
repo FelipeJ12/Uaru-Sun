@@ -1,3 +1,6 @@
+@php
+    $title = 'Vista Publicacion'; 
+@endphp
 @extends('layouts.app')
 
 @section('title', $specie->nombre)

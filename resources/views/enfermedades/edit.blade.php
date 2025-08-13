@@ -1,3 +1,7 @@
+@php
+    $title = 'Editar Enfermedad en Planta'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Editar Enfermedad')

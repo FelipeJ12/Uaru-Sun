@@ -1,3 +1,7 @@
+@php
+    $title = 'Registrar Planta Medicinal'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', isset($medicina) ? 'Editar Medicina' : 'Agregar planta')

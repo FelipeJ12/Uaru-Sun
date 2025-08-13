@@ -1,3 +1,8 @@
+@php
+    $title = 'Enfermedades en Plantas'; 
+@endphp
+
+
 @extends('layouts.app')
 
 @section('title', 'Enfermedades de Plantas')

@@ -1,3 +1,7 @@
+@php
+    $title = 'Comentarios'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Comentarios')

@@ -1,3 +1,7 @@
+@php
+    $title = 'Recomendaciones del Sistema'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Recomendaciones de Mejora')

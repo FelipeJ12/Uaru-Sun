@@ -1,3 +1,7 @@
+@php
+    $title = 'Bitácora del Sistema'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Bitácora')

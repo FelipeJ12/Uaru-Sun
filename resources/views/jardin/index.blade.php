@@ -1,3 +1,8 @@
+@php
+    $title = 'Flora de Jardín'; 
+@endphp
+
+
 @extends('layouts.app')
 
 @section('content')

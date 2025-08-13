@@ -1,3 +1,7 @@
+@php
+    $title = 'Fauna Hondureña'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Grupo de Faunas')

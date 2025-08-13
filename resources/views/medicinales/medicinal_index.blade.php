@@ -1,3 +1,7 @@
+@php
+    $title = 'Catálogo de Plantas Medicinales'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Administrar Medicinas Naturales')

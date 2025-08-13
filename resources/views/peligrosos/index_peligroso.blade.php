@@ -1,3 +1,8 @@
+@php
+    $title = 'Animales peligrosos'; 
+@endphp
+
+
 @extends('layouts.app')
 
 @section('title', 'Administrar Peligrosos')

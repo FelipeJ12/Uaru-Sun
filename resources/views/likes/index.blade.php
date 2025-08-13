@@ -1,3 +1,7 @@
+@php
+    $title = 'Mis Likes'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Mis Likes')

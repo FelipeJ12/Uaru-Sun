@@ -1,3 +1,7 @@
+@php
+    $title = 'Sección Arboles'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

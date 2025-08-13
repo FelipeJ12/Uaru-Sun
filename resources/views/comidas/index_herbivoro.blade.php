@@ -1,3 +1,7 @@
+@php
+    $title = 'Alimentación de herbívoros'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Alimentación')

@@ -1,3 +1,7 @@
+@php
+    $title = 'Mis Favoritos '; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Mis Favoritos - Flora y Fauna de Honduras')

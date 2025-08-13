@@ -1,3 +1,7 @@
+@php
+    $title = 'Flora y Fauna'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Catálogo de Especies')

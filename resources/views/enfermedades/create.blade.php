@@ -1,3 +1,7 @@
+@php
+    $title = 'Registrar Enfermedad en Planta'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

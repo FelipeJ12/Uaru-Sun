@@ -1,3 +1,7 @@
+@php
+    $title = 'Sección de Aves'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

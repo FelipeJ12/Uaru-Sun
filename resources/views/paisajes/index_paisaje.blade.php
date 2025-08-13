@@ -1,3 +1,7 @@
+@php
+    $title = 'Paisajes Naturales'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Administrar Paisajes')

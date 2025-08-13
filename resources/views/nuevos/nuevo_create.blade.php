@@ -1,3 +1,7 @@
+@php
+    $title = 'Crear Sugerencias'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Sugerir Nueva Sección')

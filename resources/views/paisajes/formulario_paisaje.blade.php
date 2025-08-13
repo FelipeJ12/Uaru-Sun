@@ -1,3 +1,7 @@
+@php
+    $title = 'Crear Paisajes'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
