@@ -1,4 +1,10 @@
 @php
+    $items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Flora', 'url' => route('flora.index')],
+        ['label' => 'Flora de jardín'] // Última miga
+    ];
+
     $title = 'Flora de Jardín'; 
 @endphp
 

@@ -1,4 +1,10 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Fauna', 'url' => route('fauna.index')],
+        ['label' => 'En Peligro de Extinción'] // Última miga
+    ];
+
     $title = 'Especies en Peligro de Extincion'; 
 @endphp
 

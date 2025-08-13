@@ -1,4 +1,11 @@
 @php
+
+$items = [
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Flora', 'url' => route('flora.index')],
+    ['label' => 'Flora agrícola'] // sin /
+];
+
     $title = 'Flora Agricola'; 
 @endphp
 

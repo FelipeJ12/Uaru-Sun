@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Tienda', 'url' => route('store')],
+        ['label' => 'Carrito'] // Última miga
+    ];
     $title = 'Mi Carrito'; 
 @endphp
 

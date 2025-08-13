@@ -1,4 +1,10 @@
 @php
+    $items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Flora'] // Última miga
+    ];
+
+
     $title = 'Flora Hondureña '; 
 @endphp
 

@@ -12,40 +12,49 @@
         margin: 0;
         font-size: 0.9rem;
     }
+
     .breadcrumb-arrow li {
         position: relative;
         background: #e6f4ea;
         color: #2f855a; /* verde */
-        padding: 0.5rem 1rem 0.5rem 2rem;
-        margin-right: 0.5rem;
+        padding: 0.5rem 1.5rem 0.5rem 2rem;
         cursor: pointer;
         font-weight: 600;
         border-radius: 4px;
         transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
     }
-    .breadcrumb-arrow li:not(:last-child) {
-        margin-right: 0.75rem;
+
+    /* Espacio entre cajas */
+    .breadcrumb-arrow li + li {
+        margin-left: 12px;
     }
+
+    /* Flecha entre elementos */
     .breadcrumb-arrow li:not(:last-child)::after {
         content: "";
         position: absolute;
         top: 50%;
-        right: -20px;
+        right: -10px; /* flecha más cerca del borde */
         transform: translateY(-50%) rotate(45deg);
-        width: 15px;
-        height: 15px;
-        background: #e6f4ea;
+        width: 20px;
+        height: 20px;
+        background: inherit; /* mismo color que la caja */
         border-top-right-radius: 4px;
-        box-shadow: 1px -1px 0 0 white;
-        z-index: 1;
+        z-index: 2;
         transition: background-color 0.3s ease;
     }
+
+    /* Hover */
     .breadcrumb-arrow li:hover:not(.active) {
         background-color: #c6eccb;
     }
     .breadcrumb-arrow li:hover:not(.active)::after {
         background-color: #c6eccb;
     }
+
+    /* Activo */
     .breadcrumb-arrow li.active {
         background: #2f855a;
         color: white;
@@ -54,6 +63,7 @@
     .breadcrumb-arrow li.active::after {
         content: none;
     }
+
     .breadcrumb-arrow a {
         color: inherit;
         text-decoration: none;
@@ -67,8 +77,6 @@
             <h2 class="h4 mb-0 text-success fw-semibold">{{ $title }}</h2>
         </div>
     @endif
-
-
 
     <nav aria-label="breadcrumb" class="bg-white rounded shadow-sm p-3">
         <ol class="breadcrumb-arrow">

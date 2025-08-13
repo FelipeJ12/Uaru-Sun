@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Fauna', 'url' => route('fauna.index')],
+        ['label' => 'Grupo de Mamíferos'] // Última miga
+    ];
     $title = 'Sección Mamíferos'; 
 @endphp
 

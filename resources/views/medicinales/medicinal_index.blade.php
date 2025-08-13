@@ -1,4 +1,10 @@
 @php
+    $items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Flora', 'url' => route('flora.index')],
+        ['label' => 'Plantas medicinales'] // Última miga
+    ];
+
     $title = 'Catálogo de Plantas Medicinales'; 
 @endphp
 

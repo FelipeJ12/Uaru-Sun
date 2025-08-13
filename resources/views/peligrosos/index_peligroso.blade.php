@@ -1,4 +1,10 @@
 @php
+
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Fauna', 'url' => route('fauna.index')],
+        ['label' => 'Animales Peligrosos'] // Última miga
+    ];
     $title = 'Animales peligrosos'; 
 @endphp
 

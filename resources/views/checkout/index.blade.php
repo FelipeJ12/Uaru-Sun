@@ -1,4 +1,10 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Tienda', 'url' => route('store')],
+        ['label' => 'Carrito', 'url' => route('cart.view')],
+        ['label' => 'Resumen de Pago'] // Última miga
+    ];
     $title = 'Resumen del Pago'; 
 @endphp
 
