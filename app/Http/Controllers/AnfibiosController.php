@@ -9,7 +9,7 @@ class AnfibiosController extends Controller
 {
     public function index()
     {
-        $categoriaFauna = Categoria::where('nombre', 'Anfibio')->first();
+        $categoriaFauna = Categoria::where('nombre', 'Anfibios')->first();
         
         // Paginar los resultados
         $especies = Species::where('category_id', optional($categoriaFauna)->id)->paginate(9);

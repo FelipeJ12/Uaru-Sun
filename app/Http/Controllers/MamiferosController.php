@@ -13,7 +13,7 @@ class MamiferosController extends Controller
     public function index()
     {
         // Buscar la categoría 'Anfibios'
-        $categoriaFauna = Categoria::where('nombre', 'Mamifero')->first();
+        $categoriaFauna = Categoria::where('nombre', 'Mamiferos')->first();
     
         // Obtener todas las especies que pertenecen a esta categoría
         $especies = Species::where('category_id', optional($categoriaFauna)->id)->get();

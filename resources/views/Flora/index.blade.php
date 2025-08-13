@@ -127,9 +127,7 @@ figcaption span {
                 Seleccionar Categoría
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="{{ route('agricola.index') }}">Flora Agricola</a></li>
-                <li><a class="dropdown-item" href="{{ route('jardin.index') }}">Flora de Jardin</a></li>
-                <li><a class="dropdown-item" href="{{ route('arboles.index') }}">Grupo de Árboles</a></li>
+                
                 <li><a class="dropdown-item" href="{{ route('medicinas.index') }}">Plantas medicinales</a></li>
             </ul>
         </div>
