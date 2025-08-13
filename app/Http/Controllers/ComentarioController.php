@@ -16,6 +16,11 @@ class ComentarioController extends Controller
     {
         //
     }
+// En el constructor del controlador:
+public function __construct()
+{
+    $this->middleware('auth');
+}
 
     /**
      * Show the form for creating a new resource.
@@ -34,18 +39,17 @@ class ComentarioController extends Controller
     {
         $request->validate([
             'comentario' => 'required|string',
-
         ], [
             'comentario.required' => 'El comentario no puede estar vacío. Por favor, escribe algo antes de guardar.',
-
         ]);
 
         $comentario = new Comentario();
         $comentario->comentario = $request->input('comentario');
-        $comentario->user_id = $request->input('user_id');
+        $comentario->user_id = Auth::id(); // Aquí asignamos el usuario autenticado
         $comentario->species_id = $request->input('specie_id');
         $comentario->fecha = date('Y-m-d');
-        if($request->input('accion') == 'especie'){
+
+        if ($request->input('accion') == 'especie') {
             if ($comentario->save()) {
                 $id = $comentario->species_id;
                 $specie = Species::findOrFail($id);
@@ -54,14 +58,13 @@ class ComentarioController extends Controller
             } else {
                 return redirect()->route('comentarios.create', $comentario->species_id)->with('mensaje', 'Comentario no agregado.');
             }
-        }else{
+        } else {
             if ($comentario->save()) {
                 return redirect()->route('comentarios.create', $comentario->species_id)->with('mensaje', 'Comentario agregado.');
             } else {
                 return redirect()->route('comentarios.create', $comentario->species_id)->with('mensaje', 'Comentario no agregado.');
             }
         }
-
     }
 
     /**

@@ -13,7 +13,7 @@
         <!-- Usuarios conectados (solo visible en pantallas medianas o más grandes) -->
         <div class="position-fixed bottom-0 end-0 m-3 d-none d-md-block" style="width: 250px; z-index: 1050;">
            <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
-                <h6 class="text-center mb-2" style="font-size: 0.9rem;">Usuarios conectados</h6>
+                <h6 class="text-center mb-2" style="font-size: 0.9rem;"></h6>
                 <ul class="list-unstyled mb-0" style="font-size: 0.8rem;">
                     @forelse ($onlineUsers as $user)
                         <li class="text-center">
@@ -25,12 +25,13 @@
                             @endif
                         </li>
                     @empty
-                        <li class="text-center">No hay usuarios en línea</li>
+                        <li class="text-center"></li>
                     @endforelse
                 </ul>
             </div>
         </div>
     </div>
+    
 
     <div class="kb-gallery-container">
         @foreach($species as $specie)
@@ -177,4 +178,6 @@ figcaption span {
         padding-bottom: 60px;
     }
 }
+
+
 </style>
