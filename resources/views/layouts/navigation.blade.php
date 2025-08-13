@@ -51,15 +51,6 @@
             </ul>
 
             <!-- Buscador -->
-           <form class="d-flex align-items-center mb-0" method="GET" action="{{ route('admin.especies.index') }}">
-    <div class="input-group input-group-sm">
-        <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}" aria-label="Buscar especie" aria-describedby="button-addon2">
-        <button class="btn btn-outline-light" type="submit" id="button-addon2">
-            <i class="fas fa-search"></i>
-        </button>
-    </div>
-</form>
-
             <form class="d-flex align-items-center mb-0" method="GET" action="{{ route('admin.especies.index') }}">
     <div class="input-group input-group-sm">
         <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}" aria-label="Buscar especie" aria-describedby="button-addon2">
