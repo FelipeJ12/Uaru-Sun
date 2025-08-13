@@ -57,7 +57,6 @@
 </style>
 
 <div class="container mt-4">
-    <h1 style="color: white; text-align: center; margin-top: 30px;">Bienvenido a la Flora Agricola</h1>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="{{ route('flora.index') }}" class="btn btn-success me-md-2">Regresar</a>

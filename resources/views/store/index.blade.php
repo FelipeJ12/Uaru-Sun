@@ -1,5 +1,5 @@
 @php
-    $title = 'Tienda'; 
+    $title = '🌿 Tienda de Flora Hondureña'; 
 @endphp
 
 @extends('layouts.app')
@@ -157,12 +157,6 @@
             }
         }
     </style>
-
-    <div class="text-center mb-12">
-        <h1 class="text-5xl font-extrabold text-white drop-shadow-lg select-none">
-            🌿 Tienda de Flora Hondureña
-        </h1>
-    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         @foreach ($products as $product)

@@ -9,7 +9,6 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 style="color: white; text-align: center; margin-top: 30px;">Publicaciones de Usuario</h1>
         <a href="{{ route('UsuarioPost.create') }}" class="btn btn-success">
             <i class="fas fa-plus"></i> Nueva Especie
         </a>

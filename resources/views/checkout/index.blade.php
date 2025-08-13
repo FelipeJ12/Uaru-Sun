@@ -1,5 +1,5 @@
 @php
-    $title = 'Estado de Cuenta'; 
+    $title = 'Resumen del Pago'; 
 @endphp
 
 @extends('layouts.app')
@@ -101,8 +101,6 @@
             }
         }
     </style>
-
-    <h1 class="text-4xl font-extrabold text-green-700 text-center mb-10" style="color: white;">Resumen del Pago</h1>
 
     <div class="contenedor">
         <div class="informacion">

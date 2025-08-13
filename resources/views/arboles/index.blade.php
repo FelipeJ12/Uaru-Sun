@@ -57,7 +57,6 @@
 </style>
 
 <div class="container mt-4">
-    <h1 style="color: white; text-align: center; margin-top: 30px;">Bienvenido a la Sección Arboles</h1>
 
        <!-- Menú desplegable -->
        <div class="d-flex justify-content-end mb-4">

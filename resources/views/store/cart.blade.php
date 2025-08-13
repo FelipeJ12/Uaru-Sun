@@ -145,8 +145,6 @@
         }
     </style>
 
-    <h1 class="text-3xl font-bold text-center text-green-700 mb-10" style="color: white; margin-top: 30px;">Mi Carrito</h1>
-
     <div class="contenedor">
         <div class="informacion">
             <h3>Opciones de pago seguro</h3>

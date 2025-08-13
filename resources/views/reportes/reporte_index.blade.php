@@ -9,7 +9,6 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
-            <h1 class="text-white mb-0">Reportes de actividades ilegales</h1>
         </div>
         <div class="alert alert-warning text-dark">
             Estos reportes corresponden a actividades ilegales identificadas en áreas protegidas de Honduras, como la <strong>caza furtiva</strong> y la <strong>deforestación no autorizada</strong>.

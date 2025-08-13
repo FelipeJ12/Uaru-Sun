@@ -9,7 +9,6 @@
 @section('content')
     <div class="container" style="margin-top: 50px">
         <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
-            <h1 class="text-white mb-0">Registrar Planta Medicinal</h1>
         </div>
         <div class="alert alert-info">
             <strong>Importante:</strong> Este formulario está destinado a registrar información sobre <strong>plantas medicinales</strong>. Asegúrate de que los datos sean reales y útiles.

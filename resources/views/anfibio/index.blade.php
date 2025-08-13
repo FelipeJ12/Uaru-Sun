@@ -15,9 +15,6 @@
     </style>
 
     <div class="text-center mb-4">
-        <h1 class="mb-4 text-white" class="display-4 text-success">
-            <i class="fas fa-leaf"></i> Tipo de Especies Anfibios
-        </h1>
     </div>
 
     <!-- Menú desplegable -->

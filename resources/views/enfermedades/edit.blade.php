@@ -140,7 +140,6 @@
 </style>
 
 <div class="form-container">
-    <h2>Editar Enfermedad en Planta</h2>
 
     <form action="{{ route('enfermedades.update', $enfermedad->id) }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf

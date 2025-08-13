@@ -13,9 +13,6 @@
         }
     </style>
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="text-white text-center">Alimentación de animales herbívoros</h1>
-        </div>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
     <a href="{{ route('fauna.index') }}" class="btn btn-success w-100 w-md-auto">Regresar</a>
 </div>

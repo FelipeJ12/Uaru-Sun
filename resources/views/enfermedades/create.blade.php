@@ -138,7 +138,6 @@
 </style>
 
 <div class="form-container">
-    <h2>Registrar Enfermedad en Planta</h2>
 
     <form action="{{ route('enfermedades.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf

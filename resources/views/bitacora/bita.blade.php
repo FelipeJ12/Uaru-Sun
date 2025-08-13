@@ -8,7 +8,6 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="mb-3 text-white">Bitácora del Sistema</h1>
 
     <!-- Botón de regresar -->
     <a href="{{ url()->previous() }}" class="btn btn-outline-light mb-3">

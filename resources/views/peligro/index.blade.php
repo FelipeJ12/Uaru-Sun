@@ -1,5 +1,5 @@
 @php
-    $title = 'Peligro de Extincion'; 
+    $title = 'Especies en Peligro de Extincion'; 
 @endphp
 
 
@@ -15,11 +15,7 @@
         }
     </style>
 
-    <div class="text-center mb-4">
-        <h1 class="mb-4 text-white" class="display-4 text-success">
-            <i class="fas fa-leaf"></i> Especies en Peligro de Extincion
-        </h1>
-    </div>
+    
     
     <!-- Menú desplegable -->
     <div class="d-flex justify-content-end mb-4">

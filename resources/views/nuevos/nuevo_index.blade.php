@@ -1,5 +1,5 @@
 @php
-    $title = 'Recomendaciones del Sistema'; 
+    $title = '💡Recomendaciones del Sistema'; 
 @endphp
 
 @extends('layouts.app')
@@ -10,7 +10,6 @@
     <div class="container mt-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-white">💡 Recomendaciones del Sistema</h2>
             <a href="{{ route('nuevos.create') }}" class="btn btn-success">
                 + Nueva sugerencia
             </a>

@@ -134,8 +134,6 @@
         }
     </style>
 
-    <h1 style="color: white; text-align: center; margin-top: 50px">Mi Perfil</h1>
-
     <div class="perfil-container" style="margin-top: 30px;">
         <div id="avatar-profile" class="avatar">
             @if($user->datos && $user->datos->foto_perfil)

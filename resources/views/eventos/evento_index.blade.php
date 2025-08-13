@@ -1,5 +1,5 @@
 @php
-    $title = 'Eventos Programados'; 
+    $title = ' 🌿Eventos Programados'; 
 @endphp
 
 @extends('layouts.app')
@@ -9,7 +9,6 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
-            <h1 class="text-white mb-0">🌿 Eventos Programados</h1>
             <a href="{{ route('eventos.create') }}" class="btn btn-success">Agregar evento</a>
         </div>
 
