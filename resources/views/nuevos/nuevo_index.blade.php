@@ -1,5 +1,9 @@
 @php
-    $title = '💡Recomendaciones del Sistema'; 
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Recomendaciones'] // Última miga
+    ];
+    $title = '💡Recomendaciones de Mejora'; 
 @endphp
 
 @extends('layouts.app')

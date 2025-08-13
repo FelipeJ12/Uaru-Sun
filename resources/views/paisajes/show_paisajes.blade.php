@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Paisajes', 'url' => route('paisajes.index')],
+        ['label' => 'Ver Paisaje'] // Última miga
+    ];
     $title = 'Vista Paisajes Naturales'; 
 @endphp
 

@@ -1,4 +1,8 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Explorar Usuarios'] // Última miga
+    ];
     $title = 'Usuarios'; 
 @endphp
 

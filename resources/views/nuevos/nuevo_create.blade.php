@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Mis Recomendaciones', 'url' => route('nuevos.store')],
+        ['label' => 'Crear Sugerencia'] // Última miga
+    ];
     $title = 'Crear Sugerencias'; 
 @endphp
 

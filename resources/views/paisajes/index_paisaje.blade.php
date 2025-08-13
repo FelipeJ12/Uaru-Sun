@@ -1,4 +1,8 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Paisajes'] // Última miga
+    ];
     $title = 'Paisajes Naturales'; 
 @endphp
 

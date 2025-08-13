@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Eventos Programados', 'url' => route('eventos.store')],
+        ['label' => 'Crear Evento'] // Última miga
+    ];
     $title = 'Crear Eventos'; 
 @endphp
 

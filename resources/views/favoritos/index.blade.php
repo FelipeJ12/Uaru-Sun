@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Mi Perfil', 'url' => route('profile.index')],
+        ['label' => 'Mis Favoritos'] // Última miga
+    ];
     $title = 'Mis Favoritos '; 
 @endphp
 

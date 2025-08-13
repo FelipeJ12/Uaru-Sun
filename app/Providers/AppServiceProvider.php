@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        // Compartir breadcrumbs manuales en todas las vistas
         View::composer('*', function ($view) {
             try {
                 // Evitar en consola, tests y vistas de error
@@ -32,21 +33,16 @@ class AppServiceProvider extends ServiceProvider
 
                 // Datos que vienen desde la vista
                 $data  = $view->getData();
-                $title = $data['title'] ?? null;
-                $items = $data['items'] ?? null; // ← Nuevo: breadcrumbs personalizados
+                $items = $data['items'] ?? null; // Solo usamos breadcrumbs manuales
 
-                if (class_exists(Breadcrumbs::class)) {
-                    if ($items) {
-                        // Si la vista envía $items, usamos eso
-                        $view->with('autoBreadcrumbs', $items);
-                    } else {
-                        // Si no hay $items, generamos automáticos
-                        $auto = Breadcrumbs::build($request, $title);
-                        $view->with('autoBreadcrumbs', $auto);
-                    }
+                if ($items) {
+                    $view->with('breadcrumbs', $items);
+                } else {
+                    // Si no hay $items, no hacemos nada
+                    $view->with('breadcrumbs', []);
                 }
             } catch (\Throwable $e) {
-                $view->with('autoBreadcrumbs', []);
+                $view->with('breadcrumbs', []);
             }
         });
     }

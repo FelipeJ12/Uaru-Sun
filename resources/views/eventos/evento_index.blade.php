@@ -1,4 +1,8 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Eventos Programados'] // Última miga
+    ];
     $title = ' 🌿Eventos Programados'; 
 @endphp
 

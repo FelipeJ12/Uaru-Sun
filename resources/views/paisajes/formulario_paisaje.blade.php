@@ -1,5 +1,10 @@
 @php
-    $title = 'Crear Paisajes'; 
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Paisajes', 'url' => route('paisajes.index')],
+        ['label' => 'Agregar Paisaje'] // Última miga
+    ];
+    $title = 'Agregar Paisajes'; 
 @endphp
 
 @extends('layouts.app')

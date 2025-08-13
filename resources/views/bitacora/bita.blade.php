@@ -1,4 +1,8 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Bitácora del Sistema'] // Última miga
+    ];
     $title = 'Bitácora del Sistema'; 
 @endphp
 

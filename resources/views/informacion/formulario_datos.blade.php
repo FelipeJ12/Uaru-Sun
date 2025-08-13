@@ -1,5 +1,10 @@
 @php
-    $title = 'Editar Perfil '; 
+    $items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Mi Perfil', 'url' => route('profile.index')],
+        ['label' => 'Actualizar Información'] // Última miga
+    ];
+    $title = 'Actualizar Información';
 @endphp
 
 @extends('layouts.app')

@@ -39,13 +39,13 @@
 
                 <!-- Íconos integrados -->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('store') }}">
-                        <i class="fas fa-store fa-lg"></i>
+                <a class="nav-link {{ request()->routeIs('store') ? 'active' : '' }}" href="{{ route('store') }}">
+                        <i class="fas fa-store me-1"></i>Tienda
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('cart.view') }}">
-                        <i class="fas fa-shopping-cart fa-lg"></i>
+                <a class="nav-link {{ request()->routeIs('cart.view') ? 'active' : '' }}" href="{{ route('cart.view') }}">
+                        <i class="fas fa-shopping-cart me-1"></i>Mi Carrito
                     </a>
                 </li>
             </ul>

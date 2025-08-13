@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Explorar Usuarios', 'url' => route('usuarios.explorar')],
+        ['label' => 'Perfil del Usuario'] // Última miga
+    ];
     $title = 'Perfil de Usuarios'; 
 @endphp
 

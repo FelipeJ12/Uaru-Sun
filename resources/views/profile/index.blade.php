@@ -1,4 +1,9 @@
 @php
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Mi Perfil'] // Última miga
+    ];
+    
     $title = 'Mi Perfil'; 
 @endphp
 
