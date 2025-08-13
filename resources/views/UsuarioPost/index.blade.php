@@ -1,3 +1,7 @@
+@php
+    $title = 'Publicaciones de Usuario'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Publicaciones de Usuario')

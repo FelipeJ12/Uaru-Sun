@@ -1,3 +1,7 @@
+@php
+    $title = 'Mi Perfil'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Mi Perfil')

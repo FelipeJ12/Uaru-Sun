@@ -1,3 +1,7 @@
+@php
+    $title = 'Mi Carrito'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

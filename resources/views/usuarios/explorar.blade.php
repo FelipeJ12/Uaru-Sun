@@ -1,3 +1,7 @@
+@php
+    $title = 'Usuarios'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

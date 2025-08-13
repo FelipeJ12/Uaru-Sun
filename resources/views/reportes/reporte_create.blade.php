@@ -1,3 +1,7 @@
+@php
+    $title = 'Crear Actividad Ilegal'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', isset($reporte) ? 'Editar Reporte' : 'Crear Reporte')

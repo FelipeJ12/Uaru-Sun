@@ -1,3 +1,7 @@
+@php
+    $title = 'Tienda'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

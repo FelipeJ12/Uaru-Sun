@@ -1,3 +1,7 @@
+@php
+    $title = 'Reportes de actividades ilegales'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Reportes de Actividades Ilegales')

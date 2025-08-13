@@ -1,3 +1,7 @@
+@php
+    $title = 'Perfil de Usuarios'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Perfil de ' . $usuario->name)

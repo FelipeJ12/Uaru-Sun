@@ -1,3 +1,7 @@
+@php
+    $title = 'Crear Publicacion'; 
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
