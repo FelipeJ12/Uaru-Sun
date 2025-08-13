@@ -1,4 +1,10 @@
 @php
+
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Administrar Especies', 'url' => route('admin.especies.index')],
+        ['label' => 'Editar Especie'] // Última miga
+    ];
     $title = 'Editar Especie'; 
 @endphp
 

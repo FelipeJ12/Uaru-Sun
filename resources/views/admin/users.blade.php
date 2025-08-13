@@ -1,4 +1,9 @@
 @php
+
+$items = [
+        ['label' => 'Inicio', 'url' => route('home')],
+        ['label' => 'Lista de Usuarios Suscritos'] // Última miga
+    ];
     $title = 'Lista de Usuarios Suscritos'; 
 @endphp
 
@@ -166,9 +171,6 @@
             <h2><i class="fas fa-leaf icon-leaf"></i> Lista de Usuarios Suscritos</h2>
         </div>
 
-        <a href="{{ url()->previous() }}" class="btn-back">
-            <i class="fas fa-arrow-left me-1"></i> Regresar
-        </a>
 
         <!-- Formulario búsqueda -->
         <form method="GET" action="{{ route('usuarios.index') }}" class="search-form" onsubmit="return validarBusqueda()">
