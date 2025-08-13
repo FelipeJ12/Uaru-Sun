@@ -14,7 +14,7 @@ class AvesController extends Controller
     public function index()
     {
         // Buscar la categoría 'Anfibios'
-        $categoriaFauna = Categoria::where('nombre', 'Aves')->first();
+        $categoriaFauna = Categoria::where('nombre', 'Grupo de Aves')->first();
     
         // Obtener todas las especies que pertenecen a esta categoría
         $especies = Species::where('category_id', optional($categoriaFauna)->id)->get();

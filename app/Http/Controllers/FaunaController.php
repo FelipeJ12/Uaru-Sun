@@ -12,18 +12,27 @@ class FaunaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Buscar la categoría 'Fauna'
-        $categoriaFauna = Categoria::where('nombre', 'Fauna')->first();
+public function index()
+{
+    // Categorías que quieres mostrar
+    $categoriasFiltrar = [
+        'Mamiferos',
+        'Peligro de Extincion',
+        'Anfibios',
+        'Grupo de Aves',
+        
+    ];
 
-        // Obtener especies paginadas que pertenecen a esta categoría
-        $especies = Species::where('category_id', optional($categoriaFauna)->id)
-                            ->paginate(8); // Podés ajustar el número como quieras
+    // Obtener IDs de esas categorías
+    $categoriasIds = Categoria::whereIn('nombre', $categoriasFiltrar)->pluck('id');
 
-        // Retornar la vista con los datos
-        return view('Fauna.index', compact('especies'));
-    }
+    // Filtrar especies que tengan uno de esos category_id
+    $especies = Species::whereIn('category_id', $categoriasIds)->paginate(8);
+
+    return view('Fauna.index', compact('especies'));
+}
+
+
 
     /**
      * Display the specified resource.

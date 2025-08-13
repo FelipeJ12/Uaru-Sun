@@ -91,7 +91,6 @@ $items = [
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Botones en fila */
     .action-buttons {
         display: flex;
         flex-direction: row;
@@ -188,7 +187,8 @@ $items = [
                                     <a href="{{ route('admin.especies.edit', $specie->id) }}" class="btn btn-success" title="Editar">
                                         <img src="{{ asset('images/edit.png') }}" alt="Editar" style="width: 20px; height: 20px;">
                                     </a>
-                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $specie->id }}" title="Eliminar">
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                            data-id="{{ $specie->id }}" data-name="{{ $specie->nombre }}" title="Eliminar">
                                         <img src="{{ asset('images/elim.png') }}" alt="Eliminar" style="width: 20px; height: 20px;">
                                     </button>
                                 @endif
@@ -220,7 +220,7 @@ $items = [
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro de que deseas eliminar esta especie?
+                ¿Estás seguro de que deseas eliminar la especie <strong id="specieName"></strong>?
             </div>
             <div class="modal-footer">
                 <form id="deleteForm" method="POST">
@@ -240,8 +240,12 @@ $items = [
         deleteModal.addEventListener("show.bs.modal", function(event) {
             var button = event.relatedTarget;
             var id = button.getAttribute("data-id");
+            var name = button.getAttribute("data-name"); // Obtener nombre de la especie
             var form = document.getElementById("deleteForm");
+            var specieName = document.getElementById("specieName");
+
             form.action = "/admin/especies/" + id;
+            specieName.textContent = name; // Mostrar nombre en el modal
         });
     });
 </script>

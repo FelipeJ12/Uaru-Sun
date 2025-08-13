@@ -11,7 +11,7 @@ class PeligroExtincionController extends Controller
     public function index()
     {
         // Buscar la categoría 'Peligro de extincion'
-        $categoriaFauna = Categoria::where('nombre', 'Peligro de extincion')->first();
+        $categoriaFauna = Categoria::where('nombre', 'Peligro de Extincion')->first();
 
         // Obtener todas las especies paginadas que pertenecen a esta categoría
         $especies = Species::where('category_id', optional($categoriaFauna)->id)->paginate(9);
