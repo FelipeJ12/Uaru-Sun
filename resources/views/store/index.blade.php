@@ -15,7 +15,8 @@ $title = '🌿 Tienda de Flora Hondureña';
         .product-card {
             width: 9cm;
             height: 14cm;
-            background: white;
+            background-color: rgba(25, 135, 84, 0.5); /* Verde con opacidad */
+            color: white; /* Texto blanco */
             border-radius: 12px;
             overflow: hidden;
             display: flex;
@@ -84,7 +85,7 @@ $title = '🌿 Tienda de Flora Hondureña';
                     </button>
 
                     <!-- Panel de confirmación -->
-                    <div id="confirmPanel-{{ $product->id }}" style="display:none; margin-top: 0.5rem; padding: 0.5rem; border: 2px solid #22c55e; border-radius: 8px; background-color: #e6f4ea;">
+                    <div id="confirmPanel-{{ $product->id }}" style="display:none; margin-top: 0.5rem; padding: 0.5rem; border: 2px solid #22c55e; border-radius: 8px; background-color: #e6f4ea; color: black;">
                         <p style="color: red; font-size: 0.8rem;">¿Estás seguro de que deseas agregar este producto al carrito?</p>
                         <div style="margin-top: 0.5rem; display: flex; justify-content: space-between;">
                             <button 
@@ -105,5 +106,3 @@ $title = '🌿 Tienda de Flora Hondureña';
     </div>
 </div>
 @endsection
-
-
