@@ -22,13 +22,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- Botón de regresar arriba a la izquierda -->
-    <div class="absolute top-4 left-4 z-50">
-        <a href="{{ route('home') }}" class="text-yellow-custom text-lg flex items-center space-x-1 no-underline">
-            <span class="text-xl">←</span><span>Regresar</span>
-        </a>
-    </div>
-
     <div class="min-h-screen w-full flex items-center justify-center bg-no-repeat bg-cover bg-center"
          style="background-image: url('{{ asset('images/fonds.jpg') }}'); height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
         
@@ -79,14 +72,20 @@
                 </div>
 
                 <div class="flex flex-col items-center justify-center mt-6 space-y-4">
-                    <x-primary-button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-lg shadow-md w-full">
-                        {{ __('Iniciar sesión') }}
-                    </x-primary-button>
+    <x-primary-button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-lg shadow-md w-full">
+        {{ __('Iniciar sesión') }}
+    </x-primary-button>
 
-                    <a href="{{ route('register') }}" class="text-sm text-yellow-custom no-underline">
-                        {{ __('Registrarse') }}
-                    </a>
-                </div>
+    <!-- Enlaces Registrarse y Regresar en la misma fila -->
+    <div class="flex justify-center gap-4 w-full">
+        <a href="{{ route('register') }}" class="text-sm text-yellow-custom no-underline">
+            {{ __('Registrarse') }}
+        </a>
+        <a href="{{ route('home') }}" class="text-sm text-yellow-custom no-underline">
+            {{ __('Regresar') }}
+        </a>
+    </div>
+</div>
             </form>
         </div>
     </div>
