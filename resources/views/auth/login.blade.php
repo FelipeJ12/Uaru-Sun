@@ -72,22 +72,19 @@
                 </div>
 
                 <div class="flex flex-col items-center justify-center mt-6 space-y-4">
-    <x-primary-button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-lg shadow-md w-full">
-        {{ __('Iniciar sesión') }}
-    </x-primary-button>
+                    <x-primary-button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-4 py-2 rounded-lg shadow-md w-full">
+                        {{ __('Iniciar sesión') }}
+                    </x-primary-button>
 
-    <!-- Enlaces Registrarse y Regresar en la misma fila -->
-    <div class="flex justify-center gap-4 w-full">
-        <a href="{{ route('register') }}" class="text-sm text-yellow-custom no-underline">
-            {{ __('Registrarse') }}
-        </a>
-        <a href="{{ route('home') }}" class="text-sm text-yellow-custom no-underline">
-            {{ __('Regresar') }}
-        </a>
-    </div>
-</div>
+                    <a href="{{ route('register') }}" class="text-sm text-yellow-custom no-underline">
+                        {{ __('Registrarse') }}
+                    </a>
+                    <a href="{{ route('home') }}" class="text-sm text-yellow-custom no-underline">
+                        {{ __('Regresar') }}
+                    </a>
+                </div>
             </form>
         </div>
     </div>
 </body>
-</html>
+</html> 
