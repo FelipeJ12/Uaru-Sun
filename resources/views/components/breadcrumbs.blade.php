@@ -78,7 +78,8 @@
         </div>
     @endif
 
-    <nav aria-label="breadcrumb" class="bg-white rounded shadow-sm p-3">
+    {{-- Quitado el fondo blanco, borde y sombra --}}
+    <nav aria-label="breadcrumb" class="p-0 m-0">
         <ol class="breadcrumb-arrow">
             @foreach($items as $index => $item)
                 @php $isLast = $index === array_key_last($items); @endphp

@@ -13,8 +13,8 @@ $title = '🌿 Tienda de Flora Hondureña';
 
     <style>
         .product-card {
-            width: 7cm;
-            height: 12cm;
+            width: 9cm;
+            height: 14cm;
             background: white;
             border-radius: 12px;
             overflow: hidden;
@@ -25,7 +25,7 @@ $title = '🌿 Tienda de Flora Hondureña';
         }
         .imagen-fija {
             width: 100%;
-            height: 5.5cm;
+            height: 6.5cm;
             object-fit: cover;
         }
         .product-info {
@@ -58,8 +58,8 @@ $title = '🌿 Tienda de Flora Hondureña';
         }
     </style>
 
-    <!-- Contenedor de tarjetas en fila -->
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: flex-start;">
+    <!-- Contenedor de tarjetas centradas -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         @foreach ($products as $product)
             <div class="product-card">
                 @if($product->image)
@@ -105,3 +105,5 @@ $title = '🌿 Tienda de Flora Hondureña';
     </div>
 </div>
 @endsection
+
+
