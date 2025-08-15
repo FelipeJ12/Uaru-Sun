@@ -217,5 +217,6 @@ Route::post('/tienda', [ProductController::class, 'store'])->name('products.stor
 
 
 Route::get('enfermedades/{enfermedad}', [EnfermedadPlantaController::class, 'show'])->name('enfermedades.show');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 require __DIR__.'/auth.php';
