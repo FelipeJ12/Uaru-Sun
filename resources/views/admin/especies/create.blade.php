@@ -168,66 +168,142 @@ $items = [
     <h1>Agregar Nueva Especie</h1>
 
     <form id="especieForm" action="{{ route('admin.especies.store') }}" method="POST" enctype="multipart/form-data" novalidate>
-        @csrf
+    @csrf
 
-        <div class="mb-3">
-            <label for="nombre">Nombre Común</label>
-            <input type="text" id="nombre" name="nombre" maxlength="35" value="{{ old('nombre') }}" required oninput="validarNombre()">
-            <div id="nombreError" class="text-danger">El nombre debe contener al menos dos letras y no debe tener más de un espacio consecutivo.</div>
-        </div>
+    <div class="mb-3">
+        <label for="nombre">Nombre Común</label>
+        <input type="text" id="nombre" name="nombre" maxlength="35" value="{{ old('nombre') }}" required oninput="validarNombre()">
+        <div id="nombreError" class="text-danger">El nombre debe contener al menos dos letras y no debe tener más de un espacio consecutivo.</div>
+    </div>
 
-        <div class="mb-3">
-            <label for="nombre_cientifico">Nombre Científico</label>
-            <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="{{ old('nombre_cientifico') }}" required oninput="validarNombreCientifico()">
-            <div id="nombreCientificoError" class="text-danger">El nombre científico debe contener al menos dos letras.</div>
-        </div>
+    <div class="mb-3">
+        <label for="nombre_cientifico">Nombre Científico</label>
+        <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="{{ old('nombre_cientifico') }}" required oninput="validarNombreCientifico()">
+        <div id="nombreCientificoError" class="text-danger">El nombre científico debe contener al menos dos letras.</div>
+    </div>
 
-        <div class="mb-3">
-            <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" rows="3" required oninput="validarDescripcion()">{{ old('descripcion') }}</textarea>
-            <div id="descripcionError" class="text-danger">La descripción debe tener al menos 5 caracteres.</div>
-        </div>
+    <div class="mb-3">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" rows="3" required oninput="validarDescripcion()">{{ old('descripcion') }}</textarea>
+        <div id="descripcionError" class="text-danger">La descripción debe tener al menos 5 caracteres.</div>
+    </div>
 
-        <div class="mb-3">
-            <label for="habitat">Hábitat</label>
-            <textarea id="habitat" name="habitat" rows="2" required oninput="validarHabitat()">{{ old('habitat') }}</textarea>
-            <div id="habitatError" class="text-danger">El hábitat debe tener al menos 5 caracteres.</div>
-        </div>
+    <div class="mb-3">
+        <label for="habitat">Hábitat</label>
+        <textarea id="habitat" name="habitat" rows="2" required oninput="validarHabitat()">{{ old('habitat') }}</textarea>
+        <div id="habitatError" class="text-danger">El hábitat debe tener al menos 5 caracteres.</div>
+    </div>
 
-        <div class="mb-3">
-            <label for="location">Ubicación</label>
-            <input type="text" id="location" name="location" value="{{ old('location') }}" required oninput="validarLocation()">
-            <div id="locationError" class="text-danger">La ubicación debe tener al menos 3 caracteres.</div>
-        </div>
+    <div class="mb-3">
+        <label for="location">Ubicación</label>
+        <input type="text" id="location" name="location" value="{{ old('location') }}" required oninput="validarLocation()">
+        <div id="locationError" class="text-danger">La ubicación debe tener al menos 3 caracteres.</div>
+    </div>
 
-        <div class="mb-3">
-            <label for="category_id">Categoría</label>
-            <select id="category_id" name="category_id" required onchange="validarCategoria()">
-                <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Seleccione una categoría</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                        {{ $category->nombre }} ({{ $category->tipo }})
-                    </option>
-                @endforeach
-            </select>
-            <div id="categoriaError" class="text-danger">Debe seleccionar una categoría.</div>
-        </div>
+    <div class="mb-3">
+        <label for="category_id">Categoría</label>
+        <select id="category_id" name="category_id" required onchange="validarCategoria(); filterSubcategories()">
+            <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Seleccione una categoría</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->nombre }}
+                </option>
+            @endforeach
+        </select>
+        <div id="categoriaError" class="text-danger">Debe seleccionar una categoría.</div>
+    </div>
 
-        <div class="mb-3">
-            <label for="image">Imagen</label>
-            <input type="file" id="image" name="image" accept="image/*" required onchange="validarImagen()">
-            <div id="imagenError" class="text-danger">Debe subir una imagen válida.</div>
-            <div id="preview"></div>
-        </div>
+    <div class="mb-3">
+    <label for="subcategory_id">Subcategoría</label>
+    <select id="subcategory_id" name="subcategory_id" onchange="validarSubcategoria()">
+        <option value="" disabled selected>Seleccione una subcategoría</option>
+        @foreach($subcategories as $subcategory)
+            <option value="{{ $subcategory->id }}" data-category-id="{{ $subcategory->category_id }}" {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                {{ $subcategory->nombre }}
+            </option>
+        @endforeach
+    </select>
+    <div id="subcategoriaError" class="text-danger">Debe seleccionar una subcategoría.</div>
+</div>
 
-        <div class="btn-group">
-            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom">Cancelar</a>
-            <button type="submit" class="btn-custom" id="guardarBtn">
-                <span id="guardarIcono" class="me-2"><i class="fas fa-save"></i></span>
-                Guardar
-            </button>
-        </div>
-    </form>
+    <div class="mb-3">
+        <label for="image">Imagen</label>
+        <input type="file" id="image" name="image" accept="image/*" required onchange="validarImagen()">
+        <div id="imagenError" class="text-danger">Debe subir una imagen válida.</div>
+        <div id="preview"></div>
+    </div>
+
+    <div class="btn-group">
+        <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom">Cancelar</a>
+        <button type="submit" class="btn-custom" id="guardarBtn">
+            <span id="guardarIcono" class="me-2"><i class="fas fa-save"></i></span>
+            Guardar
+        </button>
+    </div>
+</form>
+
+
+
+<script>
+let originalSubcategoryOptions = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Guardamos las opciones originales desde el DOM inicial
+    originalSubcategoryOptions = Array.from(document.querySelectorAll('#subcategory_id option[data-category-id]'));
+
+    console.log('Página cargada, verificando categoría preseleccionada');
+    if (document.getElementById('category_id').value) {
+        console.log('Categoría preseleccionada:', document.getElementById('category_id').value);
+        filterSubcategories();
+    }
+});
+
+function filterSubcategories() {
+    const categoryId = document.getElementById('category_id').value;
+    const subcategorySelect = document.getElementById('subcategory_id');
+    
+    console.log('Filtrando subcategorías para category_id:', categoryId);
+
+    const selectedSubcategory = subcategorySelect.value;
+
+    // Limpiar el select
+    subcategorySelect.innerHTML = '<option value="" disabled selected>Seleccione una subcategoría</option>';
+
+    // Filtrar desde las opciones originales guardadas
+    let foundOptions = false;
+    originalSubcategoryOptions.forEach(option => {
+        const optionCategoryId = option.getAttribute('data-category-id');
+        if (optionCategoryId && optionCategoryId === categoryId) {
+            const newOption = document.createElement('option');
+            newOption.value = option.value;
+            newOption.textContent = option.textContent;
+            newOption.setAttribute('data-category-id', optionCategoryId);
+            if (option.value === selectedSubcategory) {
+                newOption.selected = true;
+            }
+            subcategorySelect.appendChild(newOption);
+            foundOptions = true;
+        }
+    });
+
+    if (!foundOptions) {
+        console.log('No se encontraron subcategorías para category_id:', categoryId);
+    }
+
+    validarSubcategoria();
+}
+
+function validarSubcategoria() {
+    const subcategorySelect = document.getElementById('subcategory_id');
+    const error = document.getElementById('subcategoriaError');
+    if (!subcategorySelect.value) {
+        error.style.display = 'block';
+    } else {
+        error.style.display = 'none';
+    }
+}
+</script>
+
 </div>
 
 <script>
@@ -260,7 +336,13 @@ $items = [
     function validarDescripcion() {
         const input = document.getElementById('descripcion');
         const error = document.getElementById('descripcionError');
-        const valor = input.value.trim();
+        let valor = input.value;
+
+        valor = valor.replace(/[^a-zA-ZÁÉÍÓÚáéíóúñÑ0-9.,\s]/g, '')
+                     .replace(/\s{2,}/g, ' ')
+                     .trim()
+                     .slice(0, 150);
+        input.value = valor;
 
         const valido = valor.length >= 5;
         error.style.display = valido ? 'none' : 'block';
@@ -270,7 +352,13 @@ $items = [
     function validarHabitat() {
         const input = document.getElementById('habitat');
         const error = document.getElementById('habitatError');
-        const valor = input.value.trim();
+        let valor = input.value;
+
+        valor = valor.replace(/[^a-zA-ZÁÉÍÓÚáéíóúñÑ0-9.,\s]/g, '')
+                     .replace(/\s{2,}/g, ' ')
+                     .trim()
+                     .slice(0, 150);
+        input.value = valor;
 
         const valido = valor.length >= 5;
         error.style.display = valido ? 'none' : 'block';
@@ -280,7 +368,13 @@ $items = [
     function validarLocation() {
         const input = document.getElementById('location');
         const error = document.getElementById('locationError');
-        const valor = input.value.trim();
+        let valor = input.value;
+
+        valor = valor.replace(/[^a-zA-ZÁÉÍÓÚáéíóúñÑ0-9.,\s]/g, '')
+                     .replace(/\s{2,}/g, ' ')
+                     .trim()
+                     .slice(0, 150);
+        input.value = valor;
 
         const valido = valor.length >= 3;
         error.style.display = valido ? 'none' : 'block';
@@ -359,4 +453,5 @@ $items = [
         icono.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
     });
 </script>
+
 @endsection

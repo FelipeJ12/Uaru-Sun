@@ -118,25 +118,21 @@
 </nav>
 
 <style>
-    .navbar-nav .nav-link {
-        padding: 0.5rem 1rem;
-    }
+    /* Scroll SOLO en móviles */
+    @media (max-width: 576px) {
+        .navbar-scroll {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
 
-    .navbar-nav .fa-lg {
-        font-size: 1.5rem;
-    }
+        .search-bar {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
 
-    .filtro-dropdown {
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 5px 10px;
-        z-index: 1000;
-        display: none;
-    }
-    .filtro-container {
-        position: relative;
-        display: inline-block;
+        .search-bar input {
+            font-size: 0.85rem;
+        }
     }
 </style>
+

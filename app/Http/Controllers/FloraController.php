@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Species;
 use App\Models\Categoria;
+use App\Models\Subcategory;
+use App\Models\flora;
+
+
 
 
 class FloraController extends Controller
@@ -14,15 +18,25 @@ class FloraController extends Controller
  */
 public function index()
 {
-    // Buscar la categoría 'flora'
-    $categoriaFlora = Categoria::where('nombre', 'Flora')->first();
+    // Categorías que quieres mostrar
+    $categoriasFiltrar = [
+        'Arboles',
+        'Medicinales',
+        'Agricola',
+        'Venenosa',
+        'Comestible',
+        
+    ];
 
-    // Obtener todas las especies que pertenecen a esta categoría
-    $especies = Species::where('category_id', optional($categoriaFlora)->id)->get();
+    // Obtener IDs de esas categorías
+    $categoriasIds = Subcategory::whereIn('nombre', $categoriasFiltrar)->pluck('id');
 
-    // Retornar la vista con los datos
-    return view('Flora.index', compact('especies'));
+    // Filtrar especies que tengan uno de esos category_id
+    $especies = Species::whereIn('subcategory_id', $categoriasIds)->paginate(8);
+
+    return view('flora.index', compact('especies'));
 }
+
 
 /**
  * Display the specified resource.
