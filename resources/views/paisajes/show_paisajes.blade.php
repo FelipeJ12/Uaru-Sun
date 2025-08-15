@@ -1,17 +1,9 @@
-@php
-$items = [
-        ['label' => 'Inicio', 'url' => route('home')],
-        ['label' => 'Paisajes', 'url' => route('paisajes.index')],
-        ['label' => 'Ver Paisaje'] // Última miga
-    ];
-    $title = 'Vista Paisajes Naturales'; 
-@endphp
-
 @extends('layouts.app')
 
 @section('title', 'Mostrar Paisaje')
 
 @section('content')
+<div class="mb-3 text-white">
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>{{ $paisaje->nombres }}</h1>

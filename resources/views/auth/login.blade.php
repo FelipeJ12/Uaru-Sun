@@ -22,13 +22,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- Botón de regresar arriba a la izquierda -->
-    <div class="absolute top-4 left-4 z-50">
-        <a href="{{ route('home') }}" class="text-yellow-custom text-lg flex items-center space-x-1 no-underline">
-            <span class="text-xl">←</span><span>Regresar</span>
-        </a>
-    </div>
-
     <div class="min-h-screen w-full flex items-center justify-center bg-no-repeat bg-cover bg-center"
          style="background-image: url('{{ asset('images/fonds.jpg') }}'); height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
         
@@ -86,10 +79,12 @@
                     <a href="{{ route('register') }}" class="text-sm text-yellow-custom no-underline">
                         {{ __('Registrarse') }}
                     </a>
+                    <a href="{{ route('home') }}" class="text-sm text-yellow-custom no-underline">
+                        {{ __('Regresar') }}
+                    </a>
                 </div>
             </form>
         </div>
     </div>
 </body>
-</html>
-
+</html> 

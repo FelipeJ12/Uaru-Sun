@@ -206,6 +206,13 @@ Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index'
 
 Route::delete('/enfermedades/{id}', [EnfermedadPlantaController::class, 'destroy'])->name('enfermedades.destroy');
 
+Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
+
+// Ruta para formulario de creación de producto
+Route::get('/tienda/crear', [ProductController::class, 'create'])->name('products.create');
+
+// Ruta para guardar producto
+Route::post('/tienda', [ProductController::class, 'store'])->name('products.store');
 
 
 require __DIR__.'/auth.php';

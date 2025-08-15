@@ -59,6 +59,12 @@ $title = '🌿 Tienda de Flora Hondureña';
         }
     </style>
 
+<!-- Botón flotante para agregar nuevo producto -->
+<form action="{{ route('products.create') }}" method="GET">
+        <button type="submit" class="btn-fab" title="Agregar nuevo producto">+</button>
+    </form>
+
+
     <!-- Contenedor de tarjetas centradas -->
     <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
         @foreach ($products as $product)

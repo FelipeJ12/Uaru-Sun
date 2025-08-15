@@ -71,6 +71,7 @@ $items = [
         min-height: 100px;
     }
 
+    /* Botones actualizados */
     .btn-custom {
         background: linear-gradient(135deg, #16a34a, #15803d);
         color: white;
@@ -93,17 +94,22 @@ $items = [
         transform: scale(1.05);
     }
 
+    .btn-custom:active {
+        transform: scale(0.95);
+        box-shadow: none;
+    }
+
     .btn-secondary-custom {
-        background: #4a4a4a;
-        color: #ccc;
+        background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+        color: white;
         border: none;
         padding: 12px 25px;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 700;
         border-radius: 9999px;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        transition: background 0.3s ease, color 0.3s ease;
+        box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
         margin-top: 10px;
         display: inline-block;
         text-decoration: none;
@@ -114,6 +120,10 @@ $items = [
     .btn-secondary-custom:hover {
         background: #6b6b6b;
         color: white;
+    }
+
+    .btn-secondary-custom:active {
+        transform: scale(0.95);
     }
 
     .btn-group {
