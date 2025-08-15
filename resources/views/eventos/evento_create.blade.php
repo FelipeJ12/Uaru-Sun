@@ -69,17 +69,21 @@ textarea:focus {
 textarea { min-height: 80px; }
 
 .btn-custom {
-    background: linear-gradient(135deg, #16a34a, #15803d);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
-    transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
+        background: linear-gradient(135deg, #16a34a, #15803d);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
 }
 
 .btn-custom:hover { 
@@ -88,21 +92,22 @@ textarea { min-height: 80px; }
 }
 
 .btn-secondary-custom {
-    background: #4a4a4a;
-    color: #ccc;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: background 0.3s ease, color 0.3s ease;
-    margin-top: 10px;
-    text-align: center;
-    display: inline-block;
-    text-decoration: none;
-    line-height: 1;
+     background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
 }
 
 .btn-secondary-custom:hover { 
@@ -175,10 +180,13 @@ textarea { min-height: 80px; }
             <div class="text-danger" id="direccionError">La dirección debe tener al menos 5 caracteres.</div>
         </div>
 
-        <div class="btn-group">
-            <a href="{{ route('eventos.index') }}" class="btn-secondary-custom">Cancelar</a>
-            <button type="submit" class="btn-custom">Guardar Evento</button>
+       <div class="btn-group">
+            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
+                <i class="fas fa-times me-2"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn-custom d-flex align-items-center justify-content-center" id="guardarBtn">
+                <i class="fas fa-save me-2"></i> Guardar
+            </button>
         </div>
-    </form>
-</div>
 @endsection
