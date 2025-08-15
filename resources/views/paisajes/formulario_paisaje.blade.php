@@ -1,10 +1,10 @@
 @php
 $items = [
-        ['label' => 'Inicio', 'url' => route('home')],
-        ['label' => 'Paisajes', 'url' => route('paisajes.index')],
-        ['label' => 'Agregar Paisaje'] // Última miga
-    ];
-    $title = 'Agregar Paisajes'; 
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Paisajes', 'url' => route('paisajes.index')],
+    ['label' => isset($paisaje) ? 'Editar Paisaje' : 'Agregar Paisaje']
+];
+$title = isset($paisaje) ? 'Editar Paisaje' : 'Agregar Paisaje';
 @endphp
 
 @extends('layouts.app')
@@ -19,7 +19,7 @@ $items = [
 
     .form-container {
         max-width: 700px;
-        background: rgba(30, 28, 28, 0.8);
+        background: rgba(30, 28, 28, 0.85);
         padding: 30px 40px;
         border-radius: 15px;
         box-shadow: 0 8px 24px rgba(0,0,0,0.4);
@@ -27,7 +27,7 @@ $items = [
         color: white;
     }
 
-    h2 {
+    h1 {
         text-align: center;
         margin-bottom: 30px;
         font-weight: 700;
@@ -39,6 +39,7 @@ $items = [
         font-weight: 600;
         margin-bottom: 8px;
         display: block;
+        color: #b5e7a0;
     }
 
     input[type="text"],
@@ -90,11 +91,6 @@ $items = [
         transform: scale(1.05);
     }
 
-    .btn-custom:active {
-        transform: scale(0.95);
-        box-shadow: none;
-    }
-
     .btn-secondary-custom {
         background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
         color: white;
@@ -137,43 +133,38 @@ $items = [
         }
     }
 
-    .btn-secondary-custom:active {
-        transform: scale(0.95);
-    }
-
-    .d-flex.justify-content-between.mt-4 {
+    .btn-group {
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
         gap: 15px;
         margin-top: 20px;
+        flex-wrap: wrap;
     }
 
-    .d-flex.justify-content-between.mt-4 a,
-    .d-flex.justify-content-between.mt-4 button {
+    .btn-group > * {
         flex: 1 1 45%;
         text-align: center;
     }
 
-    #vista_previa {
-        margin-top: 15px;
-        max-width: 350px;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        display: none;
-        object-fit: cover;
-    }
-
     @media (max-width: 576px) {
-        .d-flex.justify-content-between.mt-4 a,
-        .d-flex.justify-content-between.mt-4 button {
+        .btn-group > * {
             flex: 1 1 100%;
         }
+    }
+
+    #preview img {
+        max-width: 100%;
+        max-height: 250px;
+        margin-top: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        object-fit: cover;
+        display: block;
     }
 </style>
 
 <div class="form-container">
-    <h2>{{ isset($paisaje) ? 'Editar Paisaje: ' . $paisaje->nombres : 'Crear Nuevo Paisaje' }}</h2>
+    <h1>{{ isset($paisaje) ? 'Editar Paisaje: ' . $paisaje->nombres : 'Crear Nuevo Paisaje' }}</h1>
 
     <form action="{{ isset($paisaje) ? route('paisajes.update', $paisaje->id) : route('paisajes.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
@@ -181,67 +172,59 @@ $items = [
             @method('PUT')
         @endif
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label for="nombres">Nombre del Paisaje</label>
-            <input type="text" id="nombres" name="nombres" class="form-control @error('nombres') is-invalid @enderror"
-                value="{{ old('nombres', $paisaje->nombres ?? '') }}" maxlength="100" placeholder="Ejemplo: Bosque Nuboso">
+            <input type="text" id="nombres" name="nombres" value="{{ old('nombres', $paisaje->nombres ?? '') }}" maxlength="100" placeholder="Ejemplo: Bosque Nuboso">
             @error('nombres')
-                <small class="text-danger">{{ $message }}</small>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="mb-4">
-            <label for="imagen">Imagen del paisaje</label>
-            <input type="file" id="imagen" name="imagen" class="form-control @error('imagen') is-invalid @enderror" accept="image/*">
+        <div class="mb-3">
+            <label for="imagen">Imagen del Paisaje</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
             @error('imagen')
-                <small class="text-danger">{{ $message }}</small>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
-            <img id="vista_previa" alt="Vista previa">
+            <div id="preview"></div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" class="form-control @error('descripcion') is-invalid @enderror" rows="3" maxlength="200" placeholder="Descripción">{{ old('descripcion', $paisaje->descripcion ?? '') }}</textarea>
+            <textarea id="descripcion" name="descripcion" rows="3" maxlength="200" placeholder="Descripción">{{ old('descripcion', $paisaje->descripcion ?? '') }}</textarea>
             @error('descripcion')
-                <small class="text-danger">{{ $message }}</small>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label for="ubicacion">Ubicación</label>
-            <textarea id="ubicacion" name="ubicacion" class="form-control @error('ubicacion') is-invalid @enderror" rows="2" maxlength="400" placeholder="Ejemplo: https://www.google.com/maps/place/Ubicacion...">{{ old('ubicacion', $paisaje->ubicacion ?? '') }}</textarea>
+            <textarea id="ubicacion" name="ubicacion" rows="2" maxlength="400" placeholder="Ejemplo: https://www.google.com/maps/...">{{ old('ubicacion', $paisaje->ubicacion ?? '') }}</textarea>
             @error('ubicacion')
-                <small class="text-danger">{{ $message }}</small>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <hr style="border-color: rgba(129,199,132,0.5);">
-
-        <h4 class="mt-4" style="color: #81c784;">🌿 Flora</h4>
-        <input type="hidden" name="flora_tipo" value="flora">
-        <div class="mb-4">
+        <h4 style="color: #81c784;">🌿 Flora</h4>
+        <div class="mb-3">
             <label for="flora_nombre">Nombre de la Flora</label>
-            <input type="text" id="flora_nombre" name="flora_nombre" class="form-control @error('flora_nombre') is-invalid @enderror"
-                value="{{ old('flora_nombre', $flora->nombre ?? '') }}" maxlength="100" placeholder="Ejemplo: Helechos, Bromelias">
+            <input type="text" id="flora_nombre" name="flora_nombre" value="{{ old('flora_nombre', $flora->nombre ?? '') }}" maxlength="100" placeholder="Ejemplo: Helechos, Bromelias">
             @error('flora_nombre')
-                <small class="text-danger">{{ $message }}</small>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <hr style="border-color: rgba(129,199,132,0.5);">
-
-        <h4 class="mt-4" style="color: #81c784;">🦜 Fauna</h4>
-        <input type="hidden" name="fauna_tipo" value="fauna">
-        <div class="mb-4">
+        <h4 style="color: #81c784;">🦜 Fauna</h4>
+        <div class="mb-3">
             <label for="fauna_nombre">Nombre de la Fauna</label>
-            <input type="text" id="fauna_nombre" name="fauna_nombre" class="form-control @error('fauna_nombre') is-invalid @enderror"
-                value="{{ old('fauna_nombre', $fauna->nombre ?? '') }}" maxlength="100" placeholder="Ejemplo: Tucanes, Monos aulladores">
+            <input type="text" id="fauna_nombre" name="fauna_nombre" value="{{ old('fauna_nombre', $fauna->nombre ?? '') }}" maxlength="100" placeholder="Ejemplo: Tucanes, Monos aulladores">
             @error('fauna_nombre')
-                <small class="text-danger">{{ $message }}</small>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="btn-group">
+
     <!-- Botón Cancelar con icono -->
     <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
         <i class="fas fa-times me-2"></i> Cancelar
@@ -255,19 +238,16 @@ $items = [
 
 <script>
     document.getElementById('imagen').addEventListener('change', function(event) {
-        const archivo = event.target.files[0];
-        const img = document.getElementById('vista_previa');
+        const file = event.target.files[0];
+        const preview = document.getElementById('preview');
+        preview.innerHTML = '';
 
-        if (archivo && archivo.type.startsWith('image/')) {
+        if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                img.src = e.target.result;
-                img.style.display = 'block';
+                preview.innerHTML = `<img src="${e.target.result}" alt="Vista previa">`;
             }
-            reader.readAsDataURL(archivo);
-        } else {
-            img.src = '';
-            img.style.display = 'none';
+            reader.readAsDataURL(file);
         }
     });
 </script>
