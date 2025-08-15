@@ -1,3 +1,6 @@
+
+
+
 <!-- resources/views/dashboard.blade.php -->
 @extends('layouts.app')
 
@@ -7,3 +10,4 @@
     <p>Bienvenido al panel de usuario.</p>
 </div>
 @endsection
+
