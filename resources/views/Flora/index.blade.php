@@ -68,7 +68,7 @@
 
 figcaption {
     height: 120px;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(25, 135, 84, 0.5); /* mismo color que home */
     color: white;
     padding: 10px;
     font-size: 0.9em;
@@ -79,6 +79,7 @@ figcaption {
     text-align: center;
     gap: 5px;
 }
+
 
 figcaption strong,
 figcaption em,
