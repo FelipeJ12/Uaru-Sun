@@ -15,46 +15,17 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Categoria::create([
-            'nombre' => 'Mamiferos',
-            'tipo' => 'fauna'   
+            'nombre' => 'Flora',   
            
         ]);
         Categoria::create([
-            'nombre' => 'flora',
-            'tipo' => 'Planta'   
+            'nombre' => 'Fauna',  
            
         ]);
         Categoria::create([
-            'nombre' => 'Fauna',
-            'tipo' => 'Animal'   
+            'nombre' => 'Paisaje',   
            
         ]);
-        Categoria::create([
-            'nombre' => 'Peligro de Extincion',
-            'tipo' => 'Riesgo'   
-           
-        ]);
-        Categoria::create([
-            'nombre' => 'Anfibios',
-            'tipo' => 'fauna'   
-           
-        ]);
-        Categoria::create([
-            'nombre' => 'Arboles',
-            'tipo' => 'Flora'   
-           
-        ]);
-        Categoria::create([
-            'nombre' => 'Grupo de Aves',
-            'tipo' => 'fauna'   
-           
-        ]);
-        Categoria::create([
-            'nombre' => 'Aniamales Herbivoros',
-            'tipo' => 'fauna'   
-           
-        ]);
-
     }
     
 }

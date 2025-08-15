@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Peligroso;
 use App\Models\Species;
 use App\Models\Categoria;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +28,11 @@ class AdminSpeciesController extends Controller
     }
 
     public function create()
-    {
-        $categories = Categoria::all();
-        return view('admin.especies.create', compact('categories'));
-    }
+{
+    $categories = Categoria::all();
+    $subcategories = Subcategory::all();
+    return view('admin.especies.create', compact('categories', 'subcategories'));
+}
 
     public function store(Request $request)
     {
@@ -42,7 +43,8 @@ class AdminSpeciesController extends Controller
             'habitat' => 'required',
             'location' => 'required',
             'image' => 'required|image|max:2048',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'nullable|exists:subcategories,id',
         ]);
 
         $imagePath = $request->file('image')->store('especies', 'public');
@@ -55,7 +57,8 @@ class AdminSpeciesController extends Controller
             'location' => $validated['location'],
             'image_path' => $imagePath,
             'category_id' => $validated['category_id'],
-            'user_id' => Auth::id(), // Asocia con el usuario autenticado
+            'subcategory_id' => $validated['subcategory_id'],
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('admin.especies.index')->with('success', '¡Especie creada!');
@@ -64,7 +67,8 @@ class AdminSpeciesController extends Controller
     public function edit(Species $species)
     {
         $categories = Categoria::all();
-        return view('admin.especies.edit', compact('species', 'categories'));
+        $subcategories = Subcategory::all();
+        return view('admin.especies.edit', compact('species', 'categories', 'subcategories'));
     }
 
     public function update(Request $request, Species $species)
@@ -75,8 +79,9 @@ class AdminSpeciesController extends Controller
             'descripcion' => 'required',
             'habitat' => 'required',
             'location' => 'required',
-            'category_id' => 'required',
-            'image' => 'nullable|image|max:2048'
+            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'nullable|exists:subcategories,id',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -94,6 +99,6 @@ class AdminSpeciesController extends Controller
         Storage::disk('public')->delete($species->image_path);
         $species->delete();
 
-        return redirect()->route('admin.especies.index')->with('success', '¡Publicacion eliminada!');
+        return redirect()->route('admin.especies.index')->with('success', '¡Publicación eliminada!');
     }
 }

@@ -167,9 +167,10 @@ $items = [
 <div class="container mt-5">
     <div class="overlay-container">
 
-        <div class="header-box">
-            <h2><i class="fas fa-leaf icon-leaf"></i> Lista de Usuarios Suscritos</h2>
-        </div>
+     <div class="header-box text-start">
+    <h2><i class="fas fa-leaf icon-leaf"></i> Lista de Usuarios Suscritos</h2>
+</div>
+
 
 
         <!-- Formulario búsqueda -->

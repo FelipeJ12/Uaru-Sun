@@ -167,74 +167,134 @@ $items = [
 <div class="form-container">
     <h1>Editar {{ $species->nombre }}</h1>
 
-    <form action="{{ route('admin.especies.update', $species->id) }}" method="POST" enctype="multipart/form-data" novalidate>
-        @csrf
-        @method('PUT')
+    <form id="especieForm" action="{{ route('admin.especies.update', $species->id) }}" method="POST" enctype="multipart/form-data" novalidate>
+    @csrf
+    @method('PUT')
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul style="margin-bottom:0; padding-left: 20px;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div class="mb-3">
+        <label for="nombre">Nombre Común</label>
+        <input type="text" id="nombre" name="nombre" maxlength="35" value="{{ old('nombre', $species->nombre) }}" required oninput="validarNombre()">
+        <div id="nombreError" class="text-danger">El nombre debe contener al menos dos letras y no debe tener más de un espacio consecutivo.</div>
+    </div>
 
-        <!-- Nombre común -->
-        <div class="mb-3">
-            <label for="nombre">Nombre Común</label>
-            <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $species->nombre) }}" required>
+    <div class="mb-3">
+        <label for="nombre_cientifico">Nombre Científico</label>
+        <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="{{ old('nombre_cientifico', $species->nombre_cientifico) }}" required oninput="validarNombreCientifico()">
+        <div id="nombreCientificoError" class="text-danger">El nombre científico debe contener al menos dos letras.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" rows="3" required oninput="validarDescripcion()">{{ old('descripcion', $species->descripcion) }}</textarea>
+        <div id="descripcionError" class="text-danger">La descripción debe tener al menos 5 caracteres.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="habitat">Hábitat</label>
+        <textarea id="habitat" name="habitat" rows="2" required oninput="validarHabitat()">{{ old('habitat', $species->habitat) }}</textarea>
+        <div id="habitatError" class="text-danger">El hábitat debe tener al menos 5 caracteres.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="location">Ubicación</label>
+        <input type="text" id="location" name="location" value="{{ old('location', $species->location) }}" required oninput="validarLocation()">
+        <div id="locationError" class="text-danger">La ubicación debe tener al menos 3 caracteres.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="category_id">Categoría</label>
+        <select id="category_id" name="category_id" required onchange="validarCategoria(); filterSubcategories()">
+            <option value="" disabled {{ old('category_id', $species->category_id) ? '' : 'selected' }}>Seleccione una categoría</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id', $species->category_id) == $category->id ? 'selected' : '' }}>
+                    {{ $category->nombre }}
+                </option>
+            @endforeach
+        </select>
+        <div id="categoriaError" class="text-danger">Debe seleccionar una categoría.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="subcategory_id">Subcategoría</label>
+        <select id="subcategory_id" name="subcategory_id" onchange="validarSubcategoria()">
+        <option value="" disabled selected>Seleccione una subcategoría</option>
+        @foreach($subcategories as $subcategory)
+            <option value="{{ $subcategory->id }}" data-category-id="{{ $subcategory->category_id }}" {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                {{ $subcategory->nombre }}
+            </option>
+        @endforeach
+    </select>
+
+        <div id="subcategoriaError" class="text-danger">Debe seleccionar una subcategoría.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="image">Imagen</label>
+        <input type="file" id="image" name="image" accept="image/*" onchange="validarImagen()">
+        <div id="imagenError" class="text-danger">Debe subir una imagen válida.</div>
+        <div id="preview">
+            @if($species->image_path)
+                <img src="{{ Storage::url($species->image_path) }}" alt="Current Image" style="max-width: 200px;">
+            @endif
         </div>
+    </div>
 
-        <!-- Nombre Científico -->
-        <div class="mb-3">
-            <label for="nombre_cientifico">Nombre Científico</label>
-            <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="{{ old('nombre_cientifico', $species->nombre_cientifico) }}" required>
-        </div>
+    <div class="btn-group">
+        <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom">Cancelar</a>
+        <button type="submit" class="btn-custom" id="guardarBtn">
+            <span id="guardarIcono" class="me-2"><i class="fas fa-save"></i></span>
+            Guardar
+        </button>
+    </div>
+</form>
 
-        <!-- Descripción -->
-        <div class="mb-3">
-            <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" required>{{ old('descripcion', $species->descripcion) }}</textarea>
-        </div>
+<script>
+let originalSubcategoryOptions = [];
 
-        <!-- Hábitat -->
-        <div class="mb-3">
-            <label for="habitat">Hábitat</label>
-            <input type="text" id="habitat" name="habitat" value="{{ old('habitat', $species->habitat) }}" required>
-        </div>
+document.addEventListener('DOMContentLoaded', function() {
+    // Guardamos las opciones originales desde el DOM inicial
+    originalSubcategoryOptions = Array.from(document.querySelectorAll('#subcategory_id option[data-category-id]'));
 
-        <!-- Ubicación -->
-        <div class="mb-3">
-            <label for="location">Ubicación</label>
-            <input type="text" id="location" name="location" value="{{ old('location', $species->location) }}" required>
-        </div>
+    console.log('Página cargada, verificando categoría preseleccionada');
+    if (document.getElementById('category_id').value) {
+        console.log('Categoría preseleccionada:', document.getElementById('category_id').value);
+        filterSubcategories();
+    }
+});
 
-        <!-- Categoría -->
-        <div class="mb-3">
-            <label for="category_id">Categoría</label>
-            <select id="category_id" name="category_id" required>
-                <option value="" disabled {{ old('category_id', $species->category_id) ? '' : 'selected' }}>Seleccione una categoría</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id', $species->category_id) == $category->id ? 'selected' : '' }}>
-                        {{ $category->nombre }} ({{ $category->tipo }})
-                    </option>
-                @endforeach
-            </select>
-        </div>
+function filterSubcategoriesAjax() {
+    const categoryId = document.getElementById('category_id').value;
+    const subcategorySelect = document.getElementById('subcategory_id');
 
-        <!-- Imagen -->
-        <div class="mb-3">
-            <label>Imagen Actual</label>
-            <img src="{{ asset('storage/' . $species->image_path) }}" alt="Imagen actual" class="current-image">
-            <input type="file" id="image" name="image" accept="image/*">
-        </div>
+    fetch(`/subcategories/${categoryId}`)
+        .then(response => response.json())
+        .then(data => {
+            subcategorySelect.innerHTML = '<option value="" disabled selected>Seleccione una subcategoría</option>';
+            data.forEach(subcategory => {
+                const option = document.createElement('option');
+                option.value = subcategory.id;
+                option.textContent = subcategory.nombre;
+                subcategorySelect.appendChild(option);
+            });
+        });
 
-        <div class="btn-group">
-            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom">Regresar</a>
-            <button type="submit" class="btn-custom">Actualizar</button>
-        </div>
-    </form>
+    if (!foundOptions) {
+        console.log('No se encontraron subcategorías para category_id:', categoryId);
+    }
+
+    validarSubcategoria();
+}
+
+function validarSubcategoria() {
+    const subcategorySelect = document.getElementById('subcategory_id');
+    const error = document.getElementById('subcategoriaError');
+    if (!subcategorySelect.value) {
+        error.style.display = 'block';
+    } else {
+        error.style.display = 'none';
+    }
+}
+</script>
+
 </div>
 @endsection

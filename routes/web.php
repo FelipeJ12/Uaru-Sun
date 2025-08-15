@@ -35,6 +35,27 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PerfilUsuarioController;
+use App\Http\Controllers\VenenosaController;
+use App\Http\Controllers\ComestibleController;
+use App\Http\Controllers\PlantamedicinalController;
+
+Route::resource('plantamedicinal', PlantamedicinalController::class);
+
+
+
+Route::get('/bitacora', [BitaController::class, 'index'])->name('bitacora.index');
+Route::delete('/bitacora/{id}', [BitaController::class, 'destroy'])->name('bitacora.destroy');
+
+
+
+Route::get('/comestible', [ComestibleController::class, 'index'])
+    ->name('comestible.comestible');
+
+
+Route::get('/venenosa', [VenenosaController::class, 'index'])
+    ->name('veneno.venenosa');
+
+
 
 
 
@@ -203,16 +224,13 @@ Route::post('/checkout/procesar-pago', [CheckoutController::class, 'procesarPago
 Route::delete('/usuarios/eliminar', [UserController::class, 'eliminar'])->name('usuarios.eliminar');
 
 Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+Route::get('/plantamedicinal', [PlantamedicinalController::class, 'index'])->name('plantamedicinal.index');
 
 Route::delete('/enfermedades/{id}', [EnfermedadPlantaController::class, 'destroy'])->name('enfermedades.destroy');
 
-Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
-
-// Ruta para formulario de creación de producto
-Route::get('/tienda/crear', [ProductController::class, 'create'])->name('products.create');
-
-// Ruta para guardar producto
-Route::post('/tienda', [ProductController::class, 'store'])->name('products.store');
-
+Route::get('/admin/especies/subcategories', [AdminSpeciesController::class, 'getSubcategories'])->name('admin.especies.subcategories');
+Route::get('/subcategories/{categoryId}', function($categoryId) {
+    return \App\Models\Subcategory::where('category_id', $categoryId)->get();
+});
 
 require __DIR__.'/auth.php';

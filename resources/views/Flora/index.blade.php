@@ -139,7 +139,13 @@ figcaption span {
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 
-                <li><a class="dropdown-item" href="{{ route('medicinas.index') }}">Plantas medicinales</a></li>
+                <li><a class="dropdown-item" href="{{ route('plantamedicinal.index') }}">Plantas medicinales</a></li>
+                <li><a class="dropdown-item" href="{{ route('agricola.index') }}">Flora Agricola</a></li>
+                <li><a class="dropdown-item" href="{{ route('jardin.index') }}">Flora de Jardin</a></li>
+                <li><a class="dropdown-item" href="{{ route('arboles.index') }}">Grupo de Árboles</a></li>
+                <li><a class="dropdown-item" href="{{ route('veneno.venenosa') }}">Plantas Venenosas</a></li>
+                <li><a class="dropdown-item" href="{{ route('comestible.comestible') }}">Plantas Comestibles</a></li>
+
             </ul>
         </div>
     </div>
@@ -159,7 +165,7 @@ figcaption span {
                         <em>{{ $specie->nombre_cientifico }}</em>
                         @if ($specie->category)
                             <span class="badge bg-success">
-                                {{ $specie->category->nombre }} ({{ $specie->category->tipo }})
+                                {{ $specie->category->nombre }}
                             </span>
                         @else
                             <span class="badge bg-warning">Sin categoría</span>

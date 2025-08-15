@@ -14,12 +14,7 @@ $title = 'Mis Favoritos';
 @section('content')
 <div class="container mt-5">
 
-    {{-- Botón estilizado de regreso al perfil --}}
-    <div class="mb-4">
-        <a href="{{ route('profile.index') }}" class="btn-back">
-            Regresar al perfil
-        </a>
-    </div>
+    
 
     <h2 class="text-white text-center mb-4">Mis Favoritos</h2>
 
