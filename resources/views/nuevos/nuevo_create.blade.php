@@ -47,28 +47,84 @@ $title = isset($nuevo) ? 'Editar Sugerencia' : 'Crear Sugerencia';
         justify-content: center;
     }
     .btn-custom {
-        background-color: #28a745;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #16a34a, #15803d);
         color: white;
-        font-weight: bold;
-        transition: 0.3s;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
     }
     .btn-custom:hover {
-        background-color: #218838;
+        background: linear-gradient(135deg, #15803d, #166534);
+        transform: scale(1.05);
     }
     .btn-secondary-custom {
-        background-color: #6c757d;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
         color: white;
-        font-weight: bold;
-        transition: 0.3s;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
     }
     .btn-secondary-custom:hover {
-        background-color: #5a6268;
+        background: #6b6b6b;
+        color: white;
+    }
+      .btn-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .btn-group > * {
+        flex: 1 1 45%;
+        text-align: center;
+    }
+
+    @media (max-width: 576px) {
+        .btn-group > * {
+            flex: 1 1 100%;
+        }
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .btn-group > * {
+        flex: 1 1 45%;
+        text-align: center;
+    }
+
+    @media (max-width: 576px) {
+        .btn-group > * {
+            flex: 1 1 100%;
+        }
     }
     .alert-custom {
         background: rgba(255, 221, 87, 0.2);
@@ -118,12 +174,14 @@ $title = isset($nuevo) ? 'Editar Sugerencia' : 'Crear Sugerencia';
             @else
                 <input type="hidden" id="tipo" name="tipo" value="crear">
             @endif
-
-            <div class="btn-group mt-4">
-                <button type="submit" class="btn-custom">{{ isset($nuevo) ? 'Editar Sugerencia' : 'Enviar Sugerencia' }}</button>
-                <a href="{{ route('nuevos.index') }}" class="btn-secondary-custom">Cancelar</a>
-            </div>
-        </form>
-    </div>
+<div class="btn-group mt-4">
+    <button type="submit" class="btn-custom">
+        <i class="fas {{ isset($nuevo) ? 'fa-edit' : 'fa-paper-plane' }} me-2"></i>
+        {{ isset($nuevo) ? 'Editar Sugerencia' : 'Enviar Sugerencia' }}
+    </button>
+    <a href="{{ route('nuevos.index') }}" class="btn-secondary-custom">
+        <i class="fas fa-times me-2"></i> Cancelar
+    </a>
 </div>
+
 @endsection
