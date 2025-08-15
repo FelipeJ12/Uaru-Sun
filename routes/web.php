@@ -255,5 +255,11 @@ Route::get('enfermedades/{enfermedad}', [EnfermedadPlantaController::class, 'sho
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 
+// Ruta para guardar producto
+Route::post('/tienda', [ProductController::class, 'store'])->name('products.store');
+Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
+
+// Ruta para formulario de creación de producto
+Route::get('/tienda/crear', [ProductController::class, 'create'])->name('products.create');
 
 require __DIR__.'/auth.php';
