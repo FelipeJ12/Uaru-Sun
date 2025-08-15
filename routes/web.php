@@ -233,4 +233,27 @@ Route::get('/subcategories/{categoryId}', function($categoryId) {
     return \App\Models\Subcategory::where('category_id', $categoryId)->get();
 });
 
+
+
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+
+Route::delete('/enfermedades/{id}', [EnfermedadPlantaController::class, 'destroy'])->name('enfermedades.destroy');
+
+Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
+
+// Ruta para formulario de creación de producto
+Route::get('/tienda/crear', [ProductController::class, 'create'])->name('products.create');
+
+// Ruta para guardar producto
+Route::post('/tienda', [ProductController::class, 'store'])->name('products.store');
+
+
+Route::get('enfermedades/{enfermedad}', [EnfermedadPlantaController::class, 'show'])->name('enfermedades.show');
+
+
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+
+
 require __DIR__.'/auth.php';
