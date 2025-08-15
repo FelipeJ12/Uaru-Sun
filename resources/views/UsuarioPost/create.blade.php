@@ -68,52 +68,71 @@ input:focus, textarea:focus, select:focus, input[type="file"]:focus {
 textarea { min-height: 100px; }
 
 .btn-custom {
-    background: linear-gradient(135deg, #16a34a, #15803d);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
-    transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
+   background: linear-gradient(135deg, #16a34a, #15803d);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
 }
 
-.btn-custom:hover { background: linear-gradient(135deg, #15803d, #166534); transform: scale(1.05); }
-.btn-custom:active { transform: scale(0.95); box-shadow: none; }
+.btn-custom:hover { 
+    background: linear-gradient(135deg, #15803d, #166534);
+    transform: scale(1.05);
+ }
+
 
 .btn-secondary-custom {
-    background: #4a4a4a;
-    color: #ccc;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: background 0.3s ease, color 0.3s ease;
-    margin-top: 10px;
-    text-align: center;
-    display: inline-block;
-    text-decoration: none;
+    background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
 }
 
-.btn-secondary-custom:hover { background: #6b6b6b; color: white; }
-.btn-secondary-custom:active { transform: scale(0.95); }
+.btn-secondary-custom:hover { 
+    background: #6b6b6b; 
+    color: white; 
+}
 
-.d-flex.justify-content-between.mt-4 {
+.btn-group {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 15px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
-.d-flex.justify-content-between.mt-4 a,
-.d-flex.justify-content-between.mt-4 button { flex: 1 1 45%; text-align: center; }
+.btn-group > * { 
+    flex: 1 1 45%; 
+    text-align: center; 
+}
+
+@media (max-width: 576px) { 
+    .btn-group > * { 
+        flex: 1 1 100%; 
+    } 
+} 
 
 .text-danger {
     font-size: 0.9rem;
@@ -197,12 +216,15 @@ textarea { min-height: 100px; }
             <img id="preview" class="preview-img" src="{{ isset($post) ? asset('storage/' . $post->image) : '' }}" alt="Vista previa" style="{{ isset($post) ? 'display:block;' : '' }}">
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
-            <a href="{{ route('UsuarioPost.index') }}" class="btn-secondary-custom">Cancelar</a>
-            <button type="submit" class="btn-custom">{{ isset($post) ? 'Actualizar Publicación' : 'Guardar Publicación' }}</button>
+       <div class="btn-group">
+            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
+                <i class="fas fa-times me-2"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn-custom d-flex align-items-center justify-content-center" id="guardarBtn">
+                <i class="fas fa-save me-2"></i> Guardar Publicación
+            </button>
         </div>
-    </form>
-</div>
 
 <script>
 document.getElementById('formPublicacion').addEventListener('submit', function(event) {

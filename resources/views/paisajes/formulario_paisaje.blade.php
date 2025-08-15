@@ -71,16 +71,22 @@ textarea { min-height: 80px; }
 }
 
 .btn-custom, .btn-secondary-custom {
-    border-radius: 9999px;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 9999px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
 }
 
 .btn-custom {
@@ -174,26 +180,17 @@ textarea { min-height: 80px; }
             @error('ubicacion')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
-        <h4 style="color: #81c784;">🌿 Flora</h4>
-        <div class="mb-3">
-            <label for="flora_nombre">Nombre de la Flora</label>
-            <input type="text" id="flora_nombre" name="flora_nombre" value="{{ old('flora_nombre', $flora->nombre ?? '') }}" maxlength="100" placeholder="Ejemplo: Helechos, Bromelias">
-            @error('flora_nombre')<div class="text-danger">{{ $message }}</div>@enderror
-        </div>
-
-        <h4 style="color: #81c784;">🦜 Fauna</h4>
-        <div class="mb-3">
-            <label for="fauna_nombre">Nombre de la Fauna</label>
-            <input type="text" id="fauna_nombre" name="fauna_nombre" value="{{ old('fauna_nombre', $fauna->nombre ?? '') }}" maxlength="100" placeholder="Ejemplo: Tucanes, Monos aulladores">
-            @error('fauna_nombre')<div class="text-danger">{{ $message }}</div>@enderror
-        </div>
+        
 
         <div class="btn-group">
-            <a href="{{ route('paisajes.index') }}" class="btn-secondary-custom">Cancelar</a>
-            <button type="submit" class="btn-custom">{{ isset($paisaje) ? 'Actualizar Paisaje' : 'Guardar Paisaje' }}</button>
+            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
+                <i class="fas fa-times me-2"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn-custom d-flex align-items-center justify-content-center" id="guardarBtn">
+                <i class="fas fa-save me-2"></i> Guardar Paisaje
+            </button>
         </div>
-    </form>
-</div>
 
 <script>
 document.getElementById('imagen').addEventListener('change', function(event) {
