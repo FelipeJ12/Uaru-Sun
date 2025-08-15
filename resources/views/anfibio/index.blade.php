@@ -34,7 +34,6 @@ $items = [
                 <li><a class="dropdown-item" href="{{ route('ave.index') }}">Grupo de Aves</a></li>
                 <li><a class="dropdown-item" href="{{ route('mamiferos.index') }}">Grupo de Mamiferos</a></li>
                 <li><a class="dropdown-item" href="{{ route('comidas.index') }}">Alimentación herbívoros</a></li>
-                <li><a class="dropdown-item" href="{{ route('peligrosos.index') }}">Animales peligrosos</a></li>
             </ul>
         </div>
     </div>

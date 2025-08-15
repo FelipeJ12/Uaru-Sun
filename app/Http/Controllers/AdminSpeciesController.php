@@ -11,21 +11,31 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminSpeciesController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = $request->input('query');
-        $filtro = $request->input('filtro');
+   public function index(Request $request)
+{
+    $query = $request->input('query');
+    $filtro = $request->input('filtro');
 
+    // Si hay búsqueda
+    if ($query) {
         if ($filtro === 'nombre_comun') {
             $species = Species::where('nombre', 'like', "%$query%")->paginate(10);
         } elseif ($filtro === 'habitat') {
             $species = Species::where('habitat', 'like', "%$query%")->paginate(10);
         } else {
-            $species = Species::paginate(10);
+            // Búsqueda general en nombre y hábitat
+            $species = Species::where('nombre', 'like', "%$query%")
+                               ->orWhere('habitat', 'like', "%$query%")
+                               ->paginate(10);
         }
-
-        return view('admin.especies.index', compact('species', 'query'));
+    } else {
+        // Si no hay búsqueda, devolvemos una colección vacía
+        $species = collect();
     }
+
+    return view('admin.especies.index', compact('species', 'query'));
+}
+
 
     public function create()
 {
