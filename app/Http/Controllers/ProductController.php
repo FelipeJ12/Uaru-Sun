@@ -45,6 +45,11 @@ public function store(Request $request)
     return redirect()->route('products.index')->with('success', 'Producto agregado correctamente.');
 }
 
+public function show(Product $product)
+{
+    return view('products.show', compact('product'));
+}
+
 }
 
  

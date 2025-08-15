@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fauna;
 use App\Models\Species;
 use App\Models\Categoria;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class FaunaController extends Controller
@@ -16,18 +17,19 @@ public function index()
 {
     // Categorías que quieres mostrar
     $categoriasFiltrar = [
-        'Mamiferos',
         'Peligro de Extincion',
+        'Mamiferos',
+        'Aves',
         'Anfibios',
-        'Grupo de Aves',
+        'Reptiles',
         
     ];
 
     // Obtener IDs de esas categorías
-    $categoriasIds = Categoria::whereIn('nombre', $categoriasFiltrar)->pluck('id');
+    $categoriasIds = Subcategory::whereIn('nombre', $categoriasFiltrar)->pluck('id');
 
     // Filtrar especies que tengan uno de esos category_id
-    $especies = Species::whereIn('category_id', $categoriasIds)->paginate(8);
+    $especies = Species::whereIn('subcategory_id', $categoriasIds)->paginate(8);
 
     return view('Fauna.index', compact('especies'));
 }

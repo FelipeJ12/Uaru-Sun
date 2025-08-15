@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            // Agrega la columna last_seen, que puede ser nula
+            $table->timestamp('last_seen')->nullable()->after('remember_token');
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            // Elimina la columna last_seen
+            $table->dropColumn('last_seen');
         });
     }
 };

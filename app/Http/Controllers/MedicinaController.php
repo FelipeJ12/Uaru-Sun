@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Subcategory;
 use App\Models\Medicina;
 use Illuminate\Http\Request;
 
@@ -12,9 +12,16 @@ class MedicinaController extends Controller
      */
     public function index()
     {
+
+     $categoriaFlora = Subcategory::where('nombre', 'medicibas')->first();
+
+     
+
         $medicinas = Medicina::Paginate(10);
         return view('medicinales.medicinal_index', compact('medicinas'));
+
     }
+
 
     /**
      * Show the form for creating a new resource.

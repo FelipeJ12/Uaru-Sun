@@ -22,6 +22,7 @@ class Species extends Model
         'image_path',
         'location',
         'category_id',
+        'subcategory_id',
         'user_id', // Asegúrate de que este campo existe en la tabla
     ];
 
@@ -33,6 +34,11 @@ class Species extends Model
     public function comentarios()
     {
         return $this->hasMany(Comentario::class);
+    }
+    
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class, 'subcategory_id');
     }
 
     public function user()

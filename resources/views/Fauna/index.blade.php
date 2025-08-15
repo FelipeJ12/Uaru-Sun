@@ -30,7 +30,7 @@ $items = [
                 <li><a class="dropdown-item" href="{{ route('ave.index') }}">Grupo de Aves</a></li>
                 <li><a class="dropdown-item" href="{{ route('mamiferos.index') }}">Grupo de Mamiferos</a></li>
                 <li><a class="dropdown-item" href="{{ route('comidas.index') }}">Alimentación herbívoros</a></li>
-                <li><a class="dropdown-item" href="{{ route('peligrosos.index') }}">Animales peligrosos</a></li>
+
             </ul>
         </div>
     </div>
@@ -50,7 +50,7 @@ $items = [
                         <em>{{ $specie->nombre_cientifico }}</em>
                         @if ($specie->category)
                             <span class="badge bg-success">
-                                {{ $specie->category->nombre }} ({{ $specie->category->tipo }})
+                                {{ $specie->category->nombre }}
                             </span>
                         @else
                             <span class="badge bg-warning">Sin categoría</span>
