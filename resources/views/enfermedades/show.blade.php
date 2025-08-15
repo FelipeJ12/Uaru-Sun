@@ -1,3 +1,12 @@
+@php
+$items = [
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Enfermedades de Plantas', 'url' => route('enfermedades.index')],
+    ['label' => 'Ver Enfermedad']
+];
+
+$title = 'Ver Enfermedad en Planta'; 
+@endphp
 @extends('layouts.app')
 
 @section('title', $enfermedad->nombre_enfermedad)

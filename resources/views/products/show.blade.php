@@ -1,3 +1,12 @@
+@php
+$items = [
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Tienda', 'url' => route('products.index')],
+    ['label' => 'Ver Producto' ]
+];
+$title =  'Ver Producto';
+@endphp
+
 @extends('layouts.app')
 
 @section('title', $product->name)
@@ -5,7 +14,7 @@
 @section('content')
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>{{ $product->name }}</h1>
+        <h1 class="mb-4 text-white">{{ $product->name }}</h1>
     </div>
 
     <div class="card shadow-lg p-4">
