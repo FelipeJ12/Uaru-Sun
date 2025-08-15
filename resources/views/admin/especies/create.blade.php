@@ -70,6 +70,7 @@ $items = [
         min-height: 100px;
     }
 
+    /* Botones actualizados */
     .btn-custom {
         background: linear-gradient(135deg, #16a34a, #15803d);
         color: white;
@@ -93,15 +94,13 @@ $items = [
         transform: scale(1.05);
     }
 
-    .btn-custom:disabled {
-        background: #4caf507a;
-        cursor: not-allowed;
-        transform: none;
+    .btn-custom:active {
+        transform: scale(0.95);
         box-shadow: none;
     }
 
     .btn-secondary-custom {
-         background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+        background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
         color: white;
         border: none;
         padding: 12px 25px;
@@ -122,6 +121,10 @@ $items = [
     .btn-secondary-custom:hover {
         background: #6b6b6b;
         color: white;
+    }
+
+    .btn-secondary-custom:active {
+        transform: scale(0.95);
     }
 
     .btn-group {
@@ -148,11 +151,6 @@ $items = [
         color: #f44336;
         margin-top: 5px;
         display: none;
-    }
-
-    .is-invalid {
-        border-color: #f44336 !important;
-        box-shadow: 0 0 8px #f44336 !important;
     }
 
     #preview img {
@@ -222,17 +220,15 @@ $items = [
             <div id="preview"></div>
         </div>
 
-       <div class="btn-group">
-    <!-- Botón Cancelar con icono -->
-    <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
-        <i class="fas fa-times me-2"></i> Cancelar
-    </a>
+        <div class="btn-group">
+            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
+                <i class="fas fa-times me-2"></i> Cancelar
+            </a>
 
-    <!-- Botón Guardar con icono -->
-    <button type="submit" class="btn-custom d-flex align-items-center justify-content-center" id="guardarBtn">
-        <i class="fas fa-save me-2"></i> Guardar
-    </button>
-</div>
+            <button type="submit" class="btn-custom d-flex align-items-center justify-content-center" id="guardarBtn">
+                <i class="fas fa-save me-2"></i> Guardar
+            </button>
+        </div>
 
 <script>
     function validarNombre() {

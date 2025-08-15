@@ -2,12 +2,14 @@
 $items = [
     ['label' => 'Inicio', 'url' => route('home')],
     ['label' => 'Mi Perfil', 'url' => route('profile.index')],
-    ['label' => 'Actualizar Información'] // Última miga
+    ['label' => 'Actualizar Información']
 ];
 $title = 'Actualizar Información';
 @endphp
 
 @extends('layouts.app')
+
+@section('title', $title)
 
 @section('content')
 <style>
@@ -42,7 +44,11 @@ label {
     color: #b5e7a0;
 }
 
-input[type="text"], input[type="email"], input[type="date"], textarea, input[type="file"] {
+input[type="text"], 
+input[type="email"], 
+input[type="date"], 
+textarea, 
+input[type="file"] {
     width: 100%;
     padding: 10px 14px;
     border-radius: 12px;
@@ -82,7 +88,10 @@ input:focus, textarea:focus {
     margin-top: 10px;
 }
 
-.btn-custom:hover { background: linear-gradient(135deg, #15803d, #166534); transform: scale(1.05); }
+.btn-custom:hover { 
+    background: linear-gradient(135deg, #15803d, #166534); 
+    transform: scale(1.05); 
+}
 
 .btn-secondary-custom {
     background: #4a4a4a;
@@ -102,11 +111,27 @@ input:focus, textarea:focus {
     line-height: 1;
 }
 
-.btn-secondary-custom:hover { background: #6b6b6b; color: white; }
+.btn-secondary-custom:hover { 
+    background: #6b6b6b; 
+    color: white; 
+}
 
-.btn-group { display: flex; justify-content: space-between; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-.btn-group > * { flex: 1 1 45%; text-align: center; }
-@media (max-width: 576px) { .btn-group > * { flex: 1 1 100%; } }
+.btn-group { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 15px; 
+    margin-top: 20px; 
+    flex-wrap: wrap; 
+}
+
+.btn-group > * { 
+    flex: 1 1 45%; 
+    text-align: center; 
+}
+
+@media (max-width: 576px) { 
+    .btn-group > * { flex: 1 1 100%; } 
+}
 </style>
 
 <div class="form-container">

@@ -1,8 +1,15 @@
 @php
-$title = 'Crear Publicación';
+$items = [
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Publicaciones', 'url' => route('UsuarioPost.index')],
+    ['label' => isset($post) ? 'Editar Publicación' : 'Crear Publicación']
+];
+$title = isset($post) ? 'Editar Publicación' : 'Crear Publicación';
 @endphp
 
 @extends('layouts.app')
+
+@section('title', $title)
 
 @section('content')
 <style>
@@ -134,38 +141,41 @@ textarea { min-height: 100px; }
 </style>
 
 <div class="form-container">
-    <h2>Crear Nueva Publicación</h2>
+    <h2>{{ isset($post) ? 'Editar Publicación' : 'Crear Nueva Publicación' }}</h2>
 
-    <form id="formPublicacion" action="{{ route('UsuarioPost.store') }}" method="POST" enctype="multipart/form-data" novalidate>
+    <form id="formPublicacion" action="{{ isset($post) ? route('UsuarioPost.update', $post->id) : route('UsuarioPost.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
+        @if(isset($post))
+            @method('PUT')
+        @endif
 
         <div class="mb-4">
             <label for="nombre">Nombre Común</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $post->nombre ?? '') }}" required>
             <div class="text-danger" id="error-nombre">Este campo es obligatorio.</div>
         </div>
 
         <div class="mb-4">
             <label for="nombre_cientifico">Nombre Científico</label>
-            <input type="text" id="nombre_cientifico" name="nombre_cientifico" required>
+            <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="{{ old('nombre_cientifico', $post->nombre_cientifico ?? '') }}" required>
             <div class="text-danger" id="error-nombre_cientifico">Este campo es obligatorio.</div>
         </div>
 
         <div class="mb-4">
             <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+            <textarea id="descripcion" name="descripcion" rows="3" required>{{ old('descripcion', $post->descripcion ?? '') }}</textarea>
             <div class="text-danger" id="error-descripcion">Este campo es obligatorio.</div>
         </div>
 
         <div class="mb-4">
             <label for="habitat">Hábitat</label>
-            <textarea id="habitat" name="habitat" rows="2" required></textarea>
+            <textarea id="habitat" name="habitat" rows="2" required>{{ old('habitat', $post->habitat ?? '') }}</textarea>
             <div class="text-danger" id="error-habitat">Este campo es obligatorio.</div>
         </div>
 
         <div class="mb-4">
             <label for="location">Ubicación</label>
-            <input type="text" id="location" name="location" required>
+            <input type="text" id="location" name="location" value="{{ old('location', $post->location ?? '') }}" required>
             <div class="text-danger" id="error-location">Este campo es obligatorio.</div>
         </div>
 
@@ -174,7 +184,7 @@ textarea { min-height: 100px; }
             <select id="category_id" name="category_id" required>
                 <option value="" selected disabled>Seleccione una categoría</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->nombre }} ({{ $category->tipo }})</option>
+                    <option value="{{ $category->id }}" {{ old('category_id', $post->category_id ?? '') == $category->id ? 'selected' : '' }}>{{ $category->nombre }} ({{ $category->tipo }})</option>
                 @endforeach
             </select>
             <div class="text-danger" id="error-category">Debe seleccionar una categoría.</div>
@@ -182,14 +192,14 @@ textarea { min-height: 100px; }
 
         <div class="mb-4">
             <label for="image">Imagen</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+            <input type="file" id="image" name="image" accept="image/*" {{ isset($post) ? '' : 'required' }}>
             <div class="text-danger" id="error-image">Debe seleccionar una imagen.</div>
-            <img id="preview" class="preview-img" alt="Vista previa">
+            <img id="preview" class="preview-img" src="{{ isset($post) ? asset('storage/' . $post->image) : '' }}" alt="Vista previa" style="{{ isset($post) ? 'display:block;' : '' }}">
         </div>
 
         <div class="d-flex justify-content-between mt-4">
             <a href="{{ route('UsuarioPost.index') }}" class="btn-secondary-custom">Cancelar</a>
-            <button type="submit" class="btn-custom">Guardar Publicación</button>
+            <button type="submit" class="btn-custom">{{ isset($post) ? 'Actualizar Publicación' : 'Guardar Publicación' }}</button>
         </div>
     </form>
 </div>
@@ -212,7 +222,7 @@ document.getElementById('formPublicacion').addEventListener('submit', function(e
         const field = document.getElementById(id);
         const error = document.getElementById(errorId);
 
-        if (!field.value || (field.type === 'file' && field.files.length === 0)) {
+        if (!field.value || (field.type === 'file' && field.files.length === 0 && !{{ isset($post) ? 'true' : 'false' }})) {
             error.style.display = 'block';
             field.classList.add('is-invalid');
             isValid = false;

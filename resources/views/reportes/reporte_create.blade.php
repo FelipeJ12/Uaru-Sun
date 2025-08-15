@@ -1,8 +1,15 @@
 @php
-$title = 'Crear Actividad Ilegal';
+$items = [
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Reportes de Actividades Ilegales', 'url' => route('reportes.index')],
+    ['label' => isset($reporte) ? 'Editar Reporte' : 'Crear Actividad Ilegal']
+];
+$title = isset($reporte) ? 'Editar Reporte' : 'Crear Actividad Ilegal';
 @endphp
 
 @extends('layouts.app')
+
+@section('title', $title)
 
 @section('content')
 <style>
@@ -15,14 +22,14 @@ body {
 .form-container {
     max-width: 700px;
     background: rgba(30, 28, 28, 0.85);
-    padding: 30px 40px;
+    padding: 35px 40px;
     border-radius: 15px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     margin: 50px auto;
     color: white;
 }
 
-h1 {
+h2 {
     text-align: center;
     margin-bottom: 30px;
     font-weight: 700;
@@ -55,41 +62,66 @@ input:focus, textarea:focus, select:focus {
     box-shadow: 0 0 8px #81c784;
 }
 
+.text-danger {
+    font-size: 0.9rem;
+    color: #f44336;
+    margin-top: 5px;
+}
+
+.btn-custom, .btn-secondary-custom {
+    border-radius: 9999px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
 .btn-custom {
     background: linear-gradient(135deg, #16a34a, #15803d);
     color: white;
     border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    cursor: pointer;
     box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
-    transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
 }
 
-.btn-custom:hover { background: linear-gradient(135deg, #15803d, #166534); transform: scale(1.05); }
+.btn-custom:hover {
+    background: linear-gradient(135deg, #15803d, #166534);
+    transform: scale(1.05);
+}
 
 .btn-secondary-custom {
-    background: #4a4a4a;
-    color: #ccc;
+    background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+    color: white;
     border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: background 0.3s ease, color 0.3s ease;
-    margin-top: 10px;
-    text-align: center;
-    display: inline-block;
+    box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
     text-decoration: none;
-    line-height: 1;
 }
 
-.btn-secondary-custom:hover { background: #6b6b6b; color: white; }
+.btn-secondary-custom:hover {
+    background: #6b6b6b;
+    color: white;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-group > * {
+    flex: 1 1 45%;
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    .btn-group > * { flex: 1 1 100%; }
+}
 
 #vista_previa {
     max-width: 350px;
@@ -101,21 +133,31 @@ input:focus, textarea:focus, select:focus {
     margin: 15px auto 0 auto;
 }
 
-#contenedor_imagen { display: none; margin-top: 20px; }
+#contenedor_imagen { 
+    display: none; 
+    margin-top: 20px; 
+}
+.alert-custom {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
 </style>
 
 <div class="form-container">
-    <h1>
+    <h2>
         <i class="fas fa-exclamation-triangle me-2"></i>
         {{ isset($reporte) ? 'Editar Reporte' : 'Crear Actividad Ilegal' }}
-    </h1>
+    </h2>
 
-    <div class="alert alert-warning">
+    <div class="alert-custom">
         <strong>Importante:</strong> Este formulario está destinado a reportar actividades ilegales relacionadas con la <strong>caza furtiva</strong> o la <strong>deforestación</strong>. Proporciona información precisa.
     </div>
 
-    <form action="{{ isset($reporte) ? route('reportes.update', $reporte->id) : route('reportes.store') }}"
-          method="POST" enctype="multipart/form-data" novalidate>
+    <form action="{{ isset($reporte) ? route('reportes.update', $reporte->id) : route('reportes.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if(isset($reporte))
             @method('PUT')
@@ -123,8 +165,7 @@ input:focus, textarea:focus, select:focus {
 
         <div class="mb-3">
             <label for="direccion">Dirección / Ubicación Exacta</label>
-            <textarea id="direccion" name="direccion" rows="2" maxlength="400"
-                      placeholder="Ejemplo: Sendero El Cangrejal, Parque Nacional La Tigra..."
+            <textarea id="direccion" name="direccion" rows="2" maxlength="400" placeholder="Ejemplo: Sendero El Cangrejal, Parque Nacional La Tigra..."
                       class="@error('direccion') is-invalid @enderror">{{ old('direccion', $reporte->direccion ?? '') }}</textarea>
             @error('direccion')<div class="text-danger">{{ $message }}</div>@enderror
         </div>

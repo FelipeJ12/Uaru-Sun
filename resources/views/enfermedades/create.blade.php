@@ -89,16 +89,17 @@ textarea { min-height: 80px; }
 }
 
 .btn-secondary-custom {
-    background: #4a4a4a;
-    color: #ccc;
+    background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+    color: white;
     border: none;
     padding: 12px 25px;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     border-radius: 9999px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: background 0.3s ease, color 0.3s ease;
+    box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
 }
 
 .btn-secondary-custom:hover {
@@ -138,6 +139,13 @@ textarea { min-height: 80px; }
         flex: 1 1 100%;
     }
 }
+
+.text-danger {
+    font-size: 0.9rem;
+    color: #f44336;
+    margin-top: 5px;
+    display: block;
+}
 </style>
 
 <div class="form-container">
@@ -145,9 +153,10 @@ textarea { min-height: 80px; }
 
     <form action="{{ route('enfermedades.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
+
         <div class="mb-4">
             <label for="nombre_planta">Nombre de la planta</label>
-            <input type="text" id="nombre_planta" name="nombre_planta" class="form-control" required value="{{ old('nombre_planta') }}">
+            <input type="text" id="nombre_planta" name="nombre_planta" required value="{{ old('nombre_planta') }}">
             @error('nombre_planta')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -155,7 +164,7 @@ textarea { min-height: 80px; }
 
         <div class="mb-4">
             <label for="nombre_enfermedad">Nombre de la enfermedad</label>
-            <input type="text" id="nombre_enfermedad" name="nombre_enfermedad" class="form-control" required value="{{ old('nombre_enfermedad') }}">
+            <input type="text" id="nombre_enfermedad" name="nombre_enfermedad" required value="{{ old('nombre_enfermedad') }}">
             @error('nombre_enfermedad')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -163,7 +172,7 @@ textarea { min-height: 80px; }
 
         <div class="mb-4">
             <label for="sintomas">Síntomas</label>
-            <textarea id="sintomas" name="sintomas" class="form-control" required>{{ old('sintomas') }}</textarea>
+            <textarea id="sintomas" name="sintomas" required>{{ old('sintomas') }}</textarea>
             @error('sintomas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -171,7 +180,7 @@ textarea { min-height: 80px; }
 
         <div class="mb-4">
             <label for="causas">Causas (opcional)</label>
-            <textarea id="causas" name="causas" class="form-control">{{ old('causas') }}</textarea>
+            <textarea id="causas" name="causas">{{ old('causas') }}</textarea>
             @error('causas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -179,7 +188,7 @@ textarea { min-height: 80px; }
 
         <div class="mb-4">
             <label for="solucion">Solución</label>
-            <textarea id="solucion" name="solucion" class="form-control" required>{{ old('solucion') }}</textarea>
+            <textarea id="solucion" name="solucion" required>{{ old('solucion') }}</textarea>
             @error('solucion')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -187,7 +196,7 @@ textarea { min-height: 80px; }
 
         <div class="mb-4">
             <label for="imagen">Imagen (opcional)</label>
-            <input type="file" id="imagen" name="imagen" class="form-control" accept="image/*">
+            <input type="file" id="imagen" name="imagen" accept="image/*">
             <img id="preview" alt="Previsualización de imagen">
             @error('imagen')
                 <small class="text-danger">{{ $message }}</small>

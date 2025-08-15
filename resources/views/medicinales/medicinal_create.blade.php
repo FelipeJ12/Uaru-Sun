@@ -1,10 +1,15 @@
 @php
-    $title = 'Registrar Planta Medicinal';
+$items = [
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Plantas Medicinales', 'url' => route('medicinas.index')],
+    ['label' => isset($medicina) ? 'Editar Planta' : 'Registrar Planta']
+];
+$title = isset($medicina) ? 'Editar Planta Medicinal' : 'Registrar Planta Medicinal';
 @endphp
 
 @extends('layouts.app')
 
-@section('title', isset($medicina) ? 'Editar Medicina' : 'Agregar planta')
+@section('title', $title)
 
 @section('content')
 <style>
@@ -91,6 +96,14 @@ textarea { min-height: 80px; }
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     display: none;
     object-fit: cover;
+}
+.alert-info {
+    background-color: rgba(135, 206, 235, 0.2);
+    color: #e0f7fa;
+    border: 1px solid #81c784;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
 }
 </style>
 

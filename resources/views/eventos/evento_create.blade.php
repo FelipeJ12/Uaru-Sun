@@ -2,12 +2,14 @@
 $items = [
     ['label' => 'Inicio', 'url' => route('home')],
     ['label' => 'Eventos Programados', 'url' => route('eventos.index')],
-    ['label' => isset($evento) ? 'Editar Evento' : 'Crear Evento'] // Última miga
+    ['label' => isset($evento) ? 'Editar Evento' : 'Crear Evento']
 ];
 $title = isset($evento) ? 'Editar Evento' : 'Crear Evento';
 @endphp
 
 @extends('layouts.app')
+
+@section('title', $title)
 
 @section('content')
 <style>
@@ -31,7 +33,7 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
     font-weight: 700;
-    color: #81c784; /* título verde */
+    color: #81c784;
     text-shadow: 1px 1px 4px #000;
 }
 
@@ -42,7 +44,10 @@ label {
     color: #b5e7a0;
 }
 
-input[type="text"], input[type="date"], input[type="time"], textarea {
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
     width: 100%;
     padding: 10px 14px;
     border-radius: 12px;
@@ -54,7 +59,8 @@ input[type="text"], input[type="date"], input[type="time"], textarea {
     resize: vertical;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: #81c784;
     box-shadow: 0 0 8px #81c784;
@@ -76,7 +82,10 @@ textarea { min-height: 80px; }
     margin-top: 10px;
 }
 
-.btn-custom:hover { background: linear-gradient(135deg, #15803d, #166534); transform: scale(1.05); }
+.btn-custom:hover { 
+    background: linear-gradient(135deg, #15803d, #166534);
+    transform: scale(1.05);
+}
 
 .btn-secondary-custom {
     background: #4a4a4a;
@@ -96,18 +105,45 @@ textarea { min-height: 80px; }
     line-height: 1;
 }
 
-.btn-secondary-custom:hover { background: #6b6b6b; color: white; }
+.btn-secondary-custom:hover { 
+    background: #6b6b6b; 
+    color: white; 
+}
 
-.btn-group { display: flex; justify-content: space-between; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-.btn-group > * { flex: 1 1 45%; text-align: center; }
-@media (max-width: 576px) { .btn-group > * { flex: 1 1 100%; } }
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
 
-.text-danger { font-size: 0.9rem; color: #f44336; margin-top: 5px; display: none; }
-.is-invalid { border-color: #f44336 !important; box-shadow: 0 0 8px #f44336 !important; }
+.btn-group > * { 
+    flex: 1 1 45%; 
+    text-align: center; 
+}
+
+@media (max-width: 576px) { 
+    .btn-group > * { 
+        flex: 1 1 100%; 
+    } 
+}
+
+.text-danger {
+    font-size: 0.9rem;
+    color: #f44336;
+    margin-top: 5px;
+    display: none;
+}
+
+.is-invalid {
+    border-color: #f44336 !important;
+    box-shadow: 0 0 8px #f44336 !important;
+}
 </style>
 
 <div class="form-container">
-    <h1>{{ isset($evento) ? 'Editar Evento' : 'Crear Evento' }}</h1>
+    <h1>{{ $title }}</h1>
 
     <form action="{{ isset($evento) ? route('eventos.update', $evento->id) : route('eventos.store') }}" method="POST">
         @csrf
@@ -117,25 +153,25 @@ textarea { min-height: 80px; }
 
         <div class="mb-3">
             <label for="descripcion">Descripción del evento</label>
-            <textarea id="descripcion" name="descripcion" rows="2" maxlength="100">{{ old('descripcion', isset($evento) ? $evento->descripcion : '') }}</textarea>
+            <textarea id="descripcion" name="descripcion" rows="2" maxlength="100" required>{{ old('descripcion', isset($evento) ? $evento->descripcion : '') }}</textarea>
             <div class="text-danger" id="descripcionError">La descripción debe tener al menos 5 caracteres.</div>
         </div>
 
         <div class="mb-3">
             <label for="fecha_evento">Fecha del evento</label>
-            <input type="date" id="fecha_evento" name="fecha_evento" value="{{ old('fecha_evento', isset($evento) ? $evento->fecha_evento : '') }}" min="{{ date('Y-m-d') }}">
+            <input type="date" id="fecha_evento" name="fecha_evento" value="{{ old('fecha_evento', isset($evento) ? $evento->fecha_evento : '') }}" min="{{ date('Y-m-d') }}" required>
             <div class="text-danger" id="fechaError">Seleccione una fecha válida.</div>
         </div>
 
         <div class="mb-3">
             <label for="hora_evento">Hora del evento</label>
-            <input type="time" id="hora_evento" name="hora_evento" value="{{ old('hora_evento', isset($evento) ? $evento->hora_evento : '') }}">
+            <input type="time" id="hora_evento" name="hora_evento" value="{{ old('hora_evento', isset($evento) ? $evento->hora_evento : '') }}" required>
             <div class="text-danger" id="horaError">Seleccione una hora válida.</div>
         </div>
 
         <div class="mb-3">
             <label for="direccion">Dirección exacta del evento</label>
-            <textarea id="direccion" name="direccion" rows="2" maxlength="200">{{ old('direccion', isset($evento) ? $evento->direccion : '') }}</textarea>
+            <textarea id="direccion" name="direccion" rows="2" maxlength="200" required>{{ old('direccion', isset($evento) ? $evento->direccion : '') }}</textarea>
             <div class="text-danger" id="direccionError">La dirección debe tener al menos 5 caracteres.</div>
         </div>
 
