@@ -1,3 +1,4 @@
+
 @php
 $items = [
         ['label' => 'Inicio', 'url' => route('home')],
@@ -159,7 +160,11 @@ $items = [
                                 @endif
                             </td>
                             <td>{{ $enfermedad->nombre_planta }}</td>
-                            <td>{{ $enfermedad->nombre_enfermedad }}</td>
+                            <td>
+        <a href="{{ route('enfermedades.show', $enfermedad->id) }}" class="text-white" title="Ver detalles">
+            {{ $enfermedad->nombre_enfermedad }}
+        </a>
+    </td>
                             <td title="{{ $enfermedad->sintomas }}">{{ Str::limit($enfermedad->sintomas, 100) }}</td>
                             <td title="{{ $enfermedad->causas }}">{{ $enfermedad->causas ? Str::limit($enfermedad->causas, 100) : 'No especificadas' }}</td>
                             <td title="{{ $enfermedad->solucion }}">{{ Str::limit($enfermedad->solucion, 100) }}</td>
