@@ -75,6 +75,23 @@
                 padding: 20px;
             }
         }
+       @media (max-width: 992px) {
+    .navbar-collapse {
+        max-height: 250px; /* altura máxima */
+        overflow-y: auto;  /* scroll interno si se llena */
+        background-color: #198754; /* Fondo verde igual al navbar */
+        border-radius: 0 0 12px 12px; /* esquinas redondeadas abajo */
+        padding: 10px; /* espacio interno */
+    }
+
+    /* Opcional: los enlaces más separados en móvil */
+    .navbar-nav .nav-link {
+        padding: 8px 10px;
+    }
+}
+
+
+
     </style>
 
     @livewireStyles
@@ -86,15 +103,20 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        @include('layouts.navigation')
+        <!-- Contenido colapsable -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            @include('layouts.navigation')
+        </div>
     </div>
 </nav>
 
+        
 <!-- Mensaje flash -->
 @if (session('success'))
     <div id="success-message" class="alert alert-success" role="alert">

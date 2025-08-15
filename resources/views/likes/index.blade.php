@@ -1,10 +1,10 @@
 @php
 $items = [
-        ['label' => 'Inicio', 'url' => route('home')],
-        ['label' => 'Mi Perfil', 'url' => route('profile.index')],
-        ['label' => 'Mis Likes'] // Última miga
-    ];
-    $title = 'Mis Likes'; 
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Mi Perfil', 'url' => route('profile.index')],
+    ['label' => 'Mis Likes'] // Última miga
+];
+$title = 'Mis Likes'; 
 @endphp
 
 @extends('layouts.app')
@@ -19,26 +19,25 @@ $items = [
         </a>
     </div>
 
-    <h2 style="color: white; text-align: center; margin-top: 30px;">Especies que te han gustado</h2>
+    <h2 class="text-white text-center mt-4">Especies que te han gustado</h2>
     
-    <div class="row">
+    <div class="row mt-4">
         @forelse($likes as $like)
-        <div class="col-md-4 mb-4">
-            <div class="card species-card h-100 shadow-sm bg-dark text-white">
-                <div class="image-wrapper">
-                    <img src="{{ asset('storage/' . $like->species->image_path) }}" class="card-img-top species-img" alt="{{ $like->species->nombre }}">
-                </div>
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow bg-success bg-opacity-50 text-white position-relative rounded-4">
+                    <a href="{{ route('catalogo.show', $like->species->id) }}">
+                        <img src="{{ asset('storage/' . $like->species->image_path) }}" 
+                             class="card-img-top img-fluid" 
+                             style="height: 250px; object-fit: cover; width: 100%;">
+                    </a>
+                    <div class="card-body">
                         <h5 class="card-title">{{ $like->species->nombre }}</h5>
                         <p class="card-text"><em>{{ $like->species->nombre_cientifico }}</em></p>
                     </div>
-                    <a href="{{ route('catalogo.show', $like->species->id) }}" class="btn btn-primary mt-3">Ver más</a>
                 </div>
             </div>
-        </div>
         @empty
-            <p style="color: white; text-align: center; margin-top: 30px;"> No has dado like a ninguna especie aún.</p>
+            <p class="text-white text-center mt-4">No has dado like a ninguna especie aún.</p>
         @endforelse
     </div>
 </div>
@@ -58,31 +57,11 @@ $items = [
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
     }
-
     .btn-back:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         text-decoration: none;
         color: #fff;
-    }
-
-    .species-card {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .image-wrapper {
-        height: 250px;
-        overflow: hidden;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-    }
-
-    .species-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
     }
 </style>
 @endsection

@@ -52,16 +52,18 @@
 
             <!-- Buscador -->
             <form class="d-flex align-items-center mb-0" method="GET" action="{{ route('admin.especies.index') }}">
-    <div class="input-group input-group-sm">
+        <div class="input-group input-group-sm">
         <input type="text" class="form-control" placeholder="Buscar especie..." name="query" value="{{ request('query') }}" aria-label="Buscar especie" aria-describedby="button-addon2">
         <button class="btn btn-outline-light" type="submit" id="button-addon2">
             <i class="fas fa-search"></i>
         </button>
-    </div>
-</form>
+        </div>
+        </form>
+
+        
             <!-- Menú Usuario -->
             <ul class="navbar-nav ms-auto">
-                 <div class="card h-100 shadow bg-success bg-opacity-50 text-white border-light position-relative rounded-4">
+            
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->routeIs('login', 'admin.especies.index', 'UsuarioPost.create', 'profile.index') ? 'active' : '' }}" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
                         <i class="fas fa-user-circle me-1"></i>
@@ -79,24 +81,22 @@
                         @auth
     @if(Auth::user()->role === 'admin')
         <li><a class="dropdown-item" href="{{ route('admin.especies.index') }}"><i class="fas fa-cog me-1"></i> Administrar Publicaciones</a></li>
-        <li><a class="dropdown-item" href="{{ route('bitacora.bita') }}"><i class="fas fa-clipboard-list me-1"></i> Ver Bitácora</a></li>
+        <li><a class="dropdown-item" href="{{ route('bitacora.bita') }}"><i class="fas fa-clipboard-list me-1"></i> Bitácora</a></li>
         <li><a class="dropdown-item" href="{{ url('/admin/users') }}"><i class="fas fa-users me-1"></i> Usuarios Suscritos</a></li>
-        <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Ver Actividades Ilegales</a></li>
+        <li><a class="dropdown-item" href="{{ route('reportes.index') }}"><i class="fas fa-triangle-exclamation me-1"></i> Actividades Ilegales</a></li>
         <li><a class="dropdown-item" href="{{ route('enfermedades.index') }}"><i class="fas fa-virus me-1"></i> Enfermedades de Plantas</a></li>
         <li><a class="dropdown-item" href="{{ route('nuevos.index') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Ver recomendaciones de secciones</a></li>
-        <li><a class="dropdown-item" href="{{ route('store') }}"><i class="fas fa-store me-2 text-dark"></i>Tienda</a></li>
-        <li><a class="dropdown-item" href="{{ route('cart.view') }}"><i class="fas fa-shopping-cart me-2 text-dark"></i>Carrito</a></li>
     @endif
 
     @if(Auth::user()->role === 'user')
         <li><a class="dropdown-item" href="{{ route('UsuarioPost.create') }}"><i class="fas fa-plus-circle me-1"></i> Crear Publicación</a></li>
         <li><a class="dropdown-item" href="{{ route('reportes.create') }}"><i class="fas fa-triangle-exclamation me-1"></i> Reportar Actividad Ilegal</a></li>
         <li><a class="dropdown-item" href="{{ route('nuevos.create') }}"><i class="fas fa-lightbulb me-2 text-dark"></i> Recomendaciones de Secciones Nuevas</a></li>
+    <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>
     @endif
 
     <li><a class="dropdown-item" href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt me-2"></i> Eventos</a></li>
     <li><a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-1"></i> Mi perfil</a></li>
-    <li><a class="dropdown-item" href="{{ route('usuarios.explorar') }}"><i class="fas fa-users me-1"></i> Explorar Usuarios</a></li>
 
     <li><hr class="dropdown-divider"></li>
     <li>

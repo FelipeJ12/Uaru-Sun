@@ -48,6 +48,13 @@ class EnfermedadPlantaController extends Controller
 
         return redirect()->route('enfermedades.index')->with('success', 'Enfermedad registrada exitosamente.');
     }
+    public function show($id)
+    {
+        $enfermedad = EnfermedadPlanta::findOrFail($id);
+        return view('enfermedades.show', compact('enfermedad'));
+    }
+    
+    
 
     public function destroy($id)
 {
