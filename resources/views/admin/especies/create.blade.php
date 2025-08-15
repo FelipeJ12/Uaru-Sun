@@ -82,7 +82,8 @@ $items = [
         box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
         transition: background 0.3s ease, transform 0.2s ease;
         margin-top: 10px;
-        display: inline-flex;
+        display: flex;
+        justify-content: center;
         align-items: center;
         gap: 8px;
     }
@@ -100,21 +101,22 @@ $items = [
     }
 
     .btn-secondary-custom {
-        background: #4a4a4a;
-        color: #ccc;
+         background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
+        color: white;
         border: none;
         padding: 12px 25px;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 700;
         border-radius: 9999px;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        transition: background 0.3s ease, color 0.3s ease;
+        box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
+        transition: background 0.3s ease, transform 0.2s ease;
         margin-top: 10px;
-        text-align: center;
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
         text-decoration: none;
-        line-height: 1;
     }
 
     .btn-secondary-custom:hover {
@@ -220,14 +222,16 @@ $items = [
             <div id="preview"></div>
         </div>
 
-        <div class="btn-group">
-            <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom">Cancelar</a>
-            <button type="submit" class="btn-custom" id="guardarBtn">
-                <span id="guardarIcono" class="me-2"><i class="fas fa-save"></i></span>
-                Guardar
-            </button>
-        </div>
-    </form>
+       <div class="btn-group">
+    <!-- Botón Cancelar con icono -->
+    <a href="{{ route('admin.especies.index') }}" class="btn-secondary-custom d-flex align-items-center justify-content-center">
+        <i class="fas fa-times me-2"></i> Cancelar
+    </a>
+
+    <!-- Botón Guardar con icono -->
+    <button type="submit" class="btn-custom d-flex align-items-center justify-content-center" id="guardarBtn">
+        <i class="fas fa-save me-2"></i> Guardar
+    </button>
 </div>
 
 <script>
