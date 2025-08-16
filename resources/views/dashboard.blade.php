@@ -1,6 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+
+
+
+>>>>>>> 08ae55bdf2865e5cbdf9c7cf15ea508335570dc5
 <!-- resources/views/dashboard.blade.php -->
 @extends('layouts.app')
 
@@ -10,4 +16,8 @@
     <p>Bienvenido al panel de usuario.</p>
 </div>
 @endsection
+<<<<<<< HEAD
 >>>>>>> e5ea3a68fee4675a8c3aa9cb93b533f9618991a5
+=======
+
+>>>>>>> 08ae55bdf2865e5cbdf9c7cf15ea508335570dc5
