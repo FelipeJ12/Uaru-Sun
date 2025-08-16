@@ -1,47 +1,35 @@
 @php
 $items = [
-        ['label' => 'Inicio', 'url' => route('home')],
-        ['label' => 'flora', 'url' => route('flora.index')],
-        ['label' => 'Planta medicinal'] // Última miga
-    ];
-
-    $title = 'Plantas medicinal'; 
+    ['label' => 'Inicio', 'url' => route('home')],
+    ['label' => 'Flora', 'url' => route('flora.index')],
+    ['label' => 'Planta medicinal']
+];
+$title = 'Plantas medicinal'; 
 @endphp
-
 
 @extends('layouts.app')
 
-@section('title', 'Plantas medicinal')
-
 @section('content')
-    <div class="container">
-    <style>
-        .text-center {
-            margin-top: 80px; /* Ajusta este valor según sea necesario */
-        }
-    </style>
+<div class="container mt-4">
 
-    
-    
-    <!-- Menú desplegable -->
     @if($especies->isEmpty())
-        <p class="text-white text-center">No Hay Registros en Plantas medicinal.</p>
+        <p class="text-white text-center mt-3">No hay registros en Plantas medicinal.</p>
     @else
         <div class="kb-gallery-container">
             @foreach($especies as $especie)
-            <a href="{{ route('catalogo.show', $especie->id) }}" class="kb-gallery-item">
-                <figure>
-                    <div class="img-wrapper">
-                        <img src="{{ asset('storage/' . $especie->image_path) }}" alt="{{ $especie->nombre }}">
-                    </div>
-                    <figcaption>
-                        <strong>{{ $especie->nombre }}</strong>
-                        <em>{{ $especie->nombre_cientifico }}</em>
-                        <span><strong>Hábitat:</strong> {{ $especie->habitat }}</span>
-                        <span><strong>Ubicación:</strong> {{ $especie->ubicacion }}</span>
-                    </figcaption>
-                </figure>
-            </a>
+                <a href="{{ route('catalogo.show', $especie->id) }}" class="kb-gallery-item">
+                    <figure>
+                        <div class="img-wrapper">
+                            <img src="{{ asset('storage/' . $especie->image_path) }}" alt="{{ $especie->nombre }}">
+                        </div>
+                        <figcaption>
+                            <strong>{{ $especie->nombre }}</strong>
+                            <em>{{ $especie->nombre_cientifico }}</em>
+                            <span><strong>Hábitat:</strong> {{ $especie->habitat }}</span>
+                            <span><strong>Ubicación:</strong> {{ $especie->ubicacion }}</span>
+                        </figcaption>
+                    </figure>
+                </a>
             @endforeach
         </div>
 
@@ -108,16 +96,16 @@ $items = [
 
 figcaption {
     height: 120px;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(25, 135, 84, 0.5); /* mismo color que Flora y Fauna */
     color: white;
     padding: 10px;
-    font-size: 0.85em;
+    font-size: 0.9em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 figcaption strong,
