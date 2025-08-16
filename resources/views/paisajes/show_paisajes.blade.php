@@ -10,11 +10,12 @@
     </div>
 
     <div class="card shadow-lg">
-        @if($paisaje->id <= 5)
-            <img src="{{ asset($paisaje->url) }}" class="card-img-top" alt="Imagen del Paisaje" style="max-height: 400px; object-fit: cover;">
-        @else
-            <img src="{{ asset('storage/' . $paisaje->url) }}" class="card-img-top" alt="Imagen del Paisaje" style="max-height: 400px; object-fit: cover;">
-        @endif
+        @php
+            $imagenPath = file_exists(public_path('storage/' . $paisaje->url)) 
+                ? asset('storage/' . $paisaje->url) 
+                : asset('images/default-paisaje.jpg'); // imagen por defecto
+        @endphp
+        <img src="{{ $imagenPath }}" class="card-img-top" alt="Imagen del Paisaje" style="max-height: 400px; object-fit: cover;">
 
         <div class="card-body">
             <h4 class="card-title text-primary">Descripción</h4>
@@ -48,5 +49,4 @@
         <a href="{{ route('paisajes.index') }}" class="btn btn-secondary">Volver a la lista de paisajes</a>
     </div>
 </div>
-
 @endsection

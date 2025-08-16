@@ -11,38 +11,39 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminSpeciesController extends Controller
 {
-   public function index(Request $request)
+    public function index(Request $request)
 {
     $query = $request->input('query');
     $filtro = $request->input('filtro');
 
-    // Si hay búsqueda
+    $species = Species::query();
+
     if ($query) {
         if ($filtro === 'nombre_comun') {
-            $species = Species::where('nombre', 'like', "%$query%")->paginate(10);
+            $species->where('nombre', 'like', "%{$query}%");
         } elseif ($filtro === 'habitat') {
-            $species = Species::where('habitat', 'like', "%$query%")->paginate(10);
+            $species->where('habitat', 'like', "%{$query}%");
         } else {
-            // Búsqueda general en nombre y hábitat
-            $species = Species::where('nombre', 'like', "%$query%")
-                               ->orWhere('habitat', 'like', "%$query%")
-                               ->paginate(10);
+            // Si no hay filtro válido, busca en nombre y hábitat por defecto
+            $species->where(function($q) use ($query) {
+                $q->where('nombre', 'like', "%{$query}%")
+                  ->orWhere('habitat', 'like', "%{$query}%");
+            });
         }
-    } else {
-        // Si no hay búsqueda, devolvemos una colección vacía
-        $species = collect();
     }
 
-    return view('admin.especies.index', compact('species', 'query'));
+    $species = $species->paginate(10)->withQueryString();
+
+    return view('admin.especies.index', compact('species', 'query', 'filtro'));
 }
 
 
     public function create()
-{
-    $categories = Categoria::all();
-    $subcategories = Subcategory::all();
-    return view('admin.especies.create', compact('categories', 'subcategories'));
-}
+    {
+        $categories = Categoria::all();
+        $subcategories = Subcategory::all();
+        return view('admin.especies.create', compact('categories', 'subcategories'));
+    }
 
     public function store(Request $request)
     {
@@ -108,7 +109,6 @@ class AdminSpeciesController extends Controller
     {
         Storage::disk('public')->delete($species->image_path);
         $species->delete();
-
         return redirect()->route('admin.especies.index')->with('success', '¡Publicación eliminada!');
     }
 }
