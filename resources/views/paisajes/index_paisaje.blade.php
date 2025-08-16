@@ -15,7 +15,7 @@ $title = 'Paisajes Naturales';
     <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
     </div>
 
-    <a href="{{ route('paisajes.create') }}" class="btn btn-success mb-3">Agregar Paisaje</a>
+   
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
