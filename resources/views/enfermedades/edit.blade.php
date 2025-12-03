@@ -177,8 +177,13 @@ textarea { min-height: 80px; }
 
         <div class="mb-4">
             <label for="sintomas">Síntomas</label>
-            <textarea id="sintomas" name="sintomas" required>{{ old('sintomas', $enfermedad->sintomas) }}</textarea>
-            @error('sintomas')
+<textarea id="sintomas"
+          name="sintomas"
+          maxlength="150"
+          pattern="[A-Za-z0-9\s.,áéíóúÁÉÍÓÚñÑ]+"
+          title="No se permiten caracteres especiales (@, #, $, %, &, etc.)"
+          required>{{ old('sintomas') }}</textarea>           
+           @error('sintomas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>

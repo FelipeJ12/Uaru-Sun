@@ -20,88 +20,74 @@ class EnfermedadPlantaController extends Controller
 
     public function store(Request $request)
     {
-        // Validaciones
-        $validated = $request->validate([
-            'nombre_planta' => 'required|string|max:255',
-            'nombre_enfermedad' => 'required|string|max:255',
-            'sintomas' => 'required|string',
-            'causas' => 'nullable|string',
-            'solucion' => 'required|string',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ], [
-            'nombre_planta.required' => 'El nombre de la planta es obligatorio.',
-            'nombre_enfermedad.required' => 'El nombre de la enfermedad es obligatorio.',
-            'sintomas.required' => 'Debe indicar los síntomas.',
-            'solucion.required' => 'Debe indicar la solución.',
-            'imagen.image' => 'El archivo debe ser una imagen válida.',
-            'imagen.mimes' => 'La imagen debe ser jpeg, png, jpg o gif.',
-            'imagen.max' => 'La imagen no debe superar los 2MB.',
-        ]);
+       $validated = $request->validate([
+    'nombre_planta'     => ['required','string','max:50','regex:/^[a-zA-Z0-9\s]+$/'],
+    'nombre_enfermedad' => 'required|string|max:50',
+    'sintomas' => ['required','string','max:150','regex:/^[A-Za-z0-9\s.,áéíóúÁÉÍÓÚñÑ]+$/'],
+    'causas'            => 'nullable|string|max:150',
+    'solucion'          => 'required|string|max:150',
+    'imagen'            => 'nullable|image|mimes:jpeg,png,jpg,|max:2048',
+], [
+    'nombre_planta.required' => 'El nombre común es obligatorio.',
+    'nombre_planta.max'      => 'Máximo 50 caracteres.',
+    'nombre_planta.regex'    => 'El nombre común solo puede contener letras y números.',
+]);
 
-        // Guardar imagen si existe
+
         if ($request->hasFile('imagen')) {
             $validated['imagen'] = $request->file('imagen')->store('enfermedades', 'public');
         }
 
-        // Guardar en la base de datos
         EnfermedadPlanta::create($validated);
 
         return redirect()->route('enfermedades.index')->with('success', 'Enfermedad registrada exitosamente.');
     }
+
     public function show($id)
     {
         $enfermedad = EnfermedadPlanta::findOrFail($id);
         return view('enfermedades.show', compact('enfermedad'));
     }
-    
-    
 
     public function destroy($id)
-{
-    $enfermedad = EnfermedadPlanta::findOrFail($id);
-    // Aquí puedes añadir validaciones extra, como permisos
-
-    $enfermedad->delete();
-
-    return redirect()->route('enfermedades.index')->with('success', 'Enfermedad eliminada correctamente.');
-}
-public function edit($id)
-{
-    $enfermedad = EnfermedadPlanta::findOrFail($id);
-    return view('enfermedades.edit', compact('enfermedad'));
-}
-
-public function update(Request $request, $id)
-{
-    $validated = $request->validate([
-        'nombre_planta' => 'required|string|max:255',
-        'nombre_enfermedad' => 'required|string|max:255',
-        'sintomas' => 'required|string',
-        'causas' => 'nullable|string',
-        'solucion' => 'required|string',
-        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    $enfermedad = EnfermedadPlanta::findOrFail($id);
-
-    // Si viene una nueva imagen, guárdala y actualiza la ruta
-    if ($request->hasFile('imagen')) {
-        // Opcional: borrar la imagen anterior del almacenamiento si quieres
-        $validated['imagen'] = $request->file('imagen')->store('enfermedades', 'public');
-        $enfermedad->imagen = $validated['imagen'];
+    {
+        $enfermedad = EnfermedadPlanta::findOrFail($id);
+        $enfermedad->delete();
+        return redirect()->route('enfermedades.index')->with('success', 'Enfermedad eliminada correctamente.');
     }
 
-    // Actualiza los demás campos
-    $enfermedad->nombre_planta = $validated['nombre_planta'];
-    $enfermedad->nombre_enfermedad = $validated['nombre_enfermedad'];
-    $enfermedad->sintomas = $validated['sintomas'];
-    $enfermedad->causas = $validated['causas'];
-    $enfermedad->solucion = $validated['solucion'];
+    public function edit($id)
+    {
+        $enfermedad = EnfermedadPlanta::findOrFail($id);
+        return view('enfermedades.edit', compact('enfermedad'));
+    }
 
-    $enfermedad->save();
+    public function update(Request $request, $id)
+    {
+       $validated = $request->validate([
+    'nombre_planta'     => ['required','string','max:50','regex:/^[a-zA-Z0-9\s]+$/'],
+    'nombre_enfermedad' => 'required|string|max:50',
+    'sintomas' => ['required','string','max:150','regex:/^[A-Za-z0-9\s.,áéíóúÁÉÍÓÚñÑ]+$/'],
+    'causas'            => 'nullable|string|max:150',
+    'solucion'          => 'required|string|max:150',
+    'imagen'            => 'nullable|image|mimes:jpeg,png,jpg,|max:2048',
+], [
+    'nombre_planta.required' => 'El nombre común es obligatorio.',
+    'nombre_planta.max'      => 'Máximo 50 caracteres.',
+    'nombre_planta.regex'    => 'El nombre común solo puede contener letras y números.',
+    'sintomas.regex' => 'Los síntomas no pueden contener caracteres especiales.',
+ 
+]);
 
-    return redirect()->route('enfermedades.index')->with('success', 'Enfermedad actualizada exitosamente.');
-}
 
+        $enfermedad = EnfermedadPlanta::findOrFail($id);
 
+        if ($request->hasFile('imagen')) {
+            $validated['imagen'] = $request->file('imagen')->store('enfermedades', 'public');
+        }
+
+        $enfermedad->update($validated);
+
+        return redirect()->route('enfermedades.index')->with('success', 'Enfermedad actualizada exitosamente.');
+    }
 }

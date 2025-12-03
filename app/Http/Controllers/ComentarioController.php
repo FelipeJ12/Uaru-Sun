@@ -94,15 +94,20 @@ public function __construct()
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, Request $request)
-    {
-        $comentario = Comentario::findOrFail($id);
-        $especie_id = $request->input('specie_id');
-        $specie = Species::findOrFail($especie_id);
-        if ($comentario->delete()) {
-            return redirect()->route('comentarios.create', $specie->id)->with('mensaje', 'Comentario borrado con éxito');
-        } else {
-            return redirect()->route('comentarios.create', $specie->id)->with('mensaje', 'Error, el comentario no fue borrado');
-        }
+  public function destroy(string $id, Request $request)
+{
+    $comentario = Comentario::findOrFail($id);
+    $especie_id = $request->input('specie_id');
+    $specie = Species::findOrFail($especie_id);
+
+    if ($comentario->delete()) {
+        return redirect()
+            ->route('catalogo.show', $specie->id) // 👈 redirige a la publicación
+            ->with('mensaje', 'Comentario borrado con éxito');
+    } else {
+        return redirect()
+            ->route('catalogo.show', $specie->id)
+            ->with('mensaje', 'Error, el comentario no fue borrado');
     }
+}
 }

@@ -38,9 +38,9 @@
                 @endauth
 
                 <!-- Íconos integrados -->
-                <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('store') ? 'active' : '' }}" href="{{ route('store') }}">
-                        <i class="fas fa-store me-1"></i>Tienda
+            <!-- <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('store') ? 'active' : '' }}" href="{{ route('store') }}">
+                        <i class="fas fa-store me-1"></i>Tienda-->
                     </a>
                 </li>
                 <li class="nav-item">

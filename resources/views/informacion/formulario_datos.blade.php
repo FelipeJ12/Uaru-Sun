@@ -167,10 +167,14 @@ input:focus, textarea:focus {
         </div>
 
         <div class="mb-3">
-            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
-                   value="{{ isset($informacion) ? $informacion->fecha_nacimiento : old('fecha_nacimiento') }}">
-        </div>
+    <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+    <input type="date"
+           id="fecha_nacimiento"
+           name="fecha_nacimiento"
+           max="{{ date('Y-m-d') }}"
+           value="{{ isset($informacion) ? $informacion->fecha_nacimiento : old('fecha_nacimiento') }}">
+</div>
+
 
         <div class="mb-3">
             <label for="alias">Alias</label>
@@ -179,11 +183,18 @@ input:focus, textarea:focus {
         </div>
 
         <div class="mb-3">
-            <label for="telefono">Teléfono</label>
-            <input type="text" id="telefono" name="telefono"
-                   value="{{ isset($informacion) ? $informacion->telefono : old('telefono') }}"
-                   placeholder="Ejemplo: +504 9876-5432" maxlength="15">
-        </div>
+    <label for="telefono">Teléfono</label>
+    <input type="text"
+           id="telefono"
+           name="telefono"
+           value="{{ isset($informacion) ? $informacion->telefono : old('telefono') }}"
+           placeholder="Ejemplo: 98765432"
+           maxlength="15"
+           inputmode="numeric"
+           pattern="[0-9]+"
+           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+</div>
+
 
         <div class="mb-3">
             <label for="animal_favorito">Animal Favorito</label>

@@ -57,88 +57,7 @@ input[type="file"] {
     resize: vertical;
 }
 
-input:focus, textarea:focus, input[type="file"]:focus {
-    outline: none;
-    border-color: #81c784;
-    box-shadow: 0 0 8px #81c784;
-}
-
 textarea { min-height: 80px; }
-
-.btn-custom {
-    background: linear-gradient(135deg, #16a34a, #15803d);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.btn-custom:hover {
-    background: linear-gradient(135deg, #15803d, #166534);
-    transform: scale(1.05);
-}
-
-.btn-custom:active {
-    transform: scale(0.95);
-    box-shadow: none;
-}
-
-.btn-secondary-custom {
-    background: linear-gradient(135deg, #4b4848ff, #5a5858ff);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(81, 83, 82, 0.4);
-    transition: background 0.3s ease, transform 0.2s ease;
-    text-decoration: none;
-}
-
-.btn-secondary-custom:hover {
-    background: #6b6b6b;
-    color: white;
-}
-
-.btn-secondary-custom:active {
-    transform: scale(0.95);
-}
-
-.d-flex.justify-content-between.mt-4 {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.d-flex.justify-content-between.mt-4 a,
-.d-flex.justify-content-between.mt-4 button {
-    flex: 1 1 45%;
-    text-align: center;
-}
-
-#preview {
-    margin-top: 15px;
-    max-width: 250px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    display: none;
-    object-fit: cover;
-}
-
-@media (max-width: 576px) {
-    .d-flex.justify-content-between.mt-4 a,
-    .d-flex.justify-content-between.mt-4 button {
-        flex: 1 1 100%;
-    }
-}
 
 .text-danger {
     font-size: 0.9rem;
@@ -154,77 +73,89 @@ textarea { min-height: 80px; }
     <form action="{{ route('enfermedades.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
 
+        <!-- ✅ NOMBRE COMÚN (SIN SÍMBOLOS Y MÁXIMO 50) -->
         <div class="mb-4">
             <label for="nombre_planta">Nombre de la planta</label>
-            <input type="text" id="nombre_planta" name="nombre_planta" required value="{{ old('nombre_planta') }}">
+            <input type="text"
+                   id="nombre_planta"
+                   name="nombre_planta"
+                   maxlength="50"
+                   pattern="[A-Za-z0-9\s]+"
+                   title="Solo se permiten letras y números"
+                   required
+                   value="{{ old('nombre_planta') }}">
             @error('nombre_planta')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <!-- ✅ NOMBRE ENFERMEDAD -->
         <div class="mb-4">
             <label for="nombre_enfermedad">Nombre de la enfermedad</label>
-            <input type="text" id="nombre_enfermedad" name="nombre_enfermedad" required value="{{ old('nombre_enfermedad') }}">
+            <input type="text"
+                   id="nombre_enfermedad"
+                   name="nombre_enfermedad"
+                   maxlength="50"
+                   required
+                   value="{{ old('nombre_enfermedad') }}">
             @error('nombre_enfermedad')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <!-- ✅ SÍNTOMAS -->
         <div class="mb-4">
             <label for="sintomas">Síntomas</label>
-            <textarea id="sintomas" name="sintomas" required>{{ old('sintomas') }}</textarea>
+        <textarea id="sintomas"
+          name="sintomas"
+          maxlength="150"
+          pattern="[A-Za-z0-9\s.,áéíóúÁÉÍÓÚñÑ]+"
+          title="No se permiten caracteres especiales (@, #, $, %, &, etc.)"
+          required>{{ old('sintomas') }}</textarea>
             @error('sintomas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <!-- ✅ CAUSAS -->
         <div class="mb-4">
             <label for="causas">Causas (opcional)</label>
-            <textarea id="causas" name="causas">{{ old('causas') }}</textarea>
+            <textarea id="causas" name="causas" maxlength="150">{{ old('causas') }}</textarea>
             @error('causas')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <!-- ✅ SOLUCIÓN -->
         <div class="mb-4">
             <label for="solucion">Solución</label>
-            <textarea id="solucion" name="solucion" required>{{ old('solucion') }}</textarea>
+            <textarea id="solucion" name="solucion" maxlength="150" required>{{ old('solucion') }}</textarea>
             @error('solucion')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <!-- ✅ IMAGEN -->
         <div class="mb-4">
             <label for="imagen">Imagen (opcional)</label>
             <input type="file" id="imagen" name="imagen" accept="image/*">
-            <img id="preview" alt="Previsualización de imagen">
             @error('imagen')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
-        <div class="d-flex justify-content-between mt-4">
-            <a href="{{ route('enfermedades.index') }}" class="btn-secondary-custom">
-                <i class="fas fa-arrow-left"></i> Regresar
-            </a>
-            <button type="submit" class="btn-custom">
-                <i class="fas fa-save"></i> Guardar
-            </button>
-        </div>
-    </form>
+       
+
+<div class="d-flex justify-content-between mt-4">
+    <a href="{{ route('enfermedades.index') }}" class="btn-secondary-custom">
+        <i class="fas fa-arrow-left"></i> Regresar
+    </a>
+    <button type="submit" class="btn-custom">
+        <i class="fas fa-save"></i> Guardar
+    </button>
+    
 </div>
 
-<script>
-document.getElementById('imagen').addEventListener('change', function(event) {
-    const [file] = event.target.files;
-    const preview = document.getElementById('preview');
-    if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-    } else {
-        preview.src = '#';
-        preview.style.display = 'none';
-    }
-});
-</script>
+
+
 @endsection

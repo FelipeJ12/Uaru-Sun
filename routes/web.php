@@ -155,6 +155,10 @@ Route::resource('nuevos', NuevoController::class);
 Route::resource('/comentarios', ComentarioController::class);
 Route::get('/comentarios/create/{id}', [ComentarioController::class, 'create'])->name('comentarios.create');
 
+
+
+Route::resource('products', ProductController::class);
+
 // Duplicadas pero con nombres diferentes
 Route::get('/anfibio', [AnfibiosController::class, 'index'])->name('anfibio.index');
 Route::get('/ave', [AnfibiosController::class, 'index'])->name('aves.index'); // Posible error, revisa
