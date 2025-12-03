@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ecosistema;
 use App\Models\Paisaje;
+use App\Models\Species;
 use Illuminate\Http\Request;
 
 class PaisajeController extends Controller
@@ -13,8 +14,8 @@ class PaisajeController extends Controller
      */
     public function index()
     {
-        $paisajes = Paisaje::Paginate(10);
-        return view('paisajes.index_paisaje', compact('paisajes'));
+        $especies = Species::where('category_id', 3)->paginate(10); 
+        return view('paisajes.index_paisaje', compact('especies'));
     }
 
     /**

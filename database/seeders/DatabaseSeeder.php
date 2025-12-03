@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             AdminUserSeeder::class,
             PaisajeSeeder::class,
+            SubcategorySeeder::class,
             //PeligrosoSeeder::class,
         ]);
 
