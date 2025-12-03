@@ -11,31 +11,42 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminSpeciesController extends Controller
 {
-    public function index(Request $request)
+   public function index(Request $request)
 {
-    $query = $request->input('query');
+    // Validación del filtro y la búsqueda
+    $request->validate([
+        'filtro' => 'nullable|in:nombre_comun,habitat',
+        'query' => 'nullable|string|max:100'
+    ]);
+
+    $queryInput = $request->input('query');
     $filtro = $request->input('filtro');
 
     $species = Species::query();
 
-    if ($query) {
+    if (!empty($queryInput)) {
         if ($filtro === 'nombre_comun') {
-            $species->where('nombre', 'like', "%{$query}%");
+            $species->where('nombre', 'LIKE', "%{$queryInput}%");
         } elseif ($filtro === 'habitat') {
-            $species->where('habitat', 'like', "%{$query}%");
+            $species->where('habitat', 'LIKE', "%{$queryInput}%");
         } else {
             // Si no hay filtro válido, busca en nombre y hábitat por defecto
-            $species->where(function($q) use ($query) {
-                $q->where('nombre', 'like', "%{$query}%")
-                  ->orWhere('habitat', 'like', "%{$query}%");
+            $species->where(function($q) use ($queryInput) {
+                $q->where('nombre', 'LIKE', "%{$queryInput}%")
+                  ->orWhere('habitat', 'LIKE', "%{$queryInput}%");
             });
         }
     }
 
     $species = $species->paginate(10)->withQueryString();
 
-    return view('admin.especies.index', compact('species', 'query', 'filtro'));
+    return view('admin.especies.index', [
+        'species' => $species,
+        'query' => $queryInput,
+        'filtro' => $filtro,
+    ]);
 }
+
 
 
     public function create()

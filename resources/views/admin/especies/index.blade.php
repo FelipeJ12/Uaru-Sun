@@ -151,6 +151,10 @@ $items = [
                 </div>
                 <div class="col-md-9 col-12 mb-2">
                     <input type="text" class="form-control" name="query" value="{{ request('query') }}" placeholder="Buscar especie">
+                    @error('query')
+    <small class="text-danger">{{ $message }}</small>
+@enderror
+
                 </div>
                 <div class="col-md-1 col-12 mb-2">
                     <button type="submit" class="btn btn-primary w-100">Buscar</button>
